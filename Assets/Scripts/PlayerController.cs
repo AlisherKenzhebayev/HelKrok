@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleGrappleInput(true);
+        HandleGrappleInput(false);
         DebugGrappleWithMaterial();
 
         HandleCameraInput();
@@ -196,39 +196,47 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                // Spawn in chain links - TODO:
-                //float segmentsToCreate = Mathf.RoundToInt(Vector3.Distance(grappleSpawn.position, tetherPoint) / 0.5f);
-                //float distance = 1 / segmentsToCreate;
-                //float lerpValue = 0;
-                //for (int i = 0; i < segmentsToCreate; i++)
-                //{
-                //    //We increase our lerpValue
-                //    lerpValue += distance;
-                //    //Get the position
-                //    Vector3 placePosition = Vector3.Lerp(grappleSpawn.position, tetherPoint, lerpValue);
-                //    if (links.Count > i && links[i] != null)
-                //    {
-                //        links[i].transform.position = placePosition;
-                //        links[i].transform.rotation = playerCamera.transform.rotation;
-                //    }
-                //    else
-                //    {
-                //        //Instantiate the object
-                //        links.Add(Instantiate(chainLinkPrefab, placePosition, playerCamera.transform.rotation, grappleSpawn.transform));
-                //    }
-                //}
+                // Spawn in chain links
+                float totalDist = Vector3.Distance(grappleSpawn.position, tetherPoint);
+                Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - transform.position);
+                float numberOfSpawn = Mathf.RoundToInt(totalDist / distanceSpawnLinks);
+                totalDist -= totalDist % distanceSpawnLinks;
+                float distance = totalDist / numberOfSpawn;
+                float lerpValue = 0;
+                for (int i = 0; i < Math.Max(links.Count, numberOfSpawn); i++)
+                {
+                    if (i >= numberOfSpawn) {
+                        GameObject.Destroy(links[i]);
+                        continue;
+                    }
+
+                    //We increase our lerpValue
+                    lerpValue += distance;
+                    //Get the position
+                    Vector3 placePosition = Vector3.Lerp(grappleSpawn.position, grappleSpawn.position + directionToGrapple * totalDist, precisionFloat (lerpValue/totalDist));
+                    if (links.Count > i && links[i] != null)
+                    {
+                        links[i].transform.position = placePosition;
+                        links[i].transform.localScale = chainLinkPrefab.transform.lossyScale;
+                    }
+                    else
+                    {
+                        //Instantiate the object
+                        links.Add(Instantiate(chainLinkPrefab, placePosition, playerCamera.transform.rotation, transform.parent));
+                    }
+                }
             }
         }
         else 
         {
-            //if (!simpleVis)
-            //{
-            //    for (int i = 0; i < links.Count; i++)
-            //    {
-            //        GameObject.Destroy(links[i]);
-            //    }
-            //    links.Clear();
-            //}
+            if (!simpleVis)
+            {
+                for (int i = 0; i < links.Count; i++)
+                {
+                    GameObject.Destroy(links[i]);
+                }
+                links.Clear();
+            }
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse0))

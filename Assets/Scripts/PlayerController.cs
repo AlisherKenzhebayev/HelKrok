@@ -156,6 +156,9 @@ public class PlayerController : MonoBehaviour
 
         Gizmos.color = Color.green;
         Gizmos.DrawRay(this.transform.position, worldspaceMoveInput);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(tetherPoint, 0.5f);
     }
 
     //************
@@ -198,7 +201,7 @@ public class PlayerController : MonoBehaviour
             {
                 // Spawn in chain links
                 float totalDist = Vector3.Distance(grappleSpawn.position, tetherPoint);
-                Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - transform.position);
+                Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - grappleSpawn.position);
                 float numberOfSpawn = Mathf.RoundToInt(totalDist / distanceSpawnLinks);
                 totalDist -= totalDist % distanceSpawnLinks;
                 float distance = totalDist / numberOfSpawn;
@@ -217,7 +220,7 @@ public class PlayerController : MonoBehaviour
                     if (links.Count > i && links[i] != null)
                     {
                         links[i].transform.position = placePosition;
-                        links[i].transform.localScale = chainLinkPrefab.transform.lossyScale;
+                        //links[i].transform.localScale = chainLinkPrefab.transform.lossyScale;
                     }
                     else
                     {
@@ -322,7 +325,7 @@ public class PlayerController : MonoBehaviour
 
         //Detach grapple if >90 angle
         {
-            Debug.Log(Vector3.Dot(playerCamera.transform.forward.normalized, directionToGrapple));
+            //Debug.Log(Vector3.Dot(playerCamera.transform.forward.normalized, directionToGrapple));
             if (Vector3.Dot(playerCamera.transform.forward.normalized, directionToGrapple) < 0) {
                 EndGrapple();
             }

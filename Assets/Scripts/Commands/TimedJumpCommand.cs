@@ -5,13 +5,15 @@ using UnityEngine;
 public class TimedJumpCommand : BaseCommand
 {
     public float jumpForce = 600f;
+    private Vector3 worldspaceMoveInput;
 
-    public TimedJumpCommand(Rigidbody rb) : base(rb)
+    public TimedJumpCommand(Rigidbody rb, Vector3 worldspaceMoveInput) : base(rb)
     {
         this.rbReference = rb;
+        this.worldspaceMoveInput = worldspaceMoveInput;
     }
 
-    public override void execute(Vector3 worldspaceMoveInput)
+    public override void execute()
     {
         rbReference.AddForce(rbReference.transform.up * jumpForce, ForceMode.Impulse);
     }

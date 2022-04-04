@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class JumpCommand : BaseCommand
 {
-    [Tooltip("Jump force")]
-    public float jumpForce = 300f;
+    private float jumpForce = 300f;
 
-    public JumpCommand(Rigidbody rb) : base(rb)
+    private Vector3 worldspaceMoveInput;
+
+    public JumpCommand(Rigidbody rb, Vector3 worldspaceMoveInput) : base(rb)
     {
         this.rbReference = rb;
+        this.worldspaceMoveInput = worldspaceMoveInput;
     }
 
-    public override void execute(Vector3 worldspaceMoveInput)
+    public override void execute()
     {
         rbReference.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }

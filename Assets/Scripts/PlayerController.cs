@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     public float airStrafeForce = 100f;
     [Tooltip("Max air speed")]
     public float maxAirSpeed = 5f;
-    [Tooltip("Air force effect curve")]
+    [Tooltip("Air force time curve")]
     public AnimationCurve airForceEffectCurve;
 
     //**********
@@ -73,10 +73,7 @@ public class PlayerController : MonoBehaviour
     private float tetherLength;
     private Vector3 tetherPoint;
 
-    private ICommand jumpCommand;
-    private ICommand timedJumpCommand;
-    private ICommand moveCommand;
-    private ICommand airStrafeCommand;
+    private List<ICommand> physicsCommands;
 
     private LineRenderer lr;
     private Rigidbody rb;
@@ -92,14 +89,14 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        physicsCommands = new List<ICommand>();
         links = new List<GameObject>();
+        inputManager = new InputManager();
 
         Instantiate(uiPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
         CursorMagick();
-
-        inputManager = new InputManager();
-
+        
         rb = this.GetComponent<Rigidbody>();
         if (rb == null)
         {
@@ -117,12 +114,6 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("Error - no MeshRenderer component");
         }
-
-        // Define commands here
-        jumpCommand = new JumpCommand(rb).SetJumpForce(jumpForce);
-        moveCommand = new MoveCommand(rb).SetGroundSpeed(groundSpeed).SetBackwardsSpeedCoef(backwardsSpeedCoef);
-        timedJumpCommand = new TimedJumpCommand(rb).SetJumpForce(superJumpForce);
-        airStrafeCommand = new AirStrafeCommand(rb).SetAirStrafeForce(airStrafeForce).SetMaxAirSpeed(maxAirSpeed).SetAirForceEffectCurve(airForceEffectCurve);
     }
 
     // Update is called once per frame
@@ -181,7 +172,9 @@ public class PlayerController : MonoBehaviour
                     else
                     {
                         //Instantiate the object
-                        links.Add(Instantiate(chainLinkPrefab, placePosition, playerCamera.transform.rotation, transform.parent));
+                        GameObject newLink = Instantiate(chainLinkPrefab, placePosition, playerCamera.transform.rotation);
+                        newLink.transform.parent = grappleSpawn.transform;
+                        links.Add(newLink);
                     }
                 }
             }
@@ -201,6 +194,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        physicsCommands.Clear();
+        
         // Update grapple timer up to grappleMaxTime
         if (isTethered) {
             timeGrappledSince = Mathf.Clamp(timeGrappledSince + Time.fixedDeltaTime, 0, grappleMaxTime);
@@ -211,6 +206,12 @@ public class PlayerController : MonoBehaviour
         ApplyMovePhysics();
 
         ApplyJumpPhysics();
+
+        // Fire up the commands 
+        foreach (ICommand command in physicsCommands)
+        {
+            command.execute();
+        }
     }
 
     void OnDrawGizmos()
@@ -221,8 +222,8 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawRay(this.transform.position, worldspaceMoveInput);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(tetherPoint, 0.5f);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawSphere(tetherPoint, 0.1f);
     }
 
     //************
@@ -297,12 +298,17 @@ public class PlayerController : MonoBehaviour
             if (isGrounded())
             {
                 // Handle Movement on ground
-                moveCommand.execute(worldspaceMoveInput);
+                physicsCommands.Add(new MoveCommand(rb, worldspaceMoveInput)
+                    .SetGroundSpeed(groundSpeed)
+                    .SetBackwardsSpeedCoef(backwardsSpeedCoef));
             }
             else
             {
                 // Air strafing
-                airStrafeCommand.execute(worldspaceMoveInput);
+                physicsCommands.Add(new AirStrafeCommand(rb, worldspaceMoveInput)
+                    .SetAirStrafeForce(airStrafeForce)
+                    .SetMaxAirSpeed(maxAirSpeed)
+                    .SetAirForceEffectCurve(airForceEffectCurve));
             }
         }
     }
@@ -313,13 +319,15 @@ public class PlayerController : MonoBehaviour
         {
             if (superJumpAvailable())
             {
-                timedJumpCommand.execute(worldspaceMoveInput);
+                physicsCommands.Add(new TimedJumpCommand(rb, worldspaceMoveInput)
+                    .SetJumpForce(superJumpForce));
                 EndJump();
                 return;
             }
             if (isGrounded())
             {
-                jumpCommand.execute(worldspaceMoveInput);
+                physicsCommands.Add(new JumpCommand(rb, worldspaceMoveInput)
+                    .SetJumpForce(jumpForce));
                 EndJump();
                 return;
             }

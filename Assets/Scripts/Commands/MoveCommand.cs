@@ -7,12 +7,15 @@ public class MoveCommand : BaseCommand
     private float backwardsSpeedCoef = 0.15f;
     private float groundSpeed = 10f;
 
-    public MoveCommand(Rigidbody rb) : base(rb)
+    private Vector3 worldspaceMoveInput;
+
+    public MoveCommand(Rigidbody rb, Vector3 worldspaceMoveInput) : base(rb)
     {
         this.rbReference = rb;
+        this.worldspaceMoveInput = worldspaceMoveInput;
     }
 
-    public override void execute(Vector3 worldspaceMoveInput)
+    public override void execute()
     {
         float dot = Vector3.Dot(rbReference.transform.forward, worldspaceMoveInput);
         float speedMod = 0f;

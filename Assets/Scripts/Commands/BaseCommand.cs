@@ -10,5 +10,5 @@ public abstract class BaseCommand : ICommand
         rbReference = rb;
     }
 
-    public abstract void execute(Vector3 worldspaceMoveInput);
+    public abstract void execute();
 }

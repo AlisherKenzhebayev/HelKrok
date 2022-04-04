@@ -122,17 +122,78 @@ public class PlayerController : MonoBehaviour
         jumpCommand = new JumpCommand(rb).SetJumpForce(jumpForce);
         moveCommand = new MoveCommand(rb).SetGroundSpeed(groundSpeed).SetBackwardsSpeedCoef(backwardsSpeedCoef);
         timedJumpCommand = new TimedJumpCommand(rb).SetJumpForce(superJumpForce);
+        airStrafeCommand = new AirStrafeCommand(rb).SetAirStrafeForce(airStrafeForce).SetMaxAirSpeed(maxAirSpeed).SetAirForceEffectCurve(airForceEffectCurve);
     }
 
     // Update is called once per frame
     void Update()
     {
-        HandleGrappleInput(false);
+        HandleGrappleInput();
         DebugGrappleWithMaterial();
+
+        VisualizeGrapple(false);
 
         HandleCameraInput();
 
         HandleInput();
+    }
+
+    private void VisualizeGrapple(bool simpleVis)
+    {
+        if (isTethered)
+        {
+            if (simpleVis)
+            {
+                lr.SetPosition(0, grappleSpawn.position);
+                lr.SetPosition(1, tetherPoint);
+            }
+            else
+            {
+                // Spawn in chain links
+                float totalDist = Vector3.Distance(grappleSpawn.position, tetherPoint);
+                Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - grappleSpawn.position);
+                float numberOfSpawn = Mathf.RoundToInt(totalDist / distanceSpawnLinks);
+                totalDist -= totalDist % distanceSpawnLinks;
+                float distance = totalDist / numberOfSpawn;
+                float distValue = 0;
+                for (int i = 0; i < Math.Max(links.Count, numberOfSpawn); i++)
+                {
+                    if (i >= numberOfSpawn)
+                    {
+                        GameObject.Destroy(links[i]);
+                        continue;
+                    }
+
+                    //We increase our lerpValue
+                    distValue += distance;
+                    float lerpValue = precisionFloat(distValue / totalDist);
+                    //Get the position
+                    Vector3 placePosition = Vector3.Lerp(grappleSpawn.position, grappleSpawn.position + directionToGrapple * totalDist, lerpValue);
+                    if (links.Count > i && links[i] != null)
+                    {
+                        links[i].transform.position = placePosition;
+                        links[i].transform.rotation = Quaternion.Lerp(playerCamera.transform.rotation, grappleSpawn.rotation, lerpValue);
+                        //links[i].transform.localScale = chainLinkPrefab.transform.lossyScale;
+                    }
+                    else
+                    {
+                        //Instantiate the object
+                        links.Add(Instantiate(chainLinkPrefab, placePosition, playerCamera.transform.rotation, transform.parent));
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (!simpleVis)
+            {
+                for (int i = 0; i < links.Count; i++)
+                {
+                    GameObject.Destroy(links[i]);
+                }
+                links.Clear();
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -162,7 +223,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //************
-    //  PRIVATE
+    //  INPUTS
     //************
 
     private void HandleInput()
@@ -180,65 +241,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleGrappleInput(bool simpleVis)
+    private void HandleGrappleInput()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (!isTethered)
             {
                 BeginGrapple();
-            }
-        }
-
-        if (isTethered)
-        {
-            if (simpleVis)
-            {
-                lr.SetPosition(0, grappleSpawn.position);
-                lr.SetPosition(1, tetherPoint);
-            }
-            else
-            {
-                // Spawn in chain links
-                float totalDist = Vector3.Distance(grappleSpawn.position, tetherPoint);
-                Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - grappleSpawn.position);
-                float numberOfSpawn = Mathf.RoundToInt(totalDist / distanceSpawnLinks);
-                totalDist -= totalDist % distanceSpawnLinks;
-                float distance = totalDist / numberOfSpawn;
-                float lerpValue = 0;
-                for (int i = 0; i < Math.Max(links.Count, numberOfSpawn); i++)
-                {
-                    if (i >= numberOfSpawn) {
-                        GameObject.Destroy(links[i]);
-                        continue;
-                    }
-
-                    //We increase our lerpValue
-                    lerpValue += distance;
-                    //Get the position
-                    Vector3 placePosition = Vector3.Lerp(grappleSpawn.position, grappleSpawn.position + directionToGrapple * totalDist, precisionFloat (lerpValue/totalDist));
-                    if (links.Count > i && links[i] != null)
-                    {
-                        links[i].transform.position = placePosition;
-                        //links[i].transform.localScale = chainLinkPrefab.transform.lossyScale;
-                    }
-                    else
-                    {
-                        //Instantiate the object
-                        links.Add(Instantiate(chainLinkPrefab, placePosition, playerCamera.transform.rotation, transform.parent));
-                    }
-                }
-            }
-        }
-        else 
-        {
-            if (!simpleVis)
-            {
-                for (int i = 0; i < links.Count; i++)
-                {
-                    GameObject.Destroy(links[i]);
-                }
-                links.Clear();
             }
         }
 
@@ -290,7 +299,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 // Air strafing
-                AirMovement(worldspaceMoveInput);
+                airStrafeCommand.execute(worldspaceMoveInput);
             }
         }
     }
@@ -346,38 +355,13 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(directionToGrapple * grappleForce * curveMod, ForceMode.Force);
     }
 
-    /// <summary>
-    /// Air strafing defined
-    /// </summary>
-    /// <param name="moveInput"></param>
-    void AirMovement(Vector3 moveInput)
-    {
-        // project the velocity onto the movevector
-        Vector3 projVel = Vector3.Project(rb.velocity, moveInput);
-
-        // check if the movevector is moving towards or away from the projected velocity
-        bool isAway = Vector3.Dot(moveInput, projVel) <= 0f;
-
-        // only apply force if moving away from velocity or velocity is below MaxAirSpeed
-        if (projVel.magnitude < maxAirSpeed || isAway)
-        {
-            float curveMod = airForceEffectCurve.Evaluate(precisionFloat(projVel.magnitude / maxAirSpeed));
-
-            // calculate the ideal movement force
-            Vector3 vc = moveInput.normalized * airStrafeForce * curveMod;
-
-            // Apply the force
-            rb.AddForce(vc, ForceMode.Impulse);
-        }
-    }
-
     //************
     //  HELPER
     //************
 
     private float precisionFloat(float fValue)
     {
-        return Mathf.Round(fValue * 100f) / 100f;
+        return Mathf.Round(fValue * 1000f) / 1000f;
     }
 
     private void DebugGrappleWithMaterial()
@@ -416,7 +400,6 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
 
     void BeginGrapple()
     {

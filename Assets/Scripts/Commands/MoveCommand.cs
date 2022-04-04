@@ -22,8 +22,6 @@ public class MoveCommand : BaseCommand
             speedMod = Mathf.SmoothStep(0, 1, -dot) * backwardsSpeedCoef;
         }
 
-        Debug.Log(1 - speedMod);
-
         Vector3 characterVelocity = worldspaceMoveInput * groundSpeed * (1 - speedMod);
         characterVelocity.y = rbReference.velocity.y;
 

@@ -196,7 +196,8 @@ MonoBehaviour:
   playerCamera: {fileID: 9208518964827519904}
   groundCheck: {fileID: 9208518966150329144}
   grappleSpawn: {fileID: 9208518965371551863}
-  chainLinkPrefab: {fileID: 4782248338475177714, guid: 7a89d6884085c4f41933c8673f6ba09d, type: 3}
+  chainLinkPrefab: {fileID: 1080397614306024, guid: 1f5d98c5ba034a846bb35ff27e18823c, type: 3}
+  distanceSpawnLinks: 0.5
   uiPrefab: {fileID: 865879249042825547, guid: 5506e71babd327a4487cebf021810fc1, type: 3}
   debugGoodStateMaterial: {fileID: 2100000, guid: dd594aa7b65105b4f830bddd556f66fa, type: 2}
   debugQuoStateMaterial: {fileID: 2100000, guid: 4f47b69c96e3e06438c10c907f7d4f98, type: 2}

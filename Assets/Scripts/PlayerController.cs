@@ -160,7 +160,10 @@ public class PlayerController : MonoBehaviour
                 {
                     if (i >= numberOfSpawn)
                     {
-                        GameObject.Destroy(links[i]);
+                        if(links[i] != null) { 
+                            GameObject.Destroy(links[i]);
+                            links[i] = null;
+                        }
                         continue;
                     }
 
@@ -329,7 +332,6 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - transform.position);
         float currentDistanceToGrapple = Vector3.Distance(tetherPoint, transform.position);
-
         float speedTowardsGrapplePoint = precisionFloat(Vector3.Dot(rb.velocity, directionToGrapple));
 
         //Detach grapple if >90 angle
@@ -350,8 +352,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        tetherLength = currentDistanceToGrapple;
+
         float curveMod = speedCurve.Evaluate(precisionFloat(timeGrappledSince / grappleMaxTime));
-        //Debug.Log(directionToGrapple.magnitude * grappleForce * curveMod);
+        Debug.Log(curveMod);
         rb.AddForce(directionToGrapple * grappleForce * curveMod, ForceMode.Force);
     }
 

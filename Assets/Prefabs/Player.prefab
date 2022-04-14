@@ -243,7 +243,7 @@ MonoBehaviour:
   playerCamera: {fileID: 9208518964827519904}
   groundCheck: {fileID: 9208518966150329144}
   grappleSpawn: {fileID: 9208518965371551863}
-  chainLinkPrefab: {fileID: 1080397614306024, guid: 1f5d98c5ba034a846bb35ff27e18823c, type: 3}
+  chainLinkPrefab: {fileID: 4782248338475177714, guid: 7a89d6884085c4f41933c8673f6ba09d, type: 3}
   distanceSpawnLinks: 0.25
   uiPrefab: {fileID: 865879249042825547, guid: 5506e71babd327a4487cebf021810fc1, type: 3}
   debugGoodStateMaterial: {fileID: 2100000, guid: dd594aa7b65105b4f830bddd556f66fa, type: 2}
@@ -257,7 +257,7 @@ MonoBehaviour:
   superJumpForce: 600
   superJumpAllow: 0.2
   backwardsSpeedCoef: 0.25
-  grappleForce: 2000
+  grappleForce: 4000
   grappleMaxTime: 3.5
   speedCurve:
     serializedVersion: 2

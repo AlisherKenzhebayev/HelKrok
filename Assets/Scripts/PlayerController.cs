@@ -68,10 +68,13 @@ public class PlayerController : MonoBehaviour
     private bool isTethered = false;
     private bool hasJumpInput = false;
 
+    // Grapple information
     private float timeGrappledSince;
     private float timeSuperJumpSince;
     private float tetherLength;
     private Vector3 tetherPoint;
+    private Vector3 tetherOffset;
+    private GameObject tetherObject;
 
     private List<ICommand> physicsCommands;
 
@@ -129,66 +132,11 @@ public class PlayerController : MonoBehaviour
         HandleInput();
     }
 
-    private void VisualizeGrapple(bool simpleVis)
+    private void UpdateGrapplePosition()
     {
         if (isTethered)
         {
-            if (simpleVis)
-            {
-                lr.SetPosition(0, grappleSpawn.position);
-                lr.SetPosition(1, tetherPoint);
-            }
-            else
-            {
-                // Spawn in chain links
-                float totalDist = Vector3.Distance(grappleSpawn.position, tetherPoint);
-                Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - grappleSpawn.position);
-                float numberOfSpawn = Mathf.RoundToInt(totalDist / distanceSpawnLinks);
-                totalDist -= totalDist % distanceSpawnLinks;
-                float distance = totalDist / numberOfSpawn;
-                float distValue = 0;
-                for (int i = 0; i < Math.Max(links.Count, numberOfSpawn); i++)
-                {
-                    if (i >= numberOfSpawn)
-                    {
-                        if(links[i] != null) { 
-                            GameObject.Destroy(links[i]);
-                            links[i] = null;
-                        }
-                        continue;
-                    }
-
-                    //We increase our lerpValue
-                    distValue += distance;
-                    float lerpValue = precisionFloat(distValue / totalDist);
-                    //Get the position
-                    Vector3 placePosition = Vector3.Lerp(grappleSpawn.position, grappleSpawn.position + directionToGrapple * totalDist, lerpValue);
-                    if (links.Count > i && links[i] != null)
-                    {
-                        links[i].transform.position = placePosition;
-                        links[i].transform.rotation = Quaternion.Lerp(playerCamera.transform.rotation, grappleSpawn.rotation, lerpValue);
-                        //links[i].transform.localScale = chainLinkPrefab.transform.lossyScale;
-                    }
-                    else
-                    {
-                        //Instantiate the object
-                        GameObject newLink = Instantiate(chainLinkPrefab, placePosition, playerCamera.transform.rotation);
-                        newLink.transform.parent = grappleSpawn.transform;
-                        links.Add(newLink);
-                    }
-                }
-            }
-        }
-        else
-        {
-            if (!simpleVis)
-            {
-                for (int i = 0; i < links.Count; i++)
-                {
-                    GameObject.Destroy(links[i]);
-                }
-                links.Clear();
-            }
+            tetherPoint = tetherObject.transform.position + tetherOffset;
         }
     }
 
@@ -202,6 +150,8 @@ public class PlayerController : MonoBehaviour
         }
         // Update timer superjump each update
         timeSuperJumpSince = Mathf.Clamp(timeSuperJumpSince - Time.fixedDeltaTime, -1f, superJumpAllow);
+
+        UpdateGrapplePosition();
 
         ApplyMovePhysics();
 
@@ -222,9 +172,13 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawRay(this.transform.position, worldspaceMoveInput);
 
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(this.transform.position, Vector3.Project(this.GetComponent<Rigidbody>().velocity, worldspaceMoveInput));
+
         Gizmos.color = Color.cyan;
         Gizmos.DrawSphere(tetherPoint, 0.1f);
     }
+
 
     //************
     //  INPUTS
@@ -233,7 +187,7 @@ public class PlayerController : MonoBehaviour
     private void HandleInput()
     {
         // Handle keyboard movement
-        worldspaceMoveInput = transform.TransformVector(inputManager.GetMoveInput());    
+        worldspaceMoveInput = transform.TransformVector(inputManager.GetMoveInput());
 
         // Handle jump keys
         if (inputManager.GetJumping())
@@ -371,6 +325,70 @@ public class PlayerController : MonoBehaviour
     //  HELPER
     //************
 
+    private void VisualizeGrapple(bool simpleVis)
+    {
+        if (isTethered)
+        {
+            if (simpleVis)
+            {
+                lr.SetPosition(0, grappleSpawn.position);
+                lr.SetPosition(1, tetherPoint);
+            }
+            else
+            {
+                // Spawn in chain links
+                float totalDist = Vector3.Distance(grappleSpawn.position, tetherPoint);
+                Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - grappleSpawn.position);
+                float numberOfSpawn = Mathf.RoundToInt(totalDist / distanceSpawnLinks);
+                totalDist -= totalDist % distanceSpawnLinks;
+                float distance = totalDist / numberOfSpawn;
+                float distValue = 0;
+                for (int i = 0; i < Math.Max(links.Count, numberOfSpawn); i++)
+                {
+                    if (i >= numberOfSpawn)
+                    {
+                        if (links[i] != null)
+                        {
+                            GameObject.Destroy(links[i]);
+                            links[i] = null;
+                        }
+                        continue;
+                    }
+
+                    //We increase our lerpValue
+                    distValue += distance;
+                    float lerpValue = precisionFloat(distValue / totalDist);
+                    //Get the position
+                    Vector3 placePosition = Vector3.Lerp(grappleSpawn.position, grappleSpawn.position + directionToGrapple * totalDist, lerpValue);
+                    if (links.Count > i && links[i] != null)
+                    {
+                        links[i].transform.position = placePosition;
+                        links[i].transform.rotation = Quaternion.Lerp(playerCamera.transform.rotation, grappleSpawn.rotation, lerpValue);
+                        //links[i].transform.localScale = chainLinkPrefab.transform.lossyScale;
+                    }
+                    else
+                    {
+                        //Instantiate the object
+                        GameObject newLink = Instantiate(chainLinkPrefab, placePosition, playerCamera.transform.rotation);
+                        newLink.transform.parent = grappleSpawn.transform;
+                        links.Add(newLink);
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (!simpleVis)
+            {
+                for (int i = 0; i < links.Count; i++)
+                {
+                    GameObject.Destroy(links[i]);
+                }
+                links.Clear();
+            }
+        }
+    }
+
     private float precisionFloat(float fValue)
     {
         return Mathf.Round(fValue * 1000f) / 1000f;
@@ -415,12 +433,15 @@ public class PlayerController : MonoBehaviour
 
     void BeginGrapple()
     {
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, Mathf.Infinity))
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, Mathf.Infinity) 
+            && hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable))
         {
             isTethered = true;
             timeGrappledSince = 0f;
             timeSuperJumpSince = superJumpAllow;
-            tetherPoint = hit.point;
+            tetherObject = hit.collider.gameObject;
+            tetherOffset = hit.point - tetherObject.transform.position;
+            tetherPoint = tetherObject.transform.position + tetherOffset;
             tetherLength = Vector3.Distance(tetherPoint, playerCamera.position);
             lr.positionCount = 2;
         }
@@ -429,6 +450,7 @@ public class PlayerController : MonoBehaviour
     void EndGrapple()
     {
         isTethered = false;
+        tetherObject = null;
         lr.positionCount = 0;
     }
 

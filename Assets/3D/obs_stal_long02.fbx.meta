@@ -3,7 +3,12 @@ guid: ab4e28c76890b4846aac3fe28db17d56
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: obstalceMat
+    second: {fileID: 2100000, guid: 25f10efd6dc39e64b812a014bf17adf7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

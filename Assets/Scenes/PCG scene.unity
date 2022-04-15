@@ -454,6 +454,54 @@ PrefabInstance:
       propertyPath: groundSpeed
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: maxAirSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: grappleForce
+      value: 4000
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: airStrafeForce
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: superJumpForce
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: distanceSpawnLinks
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].time
+      value: 0.027024455
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[2].time
+      value: 0.19600646
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[0].value
+      value: 0.40004933
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].value
+      value: 0.46002108
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[2].value
+      value: 0.51227033
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: airForceEffectCurve.m_Curve.Array.data[0].value
+      value: 0.3001709
+      objectReference: {fileID: 0}
     - target: {fileID: 9208518964815489744, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.5

@@ -363,7 +363,11 @@ public class PlayerController : MonoBehaviour
                     if (links.Count > i && links[i] != null)
                     {
                         links[i].transform.position = placePosition;
-                        links[i].transform.rotation = Quaternion.Lerp(playerCamera.transform.rotation, grappleSpawn.rotation, lerpValue);
+                        Quaternion rotation = Quaternion.LookRotation(directionToGrapple);
+                        rotation = Quaternion.Lerp(rotation*chainLinkPrefab.transform.rotation, rotation, lerpValue);
+                        Quaternion localRotation = Quaternion.Euler(0, 10*i, 0);
+                        links[i].transform.rotation = rotation;
+                        links[i].transform.localRotation *= localRotation;
                         //links[i].transform.localScale = chainLinkPrefab.transform.lossyScale;
                     }
                     else

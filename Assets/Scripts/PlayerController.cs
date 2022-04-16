@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,53 +10,89 @@ public class PlayerController : MonoBehaviour
 
     [Header("References")]
     [Tooltip("Camera follow transform")]
-    public Transform playerCamera;
-    public Transform groundCheck;
-    public Transform grappleSpawn;
-    public GameObject chainLinkPrefab;
-    public float distanceSpawnLinks = 0.5f;
-    public GameObject uiPrefab;
+    [SerializeField]
+    private Transform playerCamera = null;
+    [SerializeField]
+    private Transform groundCheck = null;
+    [SerializeField]
+    private Transform grappleSpawn = null;
+    [SerializeField] 
+    private GameObject chainLinkPrefab = null;
+    [SerializeField]
+    private float distanceSpawnLinks = 0.5f;
+    [SerializeField]
+    private GameObject uiPrefab = null;
 
     [Header("Debug Materials")]
-    public Material debugGoodStateMaterial;
-    public Material debugQuoStateMaterial;
-    public Material debugBadStateMaterial;
-    public GameObject debugObject;
+    [SerializeField]
+    private Material debugGoodStateMaterial = null;
+    [SerializeField]
+    private Material debugQuoStateMaterial = null;
+    [SerializeField]
+    private Material debugBadStateMaterial = null;
+    [SerializeField]
+    private GameObject debugObject = null;
 
-    [Header("Rotation")]
+    [Header("Camera Rotation/Sensitivity")]
     [Tooltip("Rotation speed X for moving the camera")]
-    public float horizontalRotationSpeed = 2.2f;
+    [SerializeField] 
+    private float horizontalRotationSpeed = 2.2f;
     [Tooltip("Rotation speed Y for moving the camera")]
-    public float verticalRotationSpeed = 2.2f;
+    [SerializeField]
+    private float verticalRotationSpeed = 2.2f;
 
     [Header("Basic Movement")]
+    [Tooltip("Gravity acceleration")]
+    [SerializeField]
+    private float gravityAcceleration = 10f;
     [Tooltip("Ground speed")]
-    public float groundSpeed = 10f;
+    [SerializeField]
+    private float groundSpeed = 10f;
     [Tooltip("Jump force")]
-    public float jumpForce = 300f;
+    [SerializeField]
+    private float jumpForce = 300f;
     [Tooltip("Super Jump force")]
-    public float superJumpForce = 600f;
+    [SerializeField]
+    private float superJumpForce = 600f;
     [Tooltip("Superjump timing window (s)")]
-    public float superJumpAllow = 0.2f;
+    [SerializeField]
+    private float superJumpAllow = 0.2f;
     [Tooltip("Backmove dampening")]
     [Range(0f, 1f)]
-    public float backwardsSpeedCoef = 0.15f;
+    [SerializeField]
+    private float backwardsSpeedCoef = 0.15f;
 
     [Header("Grapple Movement")]
     [Tooltip("Grapple force")]
-    public float grappleForce = 2000f;
+    [SerializeField]
+    private float grappleForce = 2000f;
     [Tooltip("Grapple speed time")]
-    public float grappleMaxTime = 3f;
+    [SerializeField] 
+    private float grappleMaxTime = 3f;
     [Tooltip("Speed curve")]
-    public AnimationCurve speedCurve;
+    [SerializeField] 
+    private AnimationCurve speedCurve = null;
+    [Tooltip("Gravity curve")]
+    [SerializeField]
+    private AnimationCurve gravityCurve = null;
+    [Tooltip("Grapple overlap geometry time")]
+    [SerializeField]
+    private float grappleMaxOverlapTime = 3f;
+    [Tooltip("Grapple shake amount")]
+    [SerializeField]
+    private float shakeValue = 3f;
+
 
     [Header("Air Movement")]
     [Tooltip("Air strafe force")]
-    public float airStrafeForce = 100f;
+    [SerializeField]
+    private float airStrafeForce = 100f;
     [Tooltip("Max air speed")]
-    public float maxAirSpeed = 5f;
-    [Tooltip("Air force time curve")]
-    public AnimationCurve airForceEffectCurve;
+    [SerializeField] 
+    private float maxAirSpeed = 5f;
+    [Tooltip("Air force curve (dependency of time)")]
+    [SerializeField] 
+    private AnimationCurve airForceEffectCurve = null;
 
     //**********
     //  PRIVATE
@@ -70,6 +105,7 @@ public class PlayerController : MonoBehaviour
 
     // Grapple information
     private float timeGrappledSince;
+    private float timeGrappleOverlapGeometry;
     private float timeSuperJumpSince;
     private float tetherLength;
     private Vector3 tetherPoint;
@@ -83,8 +119,6 @@ public class PlayerController : MonoBehaviour
     private float m_CameraVerticalAngle = 0f;
     
     private InputManager inputManager;
-    private float xMouseInput;
-    private float yMouseInput;
     private Vector3 worldspaceMoveInput;
 
     private MeshRenderer debugRenderer;
@@ -132,26 +166,15 @@ public class PlayerController : MonoBehaviour
         HandleInput();
     }
 
-    private void UpdateGrapplePosition()
-    {
-        if (isTethered)
-        {
-            tetherPoint = tetherObject.transform.position + tetherOffset;
-        }
-    }
-
     private void FixedUpdate()
     {
+        ApplyGravity();
+
         physicsCommands.Clear();
-        
-        // Update grapple timer up to grappleMaxTime
-        if (isTethered) {
-            timeGrappledSince = Mathf.Clamp(timeGrappledSince + Time.fixedDeltaTime, 0, grappleMaxTime);
-        }
-        // Update timer superjump each update
-        timeSuperJumpSince = Mathf.Clamp(timeSuperJumpSince - Time.fixedDeltaTime, -1f, superJumpAllow);
 
         UpdateGrapplePosition();
+
+        UpdateTimers();
 
         ApplyMovePhysics();
 
@@ -161,6 +184,68 @@ public class PlayerController : MonoBehaviour
         foreach (ICommand command in physicsCommands)
         {
             command.execute();
+        }
+    }
+
+    private void ApplyGravity()
+    {
+        if (isTethered) {
+            float curveMod = gravityCurve.Evaluate(precisionFloat(timeGrappledSince / grappleMaxTime));
+            rb.AddForce(-this.transform.up * rb.mass * gravityAcceleration * curveMod);
+        }
+        else
+        {
+            rb.AddForce(-this.transform.up * rb.mass * gravityAcceleration);
+        }
+    }
+
+    private void UpdateGrapplePosition()
+    {
+        if (isTethered)
+        {
+            tetherPoint = tetherObject.transform.position + tetherOffset;
+        }
+    }
+
+    private void UpdateTimers()
+    {
+        // Update grapple timer up to grappleMaxTime
+        if (isTethered)
+        {
+            timeGrappledSince = Mathf.Clamp(timeGrappledSince + Time.fixedDeltaTime, 0, grappleMaxTime);
+        }
+        // Update timer superjump each update
+        timeSuperJumpSince = Mathf.Clamp(timeSuperJumpSince - Time.fixedDeltaTime, -1f, superJumpAllow);
+
+        if (isTethered)
+        {
+            Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - transform.position);
+            float currentDistanceToGrapple = Vector3.Distance(tetherPoint, transform.position) - 2f;
+            if (Physics.Raycast(grappleSpawn.position, directionToGrapple, out RaycastHit hit, currentDistanceToGrapple))
+            {
+                timeGrappleOverlapGeometry += Time.fixedDeltaTime;
+            }
+            else
+            {
+                if (timeGrappleOverlapGeometry > 0)
+                {
+                    timeGrappleOverlapGeometry = Mathf.Clamp(
+                        timeGrappleOverlapGeometry - Mathf.Lerp(1, 0, SmoothStart(precisionFloat(timeGrappleOverlapGeometry / grappleMaxOverlapTime))),
+                        0, 
+                        grappleMaxOverlapTime);
+                }
+                else {
+                    timeGrappleOverlapGeometry = 0f;
+                }
+            }
+        }
+        
+        //Detach if overlaps with geometry for >overlapTime
+        {
+            if (timeGrappleOverlapGeometry > grappleMaxOverlapTime)
+            {
+                EndGrapple();
+            }
         }
     }
 
@@ -222,18 +307,18 @@ public class PlayerController : MonoBehaviour
     {
         // Horizontal mouse inputs
         {
-            xMouseInput = inputManager.getMouseHorizontal();
-            transform.Rotate(new Vector3(0f, xMouseInput * horizontalRotationSpeed, 0f), Space.Self);
+            float xMouseInput = inputManager.getMouseHorizontal();
+            this.transform.Rotate(new Vector3(0f, xMouseInput * horizontalRotationSpeed, 0f), Space.Self);
         }
 
         // Vertical mouse inputs
         {
-            yMouseInput = inputManager.getMouseVertical();
+            float yMouseInput = inputManager.getMouseVertical();
             m_CameraVerticalAngle -= yMouseInput * verticalRotationSpeed;
 
             m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
 
-            playerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0f, 0f);
+            playerCamera.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0f, 0f);
         }
     }
 
@@ -298,7 +383,6 @@ public class PlayerController : MonoBehaviour
 
         //Detach grapple if >90 angle
         {
-            //Debug.Log(Vector3.Dot(playerCamera.transform.forward.normalized, directionToGrapple));
             if (Vector3.Dot(playerCamera.transform.forward.normalized, directionToGrapple) < 0) {
                 EndGrapple();
             }
@@ -317,13 +401,26 @@ public class PlayerController : MonoBehaviour
         tetherLength = currentDistanceToGrapple;
 
         float curveMod = speedCurve.Evaluate(precisionFloat(timeGrappledSince / grappleMaxTime));
-        Debug.Log(curveMod);
+        Debug.Log("Curve GrappleForce" + curveMod);
         rb.AddForce(directionToGrapple * grappleForce * curveMod, ForceMode.Force);
     }
 
     //************
     //  HELPER
     //************
+
+    private float SmoothStop(float t) {
+        return 1f - Mathf.Pow(t - 1f, 2);
+    }
+
+    private float SmoothStart(float t)
+    {
+        return Mathf.Pow(t, 2);
+    }
+
+    private float MapCos(float t) {
+        return 1 - Mathf.Cos(t * Mathf.PI);
+    }
 
     private void VisualizeGrapple(bool simpleVis)
     {
@@ -341,9 +438,8 @@ public class PlayerController : MonoBehaviour
                 Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - grappleSpawn.position);
                 float numberOfSpawn = Mathf.RoundToInt(totalDist / distanceSpawnLinks);
                 totalDist -= totalDist % distanceSpawnLinks;
-                float distance = totalDist / numberOfSpawn;
                 float distValue = 0;
-                for (int i = 0; i < Math.Max(links.Count, numberOfSpawn); i++)
+                for (int i = 0; i < Mathf.Max(links.Count, numberOfSpawn); i++)
                 {
                     if (i >= numberOfSpawn)
                     {
@@ -355,9 +451,14 @@ public class PlayerController : MonoBehaviour
                         continue;
                     }
 
-                    //We increase our lerpValue
-                    distValue += distance;
+                    if (totalDist == 0.0f)
+                    {
+                        totalDist += 0.01f;
+                    }
+
+                    //We get our lerpValue
                     float lerpValue = precisionFloat(distValue / totalDist);
+
                     //Get the position
                     Vector3 placePosition = Vector3.Lerp(grappleSpawn.position, grappleSpawn.position + directionToGrapple * totalDist, lerpValue);
                     if (links.Count > i && links[i] != null)
@@ -365,7 +466,21 @@ public class PlayerController : MonoBehaviour
                         links[i].transform.position = placePosition;
                         Quaternion rotation = Quaternion.LookRotation(directionToGrapple);
                         rotation = Quaternion.Lerp(rotation*chainLinkPrefab.transform.rotation, rotation, lerpValue);
-                        Quaternion localRotation = Quaternion.Euler(0, 10*i, 0);
+                        
+                        // Add shake when overlaps with something
+                        Quaternion shake = Quaternion.Euler(0, Random.Range(-shakeValue, shakeValue), Random.Range(-shakeValue, shakeValue));
+                        Quaternion localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), shake, precisionFloat(timeGrappleOverlapGeometry / grappleMaxOverlapTime));
+                        
+                        if(i % 2 == 0) 
+                        {
+                            localRotation *= Quaternion.Euler(0, 0, 90);
+                        }
+
+                        float maxRenderDistance = 50f;
+
+                        Renderer rnd = links[i].GetComponent<Renderer>();
+                        rnd.material.SetFloat("Distance_", Mathf.Clamp(distValue / maxRenderDistance, 0f, 1f));
+
                         links[i].transform.rotation = rotation;
                         links[i].transform.localRotation *= localRotation;
                         //links[i].transform.localScale = chainLinkPrefab.transform.lossyScale;
@@ -377,6 +492,8 @@ public class PlayerController : MonoBehaviour
                         newLink.transform.parent = grappleSpawn.transform;
                         links.Add(newLink);
                     }
+
+                    distValue += distanceSpawnLinks;
                 }
             }
         }
@@ -442,6 +559,7 @@ public class PlayerController : MonoBehaviour
         {
             isTethered = true;
             timeGrappledSince = 0f;
+            timeGrappleOverlapGeometry = 0f;
             timeSuperJumpSince = superJumpAllow;
             tetherObject = hit.collider.gameObject;
             tetherOffset = hit.point - tetherObject.transform.position;

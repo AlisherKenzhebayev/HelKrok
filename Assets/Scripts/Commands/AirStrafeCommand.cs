@@ -37,6 +37,7 @@ public class AirStrafeCommand : BaseCommand
         if (projVel.magnitude < maxAirSpeed || isAway)
         {
             float curveMod = airForceEffectCurve.Evaluate(precisionFloat(projVel.magnitude / maxAirSpeed));
+            //precisionFloat(projVel.magnitude / maxAirSpeed)
 
             // calculate the ideal movement force
             Vector3 vc = worldspaceMoveInput.normalized * airStrafeForce * curveMod;

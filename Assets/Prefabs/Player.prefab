@@ -217,6 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9208518964508941598}
   - component: {fileID: 1594718687}
+  - component: {fileID: 8349762912747694334}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -242,6 +243,18 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1594718687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9208518964508941597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71df5f365b4d8e40ba9abb3614e908d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8349762912747694334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,7 +312,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9208518964601638682}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9bbe81cfb5821b046bf7805fbe952dd5, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -338,7 +351,7 @@ MonoBehaviour:
   groundCheck: {fileID: 9208518966150329144}
   grappleSpawn: {fileID: 9208518965371551863}
   chainLinkPrefab: {fileID: 4782248338475177714, guid: 7a89d6884085c4f41933c8673f6ba09d, type: 3}
-  distanceSpawnLinks: 0.5
+  distanceSpawnLinks: 0.35
   uiPrefab: {fileID: 865879249042825547, guid: 5506e71babd327a4487cebf021810fc1, type: 3}
   debugGoodStateMaterial: {fileID: 2100000, guid: dd594aa7b65105b4f830bddd556f66fa, type: 2}
   debugQuoStateMaterial: {fileID: 2100000, guid: 4f47b69c96e3e06438c10c907f7d4f98, type: 2}
@@ -395,6 +408,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  grappleMaxOverlapTime: 3
+  shakeValue: 15
   airStrafeForce: 70
   maxAirSpeed: 30
   airForceEffectCurve:
@@ -894,13 +909,13 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 119
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -934,7 +949,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9208518965371551862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.25}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9208518964821553541}

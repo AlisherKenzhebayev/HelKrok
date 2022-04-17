@@ -20,9 +20,9 @@ RenderSettings:
   m_FogDensity: 0.007
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 1, g: 0.8072945, b: 0, a: 1}
-  m_AmbientEquatorColor: {r: 1, g: 0.31442904, b: 0, a: 1}
-  m_AmbientGroundColor: {r: 1, g: 0.8072945, b: 0, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 0.95177954, b: 0.7490566, a: 1}
+  m_AmbientEquatorColor: {r: 1, g: 0.7630411, b: 0.65471697, a: 1}
+  m_AmbientGroundColor: {r: 1, g: 0.5500686, b: 0, a: 1}
   m_AmbientIntensity: 1.46
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.5176471, g: 0.34901962, b: 0.30980393, a: 1}
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0040117153, g: 0.00021892246, b: 0.000000052825648, a: 1}
+  m_IndirectSpecularColor: {r: 0.43975666, g: 0.48818117, b: 0.56839955, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137e14656efa2f141a5f516be3212f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 3, y: 3}
+  size: {x: 9, y: 9}
   startPos: 0
   room: {fileID: 3948524115235503573, guid: 976e8131f47ecc24f8eca616ddc3cc03, type: 3}
   offset: {x: 6, y: 6}
@@ -518,13 +518,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: -0.68578494, y: -0.0018654466, z: 0.24371028, w: 0.68578494}
+  m_LocalRotation: {x: -0.12092239, y: -0.6750424, z: 0.7176862, w: 0.120922536}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -70, y: -80, z: 100}
+  m_LocalEulerAnglesHint: {x: 70, y: -80, z: 100}
 --- !u!1001 &846364819
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -813,6 +813,10 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: distanceSpawnLinks
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: gravityAcceleration
       value: 30
       objectReference: {fileID: 0}
@@ -1012,7 +1016,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.661
+  m_Value: 0.74
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

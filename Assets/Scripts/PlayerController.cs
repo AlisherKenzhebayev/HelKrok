@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
     private Material debugQuoStateMaterial = null;
     [SerializeField]
     private Material debugBadStateMaterial = null;
+
+    private float currentEnergy = 200f;
+
     [SerializeField]
     private GameObject debugObject = null;
 
@@ -95,6 +98,15 @@ public class PlayerController : MonoBehaviour
     private AnimationCurve airForceEffectCurve = null;
 
     //**********
+    //  PUBLIC
+    //**********
+
+    public float getEnergy()
+    {
+        return this.currentEnergy;
+    }
+
+    //**********
     //  PRIVATE
     //**********
 
@@ -111,6 +123,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 tetherPoint;
     private Vector3 tetherOffset;
     private GameObject tetherObject;
+    private IInteractable grappleInteractable;
 
     private List<ICommand> physicsCommands;
 
@@ -156,6 +169,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        TestGrapple();
+
         HandleGrappleInput();
         DebugGrappleWithMaterial();
 
@@ -422,6 +437,15 @@ public class PlayerController : MonoBehaviour
         return 1 - Mathf.Cos(t * Mathf.PI);
     }
 
+    private void TestGrapple()
+    {
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, Mathf.Infinity)
+            && hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable))
+        {
+            interactable.Visualize();
+        }
+    }
+
     private void VisualizeGrapple(bool simpleVis)
     {
         if (isTethered)
@@ -555,8 +579,9 @@ public class PlayerController : MonoBehaviour
     void BeginGrapple()
     {
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, Mathf.Infinity) 
-            && hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable))
+            && hit.collider.gameObject.TryGetComponent<IInteractable>(out grappleInteractable))
         {
+            grappleInteractable.Execute(true);
             isTethered = true;
             timeGrappledSince = 0f;
             timeGrappleOverlapGeometry = 0f;
@@ -571,6 +596,7 @@ public class PlayerController : MonoBehaviour
 
     void EndGrapple()
     {
+        grappleInteractable.Execute(false);
         isTethered = false;
         tetherObject = null;
         lr.positionCount = 0;

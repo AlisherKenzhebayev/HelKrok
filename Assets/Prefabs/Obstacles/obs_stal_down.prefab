@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 2100000, guid: 5cdb7ff0a9ea6fa479d97c094e7f7db5, type: 2}
 --- !u!1 &2613319724877239973
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &8346447273160787392
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -257,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &1796445966480534007
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -366,6 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &1489542869577803747
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -475,6 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &9112571307531799482
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -584,6 +589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &1432964098917687340
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -693,6 +699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &2081684233149051232
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -802,6 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &3688187347702273322
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -911,6 +919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &5866667251044941257
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1020,6 +1029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &9132448455861947310
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1129,6 +1139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &7560446567279658590
 MeshCollider:
   m_ObjectHideFlags: 0

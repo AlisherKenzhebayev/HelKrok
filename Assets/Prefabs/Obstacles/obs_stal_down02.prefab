@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &7327359232732596722
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -204,6 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &3886952108965940748
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -268,6 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 2100000, guid: 5cdb7ff0a9ea6fa479d97c094e7f7db5, type: 2}
 --- !u!1 &7573979764630828821
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &4980790040245093941
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -472,6 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &508756172556104673
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -581,6 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &8767579986658862628
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -690,6 +696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &480469670003424019
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -799,6 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!64 &5730104439331074315
 MeshCollider:
   m_ObjectHideFlags: 0

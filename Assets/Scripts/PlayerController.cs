@@ -439,6 +439,10 @@ public class PlayerController : MonoBehaviour
 
     private void TestGrapple()
     {
+        if (isTethered) {
+            return;
+        }
+
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, Mathf.Infinity)
             && hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable))
         {

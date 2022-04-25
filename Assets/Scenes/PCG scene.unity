@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.7075472, g: 0.42175364, b: 0, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.007
@@ -319,7 +319,9 @@ MonoBehaviour:
   size: {x: 9, y: 9}
   startPos: 0
   room: {fileID: 3948524115235503573, guid: 976e8131f47ecc24f8eca616ddc3cc03, type: 3}
-  offset: {x: 6, y: 6}
+  key: {fileID: 8846771666786101281, guid: 7c3a26d6b174726478ed5c3e7ca91462, type: 3}
+  roomOffset: {x: 6, y: 6}
+  keyOffset: {x: 0, y: 0}
 --- !u!4 &368965632
 Transform:
   m_ObjectHideFlags: 0

@@ -60,6 +60,27 @@ public class ObstaclesBehaviour : MonoBehaviour
 
     public List<ListWrapper<GameObject>> listOfObstacleSets;
     public List<ListWrapper<float>> listOfObstacleSetsProbabilies;
+
+    bool collisionDetect(Transform input)
+    {
+        Transform upWallPosition = transform.parent.Find("Entrances").Find("Up Wall");
+        Transform downWallPosition = transform.parent.Find("Entrances").Find("Down Wall");
+        Transform rightWallPosition = transform.parent.Find("Entrances").Find("Right Wall");
+        Transform leftWallPosition = transform.parent.Find("Entrances").Find("Left Wall");
+        print(upWallPosition);
+        Transform[] listOfTransforms = { upWallPosition, downWallPosition, rightWallPosition, leftWallPosition };
+
+        for (int i = 0; i < listOfTransforms.Length; i++)
+        {
+            if (listOfTransforms[i] != null && (Mathf.Abs(listOfTransforms[i].position.x - input.position.x) < 0.3 || Mathf.Abs(listOfTransforms[i].position.z - input.position.z) < 0.3))
+            {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,7 +93,18 @@ public class ObstaclesBehaviour : MonoBehaviour
         {
             if (Random.value <= randomSetOfObstaclesProbabilities[i])
             {
-                randomSetOfObstacles[i].SetActive(true);
+                //print("here-1");
+                if (collisionDetect(randomSetOfObstacles[i].transform))
+                {
+                    //print("here0");
+                    randomSetOfObstacles[i].SetActive(false);
+                }
+                else
+                {
+                    //print("here1");
+                    randomSetOfObstacles[i].SetActive(true);
+
+                }
             }
             else
             {

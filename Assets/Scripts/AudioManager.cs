@@ -53,6 +53,18 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        //Debug.LogError("Start");
+
+        foreach (var item in instance.sounds)
+        {
+            if (item.playOnStart) {
+                instance.Play(item.name);
+            }
+        }
+    }
+
     public void Play(string name)
     {
         Sound s = instance.sounds.Find(sound => sound.name == name);

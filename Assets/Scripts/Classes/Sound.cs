@@ -17,6 +17,8 @@ public class Sound
 
     public bool isLooping;
 
+    public bool playOnStart;
+
     [HideInInspector]
     public AudioSource source;
 }

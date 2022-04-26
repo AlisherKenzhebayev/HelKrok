@@ -39,6 +39,7 @@ public class GrappleInteractable : MonoBehaviour, IInteractable
             ResetMaterial();
         }
         isFocused = false;
+        isGrappled = false;
     }
 
     private void ShowMaterial()
@@ -52,9 +53,9 @@ public class GrappleInteractable : MonoBehaviour, IInteractable
         }
     }
 
-    public void Execute(bool state)
+    public void Execute()
     {
-        isGrappled = state;
+        isGrappled = true;
     }
 
     public void Visualize()

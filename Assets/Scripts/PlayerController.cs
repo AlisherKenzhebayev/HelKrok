@@ -130,7 +130,8 @@ public class PlayerController : MonoBehaviour
     private LineRenderer lr;
     private Rigidbody rb;
     private float m_CameraVerticalAngle = 0f;
-    
+
+    private DamageTaker health;
     private InputManager inputManager;
     private Vector3 worldspaceMoveInput;
 
@@ -174,7 +175,7 @@ public class PlayerController : MonoBehaviour
         HandleGrappleInput();
         DebugGrappleWithMaterial();
 
-        VisualizeGrapple(false);
+        VisualizeGrapple();
 
         HandleCameraInput();
 
@@ -199,68 +200,6 @@ public class PlayerController : MonoBehaviour
         foreach (ICommand command in physicsCommands)
         {
             command.execute();
-        }
-    }
-
-    private void ApplyGravity()
-    {
-        if (isTethered) {
-            float curveMod = gravityCurve.Evaluate(precisionFloat(timeGrappledSince / grappleMaxTime));
-            rb.AddForce(-this.transform.up * rb.mass * gravityAcceleration * curveMod);
-        }
-        else
-        {
-            rb.AddForce(-this.transform.up * rb.mass * gravityAcceleration);
-        }
-    }
-
-    private void UpdateGrapplePosition()
-    {
-        if (isTethered)
-        {
-            tetherPoint = tetherObject.transform.position + tetherOffset;
-        }
-    }
-
-    private void UpdateTimers()
-    {
-        // Update grapple timer up to grappleMaxTime
-        if (isTethered)
-        {
-            timeGrappledSince = Mathf.Clamp(timeGrappledSince + Time.fixedDeltaTime, 0, grappleMaxTime);
-        }
-        // Update timer superjump each update
-        timeSuperJumpSince = Mathf.Clamp(timeSuperJumpSince - Time.fixedDeltaTime, -1f, superJumpAllow);
-
-        if (isTethered)
-        {
-            Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - transform.position);
-            float currentDistanceToGrapple = Vector3.Distance(tetherPoint, transform.position) - 2f;
-            if (Physics.Raycast(grappleSpawn.position, directionToGrapple, out RaycastHit hit, currentDistanceToGrapple))
-            {
-                timeGrappleOverlapGeometry += Time.fixedDeltaTime;
-            }
-            else
-            {
-                if (timeGrappleOverlapGeometry > 0)
-                {
-                    timeGrappleOverlapGeometry = Mathf.Clamp(
-                        timeGrappleOverlapGeometry - Mathf.Lerp(1, 0, SmoothStart(precisionFloat(timeGrappleOverlapGeometry / grappleMaxOverlapTime))),
-                        0, 
-                        grappleMaxOverlapTime);
-                }
-                else {
-                    timeGrappleOverlapGeometry = 0f;
-                }
-            }
-        }
-        
-        //Detach if overlaps with geometry for >overlapTime
-        {
-            if (timeGrappleOverlapGeometry > grappleMaxOverlapTime)
-            {
-                EndGrapple();
-            }
         }
     }
 
@@ -437,6 +376,9 @@ public class PlayerController : MonoBehaviour
         return 1 - Mathf.Cos(t * Mathf.PI);
     }
 
+    /// <summary>
+    /// Checks and visualizes if the grapple point is available
+    /// </summary>
     private void TestGrapple()
     {
         if (isTethered) {
@@ -450,90 +392,144 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void VisualizeGrapple(bool simpleVis)
+    private void VisualizeGrapple()
     {
         if (isTethered)
         {
-            if (simpleVis)
+            // Spawn in chain links
+            float totalDist = Vector3.Distance(grappleSpawn.position, tetherPoint);
+            Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - grappleSpawn.position);
+            float numberOfSpawn = Mathf.RoundToInt(totalDist / distanceSpawnLinks);
+            totalDist -= totalDist % distanceSpawnLinks;
+            float distValue = 0;
+            for (int i = 0; i < Mathf.Max(links.Count, numberOfSpawn); i++)
             {
-                lr.SetPosition(0, grappleSpawn.position);
-                lr.SetPosition(1, tetherPoint);
-            }
-            else
-            {
-                // Spawn in chain links
-                float totalDist = Vector3.Distance(grappleSpawn.position, tetherPoint);
-                Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - grappleSpawn.position);
-                float numberOfSpawn = Mathf.RoundToInt(totalDist / distanceSpawnLinks);
-                totalDist -= totalDist % distanceSpawnLinks;
-                float distValue = 0;
-                for (int i = 0; i < Mathf.Max(links.Count, numberOfSpawn); i++)
+                if (i >= numberOfSpawn)
                 {
-                    if (i >= numberOfSpawn)
+                    if (links[i] != null)
                     {
-                        if (links[i] != null)
-                        {
-                            GameObject.Destroy(links[i]);
-                            links[i] = null;
-                        }
-                        continue;
+                        GameObject.Destroy(links[i]);
+                        links[i] = null;
                     }
-
-                    if (totalDist == 0.0f)
-                    {
-                        totalDist += 0.01f;
-                    }
-
-                    //We get our lerpValue
-                    float lerpValue = precisionFloat(distValue / totalDist);
-
-                    //Get the position
-                    Vector3 placePosition = Vector3.Lerp(grappleSpawn.position, grappleSpawn.position + directionToGrapple * totalDist, lerpValue);
-                    if (links.Count > i && links[i] != null)
-                    {
-                        links[i].transform.position = placePosition;
-                        Quaternion rotation = Quaternion.LookRotation(directionToGrapple);
-                        rotation = Quaternion.Lerp(rotation*chainLinkPrefab.transform.rotation, rotation, lerpValue);
-                        
-                        // Add shake when overlaps with something
-                        Quaternion shake = Quaternion.Euler(0, Random.Range(-shakeValue, shakeValue), Random.Range(-shakeValue, shakeValue));
-                        Quaternion localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), shake, precisionFloat(timeGrappleOverlapGeometry / grappleMaxOverlapTime));
-                        
-                        if(i % 2 == 0) 
-                        {
-                            localRotation *= Quaternion.Euler(0, 0, 90);
-                        }
-
-                        float maxRenderDistance = 50f;
-
-                        Renderer rnd = links[i].GetComponent<Renderer>();
-                        rnd.material.SetFloat("Distance_", Mathf.Clamp(distValue / maxRenderDistance, 0f, 1f));
-
-                        links[i].transform.rotation = rotation;
-                        links[i].transform.localRotation *= localRotation;
-                        //links[i].transform.localScale = chainLinkPrefab.transform.lossyScale;
-                    }
-                    else
-                    {
-                        //Instantiate the object
-                        GameObject newLink = Instantiate(chainLinkPrefab, placePosition, playerCamera.transform.rotation);
-                        newLink.transform.parent = grappleSpawn.transform;
-                        links.Add(newLink);
-                    }
-
-                    distValue += distanceSpawnLinks;
+                    continue;
                 }
+
+                if (totalDist == 0.0f)
+                {
+                    totalDist += 0.01f;
+                }
+
+                //We get our lerpValue
+                float lerpValue = precisionFloat(distValue / totalDist);
+
+                //Get the position
+                Vector3 placePosition = Vector3.Lerp(grappleSpawn.position, grappleSpawn.position + directionToGrapple * totalDist, lerpValue);
+                if (links.Count > i && links[i] != null)
+                {
+                    links[i].transform.position = placePosition;
+                    Quaternion rotation = Quaternion.LookRotation(directionToGrapple);
+                    rotation = Quaternion.Lerp(rotation*chainLinkPrefab.transform.rotation, rotation, lerpValue);
+                        
+                    // Add shake when overlaps with something
+                    Quaternion shake = Quaternion.Euler(0, Random.Range(-shakeValue, shakeValue), Random.Range(-shakeValue, shakeValue));
+                    Quaternion localRotation = Quaternion.Lerp(Quaternion.Euler(0, 0, 0), shake, precisionFloat(timeGrappleOverlapGeometry / grappleMaxOverlapTime));
+                        
+                    if(i % 2 == 0) 
+                    {
+                        localRotation *= Quaternion.Euler(0, 0, 90);
+                    }
+
+                    float maxRenderDistance = 50f;
+
+                    Renderer rnd = links[i].GetComponent<Renderer>();
+                    rnd.material.SetFloat("Distance_", Mathf.Clamp(distValue / maxRenderDistance, 0f, 1f));
+
+                    links[i].transform.rotation = rotation;
+                    links[i].transform.localRotation *= localRotation;
+                    //links[i].transform.localScale = chainLinkPrefab.transform.lossyScale;
+                }
+                else
+                {
+                    //Instantiate the object
+                    GameObject newLink = Instantiate(chainLinkPrefab, placePosition, playerCamera.transform.rotation);
+                    newLink.transform.parent = grappleSpawn.transform;
+                    links.Add(newLink);
+                }
+
+                distValue += distanceSpawnLinks;
+                
             }
         }
         else
         {
-            if (!simpleVis)
+            for (int i = 0; i < links.Count; i++)
             {
-                for (int i = 0; i < links.Count; i++)
+                GameObject.Destroy(links[i]);
+            }
+            links.Clear();   
+        }
+    }
+
+    private void ApplyGravity()
+    {
+        if (isTethered)
+        {
+            float curveMod = gravityCurve.Evaluate(precisionFloat(timeGrappledSince / grappleMaxTime));
+            rb.AddForce(-this.transform.up * rb.mass * gravityAcceleration * curveMod);
+        }
+        else
+        {
+            rb.AddForce(-this.transform.up * rb.mass * gravityAcceleration);
+        }
+    }
+
+    private void UpdateGrapplePosition()
+    {
+        if (isTethered)
+        {
+            tetherPoint = tetherObject.transform.position + tetherOffset;
+        }
+    }
+
+    private void UpdateTimers()
+    {
+        // Update grapple timer up to grappleMaxTime
+        if (isTethered)
+        {
+            timeGrappledSince = Mathf.Clamp(timeGrappledSince + Time.fixedDeltaTime, 0, grappleMaxTime);
+        }
+        // Update timer superjump each update
+        timeSuperJumpSince = Mathf.Clamp(timeSuperJumpSince - Time.fixedDeltaTime, -1f, superJumpAllow);
+
+        if (isTethered)
+        {
+            Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - transform.position);
+            float currentDistanceToGrapple = Vector3.Distance(tetherPoint, transform.position) - 2f;
+            if (Physics.Raycast(grappleSpawn.position, directionToGrapple, out RaycastHit hit, currentDistanceToGrapple))
+            {
+                timeGrappleOverlapGeometry += Time.fixedDeltaTime;
+            }
+            else
+            {
+                if (timeGrappleOverlapGeometry > 0)
                 {
-                    GameObject.Destroy(links[i]);
+                    timeGrappleOverlapGeometry = Mathf.Clamp(
+                        timeGrappleOverlapGeometry - Mathf.Lerp(1, 0, SmoothStart(precisionFloat(timeGrappleOverlapGeometry / grappleMaxOverlapTime))),
+                        0,
+                        grappleMaxOverlapTime);
                 }
-                links.Clear();
+                else
+                {
+                    timeGrappleOverlapGeometry = 0f;
+                }
+            }
+        }
+
+        //Detach if overlaps with geometry for >overlapTime
+        {
+            if (timeGrappleOverlapGeometry > grappleMaxOverlapTime)
+            {
+                EndGrapple();
             }
         }
     }
@@ -585,7 +581,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, Mathf.Infinity) 
             && hit.collider.gameObject.TryGetComponent<IInteractable>(out grappleInteractable))
         {
-            grappleInteractable.Execute(true);
+            grappleInteractable.Execute();
             isTethered = true;
             timeGrappledSince = 0f;
             timeGrappleOverlapGeometry = 0f;
@@ -600,7 +596,7 @@ public class PlayerController : MonoBehaviour
 
     void EndGrapple()
     {
-        grappleInteractable.Execute(false);
+        grappleInteractable.Execute();
         isTethered = false;
         tetherObject = null;
         lr.positionCount = 0;

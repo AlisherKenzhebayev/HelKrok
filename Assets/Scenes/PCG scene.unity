@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211762767}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7, z: 0}
+  m_LocalPosition: {x: 0, y: 8.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1943944455}
@@ -498,9 +498,9 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 70, y: -80, z: 100}
---- !u!1 &1030545766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9208518964601638682, guid: f884e540adfa9214783b6affda616432, type: 3}
+--- !u!4 &1030545767 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9208518964601638686, guid: f884e540adfa9214783b6affda616432, type: 3}
   m_PrefabInstance: {fileID: 1406333026}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1406333026
@@ -510,6 +510,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 989225637, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 989225639, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2067350755, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9208518964508941597, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: m_Name
       value: PlayerPrefab
@@ -559,27 +571,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638682, guid: f884e540adfa9214783b6affda616432, type: 3}
-      propertyPath: m_Name
-      value: PlayerCharacter
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9208518964821553540, guid: f884e540adfa9214783b6affda616432, type: 3}
-      propertyPath: m_Name
-      value: GrappleHand
+    - target: {fileID: 9208518964601638683, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f884e540adfa9214783b6affda616432, type: 3}
---- !u!114 &1406333028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1030545766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 180abbf2b72cb1c48bdb1387edcf9663, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1532417638
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,6 +628,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1837102838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1837102839}
+  - component: {fileID: 1837102840}
+  m_Layer: 3
+  m_Name: Energy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1837102839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837102838}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1030545767}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1837102840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837102838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3631bd26b2bc4404d8ba87afc9f5d9d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentEnergy: 100
+  timeRebound: 0.5
+  defaultRestoreSpeed: 0.33
 --- !u!1 &1943944454
 GameObject:
   m_ObjectHideFlags: 0

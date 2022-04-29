@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6591022348770764586}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Merged_obs_stal_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: -8286543350118781234}
   - component: {fileID: 718137522}
   - component: {fileID: 718137521}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: stal
   m_TagString: Untagged
   m_Icon: {fileID: 0}

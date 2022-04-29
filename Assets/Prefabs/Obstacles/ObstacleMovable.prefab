@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8526584871029953361}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ObstacleMovable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 8526584871461738749}
   - component: {fileID: 8526584871461738750}
   - component: {fileID: 4791014355160397755}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c10be42ca70a644894ad162772d353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shaderMaterial: {fileID: 0}
 --- !u!1 &8526584871705483020
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8526584871705483023}
   - component: {fileID: 8526584871705483022}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: startPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8526584872182279219}
   - component: {fileID: 8526584872182279218}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: endPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

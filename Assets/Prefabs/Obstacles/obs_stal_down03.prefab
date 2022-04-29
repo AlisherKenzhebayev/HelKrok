@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4456011683236693522}
   - component: {fileID: 4496294668108710534}
   - component: {fileID: 2579727279013755030}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: stal.099
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6265950752811521106}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: obs_stal_down03
   m_TagString: Untagged
   m_Icon: {fileID: 0}

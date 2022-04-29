@@ -325,8 +325,9 @@ GameObject:
   - component: {fileID: 9208518964601638687}
   - component: {fileID: 9208518964601638752}
   - component: {fileID: 382459780}
+  - component: {fileID: 1406333028}
   m_Layer: 3
-  m_Name: Character
+  m_Name: PlayerCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -612,6 +613,18 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &1406333028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9208518964601638682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180abbf2b72cb1c48bdb1387edcf9663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9208518964815489742
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,7 +703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9208518964821553541}
   m_Layer: 0
-  m_Name: Hand
+  m_Name: GrappleHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

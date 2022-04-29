@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5405505800773966615}
   - component: {fileID: 1768735786005480896}
   - component: {fileID: 8749850084345916595}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,9 +94,9 @@ GameObject:
   - component: {fileID: 3319453833176713408}
   - component: {fileID: 3966786569390771179}
   - component: {fileID: 6224130739598747270}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: stal.050
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ public class RestrictedCollidersCheck : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.layer == 13)
         {
             EventManager.TriggerEvent("playerCollideRestricted", new Dictionary<string, object> { { "timeCollision", Time.time } });
         }

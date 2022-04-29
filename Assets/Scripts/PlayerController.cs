@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -136,6 +135,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 worldspaceMoveInput;
 
     private MeshRenderer debugRenderer;
+    private EnergyDepleter energyDepleter;
 
     // Start is called before the first frame update
     void Start()
@@ -165,6 +165,12 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("Error - no MeshRenderer component");
         }
+
+        energyDepleter = this.GetComponentInChildren<EnergyDepleter>();
+        if(energyDepleter == null)
+        {
+            Debug.LogError("Error - no EnergyDepleter child component");
+        }
     }
 
     // Update is called once per frame
@@ -189,6 +195,7 @@ public class PlayerController : MonoBehaviour
         physicsCommands.Clear();
 
         UpdateGrapplePosition();
+        UpdateGrappleEnergy();
 
         UpdateTimers();
 
@@ -202,7 +209,6 @@ public class PlayerController : MonoBehaviour
             command.execute();
         }
     }
-
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -240,7 +246,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleGrappleInput()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) 
+            && energyDepleter.Use())
         {
             if (!isTethered)
             {
@@ -490,6 +497,16 @@ public class PlayerController : MonoBehaviour
             tetherPoint = tetherObject.transform.position + tetherOffset;
         }
     }
+
+    private void UpdateGrappleEnergy()
+    {
+        if (isTethered)
+        {
+            // Simulate continuous grapple
+            energyDepleter.Use(0, 0);
+        }
+    }
+
 
     private void UpdateTimers()
     {

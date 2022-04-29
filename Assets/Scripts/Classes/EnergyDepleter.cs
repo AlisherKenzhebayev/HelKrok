@@ -7,8 +7,11 @@ using UnityEngine;
 public abstract class EnergyDepleter : MonoBehaviour, IEnergyDepleter
 {
     [SerializeField]
-    [Tooltip("Same as maxHealth, works with that assumption")]
+    [Tooltip("Same as maxEnergy, works with that assumption")]
     internal float currentEnergy = 100;
+    [SerializeField]
+    [Tooltip("minEnergy, undepletable number")]
+    internal float minEnergy = 10;
     internal float maxEnergy;
 
     [SerializeField]
@@ -24,7 +27,7 @@ public abstract class EnergyDepleter : MonoBehaviour, IEnergyDepleter
         UpdateTimers();
         
         if(currentTimeRebound <= 0) { 
-            currentEnergy = Mathf.Clamp(currentEnergy + currentRestoreSpeed, 0f, maxEnergy);
+            currentEnergy = Mathf.Clamp(currentEnergy + currentRestoreSpeed, minEnergy, maxEnergy);
         }
     }
 
@@ -65,7 +68,7 @@ public abstract class EnergyDepleter : MonoBehaviour, IEnergyDepleter
         throw new System.NotImplementedException();
     }
 
-    public virtual bool HasEnough(float energyCost)
+    public virtual bool HasEnough(float energyCost = 25f)
     {
         if (currentEnergy >= energyCost) {
             return true;
@@ -76,7 +79,7 @@ public abstract class EnergyDepleter : MonoBehaviour, IEnergyDepleter
 
     public void RestoreFlat(float energyAmount)
     {
-        currentEnergy = Mathf.Min(maxEnergy, currentEnergy + energyAmount);
+        currentEnergy = Mathf.Clamp(currentEnergy + energyAmount, minEnergy, maxEnergy);
     }
 
     /// <summary>
@@ -96,7 +99,7 @@ public abstract class EnergyDepleter : MonoBehaviour, IEnergyDepleter
 
     internal virtual void PayPrice(float percentagePrice)
     {
-        currentEnergy = Mathf.Max(0f, currentEnergy * (1 - percentagePrice));
+        currentEnergy = Mathf.Clamp(currentEnergy * (1 - percentagePrice), minEnergy, maxEnergy);
         currentTimeRebound = timeRebound;
     }
 

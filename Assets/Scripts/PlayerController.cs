@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour
     private GameObject chainLinkPrefab = null;
     [SerializeField]
     private float distanceSpawnLinks = 0.5f;
-    [SerializeField]
-    private GameObject uiPrefab = null;
 
     [Header("Debug Materials")]
     [SerializeField]
@@ -29,8 +27,6 @@ public class PlayerController : MonoBehaviour
     private Material debugQuoStateMaterial = null;
     [SerializeField]
     private Material debugBadStateMaterial = null;
-
-    private float currentEnergy = 200f;
 
     [SerializeField]
     private GameObject debugObject = null;
@@ -96,13 +92,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] 
     private AnimationCurve airForceEffectCurve = null;
 
+    [SerializeField]
+    private float grappleCost = 25f;
+
     //**********
     //  PUBLIC
     //**********
 
     public float getEnergy()
     {
-        return this.currentEnergy;
+        return energyDepleter.GetEnergy();
     }
 
     //**********
@@ -143,8 +142,6 @@ public class PlayerController : MonoBehaviour
         physicsCommands = new List<ICommand>();
         links = new List<GameObject>();
         inputManager = new InputManager();
-
-        Instantiate(uiPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
         CursorMagick();
         
@@ -247,7 +244,7 @@ public class PlayerController : MonoBehaviour
     private void HandleGrappleInput()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) 
-            && energyDepleter.Use())
+            && energyDepleter.HasEnough(grappleCost))
         {
             if (!isTethered)
             {
@@ -392,7 +389,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, Mathf.Infinity)
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, energyDepleter.GetEnergy())
             && hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable))
         {
             interactable.Visualize();
@@ -595,9 +592,10 @@ public class PlayerController : MonoBehaviour
 
     void BeginGrapple()
     {
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, Mathf.Infinity) 
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, energyDepleter.GetEnergy()) 
             && hit.collider.gameObject.TryGetComponent<IInteractable>(out grappleInteractable))
         {
+            energyDepleter.Use(grappleCost, 0.2f);
             grappleInteractable.Execute();
             isTethered = true;
             timeGrappledSince = 0f;

@@ -43,9 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0307ff6c380b6a408c240ff49495234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileToSpawn: {fileID: 0}
+  projectileToSpawn: {fileID: 5592506708158886972, guid: a5a77d3882a2b5d46b84e8d71d8d3081, type: 3}
   timerToSpawn: 2
   numberToSpawn: 2
-  loop: 0
+  loop: 1
   timerCooldown: 2
   isSpawning: 0

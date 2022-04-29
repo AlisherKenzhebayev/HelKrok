@@ -29,8 +29,10 @@ public class ProjectileSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
-        if(isSpawning)
-        StartSpawning();
+        if (isSpawning)
+        {
+            StartSpawning();
+        }
     }
 
     private void FixedUpdate()
@@ -40,6 +42,7 @@ public class ProjectileSpawner : MonoBehaviour
 
     private void StartSpawning()
     {
+        
         if (currentCooldown <= 0) {
             if (timerCooldown == float.PositiveInfinity) {
                 return;
@@ -50,6 +53,7 @@ public class ProjectileSpawner : MonoBehaviour
             }
             currentCooldown = timerCooldown;
             spawnCor = StartCoroutine(spawnCoroutine());
+            
         }
     }
 
@@ -58,7 +62,9 @@ public class ProjectileSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(timerToSpawn);
             Instantiate(projectileToSpawn, this.transform);
+            
         }
+        Debug.Log("spawning");
     }
 
     private void OnDrawGizmos()
@@ -72,6 +78,11 @@ public class ProjectileSpawner : MonoBehaviour
     public void SwitchSpawning(bool state)
     {
         isSpawning = state;
-        StopCoroutine(spawnCor);
+        if (spawnCor != null)
+        {
+            //StopCoroutine(spawnCor);
+        }
+        //timerCooldown = 0;
+        currentCooldown = 0;
     }
 }

@@ -1,6 +1,8 @@
 public interface IEnergyDepleter
 {
     public float GetEnergy();
+   
+    public float GetPercentEnergy();
 
     public bool Use(float energyAmount, float percentagePrice);
 

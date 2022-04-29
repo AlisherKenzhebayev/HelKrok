@@ -15,5 +15,6 @@ public class CanvasCameraAssigner : MonoBehaviour
         }
 
         canvas.worldCamera = Camera.main;
+        canvas.sortingLayerName = "UI";
     }
 }

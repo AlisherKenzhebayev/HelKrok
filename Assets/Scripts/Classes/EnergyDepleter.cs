@@ -41,9 +41,14 @@ public abstract class EnergyDepleter : MonoBehaviour, IEnergyDepleter
         }
     }
 
-    private void Start()
+    public virtual void Start()
     {
         maxEnergy = currentEnergy;
+    }
+
+    public virtual void Update()
+    {
+        EventManager.TriggerEvent("currentEnergyPlayer", new Dictionary<string, object> { { "amount", this.GetPercentEnergy() } });
     }
 
     internal virtual void OnEnable()
@@ -106,5 +111,10 @@ public abstract class EnergyDepleter : MonoBehaviour, IEnergyDepleter
     public virtual float GetEnergy()
     {
         return currentEnergy;
+    }
+
+    public virtual float GetPercentEnergy()
+    {
+        return Mathf.Clamp(currentEnergy / maxEnergy, 0f, 1f);
     }
 }

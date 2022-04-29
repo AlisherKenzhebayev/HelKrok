@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
     private AnimationCurve airForceEffectCurve = null;
 
     [SerializeField]
-    private float grappleCost = 25f;
+    private float grappleCost = 5f;
 
     //**********
     //  PUBLIC

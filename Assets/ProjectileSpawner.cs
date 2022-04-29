@@ -19,11 +19,17 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField]
     private float timerCooldown = 2f;
 
+    [SerializeField]
+    bool isSpawning = false;
+
     private float currentCooldown;
+
+    Coroutine spawnCor;
 
     // Start is called before the first frame update
     void Update()
     {
+        if(isSpawning)
         StartSpawning();
     }
 
@@ -43,7 +49,7 @@ public class ProjectileSpawner : MonoBehaviour
                 timerCooldown = float.PositiveInfinity;
             }
             currentCooldown = timerCooldown;
-            StartCoroutine(spawnCoroutine());
+            spawnCor = StartCoroutine(spawnCoroutine());
         }
     }
 
@@ -61,5 +67,11 @@ public class ProjectileSpawner : MonoBehaviour
 
         Gizmos.DrawSphere(this.transform.position, radius: 0.1f);
         Gizmos.DrawRay(this.transform.position, this.transform.forward);
+    }
+
+    public void SwitchSpawning(bool state)
+    {
+        isSpawning = state;
+        StopCoroutine(spawnCor);
     }
 }

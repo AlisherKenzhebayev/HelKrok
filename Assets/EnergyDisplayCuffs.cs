@@ -5,17 +5,12 @@ using UnityEngine;
 public class EnergyDisplayCuffs : MonoBehaviour
 {
     [SerializeField]
-    private Renderer rendererReference;
-    [SerializeField]
-    private int arrayN;
-    [SerializeField]
     private Material energyShaderMaterial;
 
     private Material m;
 
     private void Start()
     {
-        m = rendererReference.sharedMaterials[arrayN];
         m = energyShaderMaterial;
     }
 

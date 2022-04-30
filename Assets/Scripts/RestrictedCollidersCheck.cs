@@ -8,10 +8,11 @@ using UnityEngine;
 /// </summary>
 public class RestrictedCollidersCheck : MonoBehaviour
 {
+    public LayerMask restrictedLayers;
+
     private void OnCollisionEnter(Collision collision)
     {
-
-        if (collision.gameObject.layer == 13)
+        if ((restrictedLayers | (1<<collision.gameObject.layer)) == restrictedLayers)
         {
             EventManager.TriggerEvent("playerCollideRestricted", new Dictionary<string, object> { { "timeCollision", Time.time } });
         }

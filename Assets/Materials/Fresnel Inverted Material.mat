@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Energy Material
-  m_Shader: {fileID: -6465566751694194690, guid: 3f121119a92cf1b478e763a3abdb60dd, type: 3}
-  m_ShaderKeywords: _EMISSION
-  m_LightmapFlags: 2
+  m_Name: Fresnel Inverted Material
+  m_Shader: {fileID: -6465566751694194690, guid: 6a04d4229e7367d47b11fc3c1a2d4a56, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -32,9 +32,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Energy_: 1
-    - Vector1_5b398d80840c4219af96322b5289299f: -0.1
+    - Edge_: 0.5
+    - Vector1_bc3fef22a4e545bd8c18376c23b31bfb: 5
     m_Colors:
-    - Color_: {r: 0.2162256, g: 0.0090094, b: 0, a: 0}
-    - EColor_: {r: 0, g: 8, b: 6.7798386, a: 1}
+    - Color_: {r: 0, g: 0, b: 0, a: 0}
+    - Position_: {r: 0, g: 0, b: 0, a: 0}
+    - RimColor_: {r: 1, g: 0.66415095, b: 0.66415095, a: 0.003921569}
+    - Vector2_bee8af85a5d044989f10dca830ea8add: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

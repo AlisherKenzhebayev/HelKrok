@@ -73,7 +73,7 @@ MonoBehaviour:
     playOnStart: 0
     source: {fileID: 0}
   - name: BGM
-    clip: {fileID: 8300000, guid: 43fb38639145482478958d4825bbcedf, type: 3}
+    clip: {fileID: 8300000, guid: 967bc3aaf03c6bc4186d1423f13d23bb, type: 3}
     volume: 0.28
     pitch: 1
     isLooping: 1

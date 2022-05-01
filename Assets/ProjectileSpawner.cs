@@ -83,6 +83,6 @@ public class ProjectileSpawner : MonoBehaviour
             //StopCoroutine(spawnCor);
         }
         //timerCooldown = 0;
-        currentCooldown = 0;
+        //currentCooldown = 0;
     }
 }

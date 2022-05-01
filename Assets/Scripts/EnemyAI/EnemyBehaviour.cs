@@ -5,9 +5,11 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
     public float speed = 1f;
+    public float followSpeedMultiplayer = .3f;
+    public float rotSpeed = 1f;
     bool moving = true;
     public GameObject patrolPointsParent;
-    public List<GameObject> patrolPoints = new List<GameObject>();
+    List<GameObject> patrolPoints = new List<GameObject>();
     [SerializeField]
     EnemyStates enemyState = EnemyStates.patrol;
 
@@ -17,13 +19,16 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField]
     float alertDistance;
 
+    [SerializeField]
+    float followDistance = 20;
+
     GameObject player;
 
     [SerializeField]
     ProjectileSpawner projectileSpawner;
 
-    public int currentTargetIndex;
-    public Transform currentTargetTransform;
+    int currentTargetIndex;
+    Transform currentTargetTransform;
     // Start is called before the first frame update
 
     public enum EnemyStates
@@ -72,6 +77,9 @@ public class EnemyBehaviour : MonoBehaviour
             while (enemyState == EnemyStates.attacking)
             {
                 projectileSpawner.SwitchSpawning(true);
+                Vector3 D = player.transform.position - enemyMesh.transform.position;
+                enemyMesh.transform.rotation = Quaternion.Slerp(enemyMesh.transform.rotation, Quaternion.LookRotation(D), rotSpeed * Time.deltaTime);
+                FollowTarget(player.transform);
                 yield return null;
             }
             while (enemyState == EnemyStates.dead)
@@ -87,7 +95,7 @@ public class EnemyBehaviour : MonoBehaviour
     IEnumerator Patrol()
     {
         float distance = 5000;
-        while (distance > 1f)
+        while (distance > 1f && enemyState == EnemyStates.patrol)
         {
             MoveToTarget(currentTargetTransform);
             yield return null;
@@ -95,10 +103,12 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    void MoveToTarget(Transform target)
+    void MoveToTarget(Transform target, float speedMultiplayer = 1)
     {
         //enemyMesh.transform.LookAt(target);
-        enemyMesh.transform.position = Vector3.Lerp(enemyMesh.transform.position, target.position, speed * Time.deltaTime);
+        Vector3 D = target.position - enemyMesh.transform.position;
+        enemyMesh.transform.rotation = Quaternion.Slerp(enemyMesh.transform.rotation, Quaternion.LookRotation(D), rotSpeed * Time.deltaTime);
+        enemyMesh.transform.position = Vector3.Lerp(enemyMesh.transform.position, target.position, speedMultiplayer * speed * Time.deltaTime);
         Debug.Log("Move To target");
     }
 
@@ -146,6 +156,15 @@ public class EnemyBehaviour : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    void FollowTarget(Transform target)
+    {
+        float distance = Vector3.Distance(target.position, enemyMesh.position);
+        if (distance > followDistance)
+        {
+            MoveToTarget(target, followSpeedMultiplayer);
         }
     }
 }

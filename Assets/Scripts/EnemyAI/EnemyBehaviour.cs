@@ -22,6 +22,12 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField]
     float followDistance = 20;
 
+    [SerializeField]
+    float hp = 100;
+
+    [SerializeField]
+    Rigidbody rb;
+
     GameObject player;
 
     [SerializeField]
@@ -60,31 +66,55 @@ public class EnemyBehaviour : MonoBehaviour
         {
             ChangeEnemyState(EnemyStates.patrol);
         }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            DecreaseHP();
+        }
     }
 
 
     IEnumerator EnemyBehaviourCor()
     {
+        Coroutine patrol = null;
         while (moving)
         {
-
-            while (enemyState == EnemyStates.patrol)
+            
+            if (enemyState == EnemyStates.patrol)
             {
                 projectileSpawner.SwitchSpawning(false);
-                yield return StartCoroutine(Patrol());
+                if (patrol != null)
+                {
+                    yield return patrol = StartCoroutine(Patrol());
+                }
+                else
+                {
+                    yield return null;
+                }
                 AssignNextTarget();
             }
-            while (enemyState == EnemyStates.attacking)
+            if (enemyState == EnemyStates.attacking)
             {
-                projectileSpawner.SwitchSpawning(true);
+                if (!projectileSpawner.isSpawningMethod())
+                {
+                    projectileSpawner.SwitchSpawning(true);
+                }
+                
                 Vector3 D = player.transform.position - enemyMesh.transform.position;
                 enemyMesh.transform.rotation = Quaternion.Slerp(enemyMesh.transform.rotation, Quaternion.LookRotation(D), rotSpeed * Time.deltaTime);
                 FollowTarget(player.transform);
                 yield return null;
             }
-            while (enemyState == EnemyStates.dead)
+            if (hp <=0)
             {
-                yield return null;
+                enemyState = EnemyStates.dead;
+                if (projectileSpawner.isSpawningMethod())
+                {
+                    projectileSpawner.SwitchSpawning(false);
+                }
+                Destroy(projectileSpawner);
+                StartCoroutine(EnemyDeath());
+                moving = false;
             }
             yield return null;
         }
@@ -167,4 +197,18 @@ public class EnemyBehaviour : MonoBehaviour
             MoveToTarget(target, followSpeedMultiplayer);
         }
     }
+
+    IEnumerator EnemyDeath()
+    {
+        rb.isKinematic = false;
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
+    }
+
+    
+    void DecreaseHP()
+    {
+        hp -= 20;
+    }
+
 }

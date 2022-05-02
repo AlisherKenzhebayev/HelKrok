@@ -46,12 +46,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
+  followSpeedMultiplayer: 0.3
   rotSpeed: 7
   patrolPointsParent: {fileID: 2360663755004385227}
   enemyState: 0
   enemyMesh: {fileID: 675778455313247481}
   alertDistance: 100
   followDistance: 40
+  hp: 100
+  rb: {fileID: 8027157143879022981}
   projectileSpawner: {fileID: 8832234282369795134}
 --- !u!1 &1486836512193212720
 GameObject:
@@ -367,7 +370,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 699735903545472785, guid: 16e976ab1cf35b04abba9e65ebb830fa, type: 3}
 --- !u!1001 &513880235195789912

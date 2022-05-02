@@ -78,11 +78,21 @@ public class ProjectileSpawner : MonoBehaviour
     public void SwitchSpawning(bool state)
     {
         isSpawning = state;
-        if (spawnCor != null)
+        if (spawnCor != null && state == false)
         {
-            //StopCoroutine(spawnCor);
+            StopCoroutine(spawnCor);
         }
-        //timerCooldown = 0;
-        //currentCooldown = 0;
+    }
+
+    public bool isSpawningMethod()
+    {
+        if (isSpawning)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

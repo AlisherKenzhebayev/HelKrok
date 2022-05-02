@@ -9,7 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
     public float rotSpeed = 1f;
     bool moving = true;
     public GameObject patrolPointsParent;
-    List<GameObject> patrolPoints = new List<GameObject>();
+    public List<GameObject> patrolPoints = new List<GameObject>();
     [SerializeField]
     EnemyStates enemyState = EnemyStates.patrol;
 
@@ -32,6 +32,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     [SerializeField]
     ProjectileSpawner projectileSpawner;
+
+    Coroutine patrol = null;
 
     int currentTargetIndex;
     Transform currentTargetTransform;
@@ -76,22 +78,22 @@ public class EnemyBehaviour : MonoBehaviour
 
     IEnumerator EnemyBehaviourCor()
     {
-        Coroutine patrol = null;
         while (moving)
         {
             
             if (enemyState == EnemyStates.patrol)
             {
                 projectileSpawner.SwitchSpawning(false);
-                if (patrol != null)
+                if (patrol == null)
                 {
-                    yield return patrol = StartCoroutine(Patrol());
+                    patrol = StartCoroutine(Patrol());
+                    yield return null;
                 }
                 else
                 {
                     yield return null;
                 }
-                AssignNextTarget();
+                
             }
             if (enemyState == EnemyStates.attacking)
             {
@@ -124,13 +126,17 @@ public class EnemyBehaviour : MonoBehaviour
 
     IEnumerator Patrol()
     {
+        Debug.Log("moving on patrol");
         float distance = 5000;
         while (distance > 1f && enemyState == EnemyStates.patrol)
         {
+            
             MoveToTarget(currentTargetTransform);
             yield return null;
             distance = Vector3.Distance(enemyMesh.transform.position, currentTargetTransform.position);
         }
+        patrol = null;
+        AssignNextTarget();
     }
 
     void MoveToTarget(Transform target, float speedMultiplayer = 1)

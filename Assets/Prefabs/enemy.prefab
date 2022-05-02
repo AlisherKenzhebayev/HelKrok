@@ -45,10 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfb069e62a3c20408aab9dbc1e548f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
-  followSpeedMultiplayer: 0.3
+  speed: 1.2
+  followSpeedMultiplayer: 0.4
   rotSpeed: 7
   patrolPointsParent: {fileID: 2360663755004385227}
+  patrolPoints: []
   enemyState: 0
   enemyMesh: {fileID: 675778455313247481}
   alertDistance: 100

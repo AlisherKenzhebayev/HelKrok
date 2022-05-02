@@ -44,7 +44,7 @@ public class GrappleInteractable : MonoBehaviour, IInteractable
 
     private void ShowMaterial()
     {
-        if ((this.transform.position - player.transform.position).magnitude < playerController.getEnergy())
+        if (true)
         {
             for (int i = 0; i < this.rendererRef.Length; i++)
             {

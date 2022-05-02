@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,8 +19,6 @@ public class PlayerController : MonoBehaviour
     private GameObject chainLinkPrefab = null;
     [SerializeField]
     private float distanceSpawnLinks = 0.5f;
-    [SerializeField]
-    private GameObject uiPrefab = null;
 
     [Header("Debug Materials")]
     [SerializeField]
@@ -30,8 +27,6 @@ public class PlayerController : MonoBehaviour
     private Material debugQuoStateMaterial = null;
     [SerializeField]
     private Material debugBadStateMaterial = null;
-
-    private float currentEnergy = 200f;
 
     [SerializeField]
     private GameObject debugObject = null;
@@ -97,13 +92,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] 
     private AnimationCurve airForceEffectCurve = null;
 
+    [SerializeField]
+    private float grappleCost = 5f;
+
     //**********
     //  PUBLIC
     //**********
 
     public float getEnergy()
     {
-        return this.currentEnergy;
+        return energyDepleter.GetEnergy();
     }
 
     //**********
@@ -136,6 +134,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 worldspaceMoveInput;
 
     private MeshRenderer debugRenderer;
+    private EnergyDepleter energyDepleter;
 
     // Start is called before the first frame update
     void Start()
@@ -143,8 +142,6 @@ public class PlayerController : MonoBehaviour
         physicsCommands = new List<ICommand>();
         links = new List<GameObject>();
         inputManager = new InputManager();
-
-        Instantiate(uiPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 
         CursorMagick();
         
@@ -164,6 +161,12 @@ public class PlayerController : MonoBehaviour
         if (debugRenderer == null)
         {
             Debug.LogError("Error - no MeshRenderer component");
+        }
+
+        energyDepleter = this.GetComponentInChildren<EnergyDepleter>();
+        if(energyDepleter == null)
+        {
+            Debug.LogError("Error - no EnergyDepleter child component");
         }
     }
 
@@ -189,6 +192,7 @@ public class PlayerController : MonoBehaviour
         physicsCommands.Clear();
 
         UpdateGrapplePosition();
+        UpdateGrappleEnergy();
 
         UpdateTimers();
 
@@ -202,7 +206,6 @@ public class PlayerController : MonoBehaviour
             command.execute();
         }
     }
-
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -240,7 +243,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleGrappleInput()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) 
+            && energyDepleter.HasEnough(grappleCost))
         {
             if (!isTethered)
             {
@@ -385,7 +389,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, Mathf.Infinity)
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, energyDepleter.GetEnergy())
             && hit.collider.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable))
         {
             interactable.Visualize();
@@ -491,6 +495,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void UpdateGrappleEnergy()
+    {
+        if (isTethered)
+        {
+            // Simulate continuous grapple
+            energyDepleter.Use(0, 0);
+        }
+    }
+
+
     private void UpdateTimers()
     {
         // Update grapple timer up to grappleMaxTime
@@ -578,9 +592,10 @@ public class PlayerController : MonoBehaviour
 
     void BeginGrapple()
     {
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, Mathf.Infinity) 
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, energyDepleter.GetEnergy()) 
             && hit.collider.gameObject.TryGetComponent<IInteractable>(out grappleInteractable))
         {
+            energyDepleter.Use(grappleCost, 0.2f);
             grappleInteractable.Execute();
             isTethered = true;
             timeGrappledSince = 0f;

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7107495697884252654}
   - component: {fileID: 3533061390281259211}
   - component: {fileID: 384538213815218514}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: stal.161
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,7 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8267186913822945748}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: wall_door01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

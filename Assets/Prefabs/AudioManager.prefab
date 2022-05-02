@@ -65,16 +65,23 @@ MonoBehaviour:
     isLooping: 0
     playOnStart: 0
     source: {fileID: 0}
-  - name: RestrictedCollision
-    clip: {fileID: 8300000, guid: a9a8ed6047d9fdc4a801934f6d31a34c, type: 3}
+  - name: LavaHit
+    clip: {fileID: 8300000, guid: 07667a9ec875b814cb6c3a8b22850e88, type: 3}
     volume: 0.15
     pitch: 1
     isLooping: 0
     playOnStart: 0
     source: {fileID: 0}
+  - name: RestrictedCollision
+    clip: {fileID: 8300000, guid: a9a8ed6047d9fdc4a801934f6d31a34c, type: 3}
+    volume: 0.091
+    pitch: 1
+    isLooping: 0
+    playOnStart: 0
+    source: {fileID: 0}
   - name: BGM
-    clip: {fileID: 8300000, guid: 43fb38639145482478958d4825bbcedf, type: 3}
-    volume: 0.28
+    clip: {fileID: 8300000, guid: 967bc3aaf03c6bc4186d1423f13d23bb, type: 3}
+    volume: 0.15
     pitch: 1
     isLooping: 1
     playOnStart: 1

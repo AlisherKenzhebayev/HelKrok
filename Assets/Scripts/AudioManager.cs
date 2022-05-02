@@ -74,4 +74,14 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Play();
     }
+
+    public void Stop(string name)
+    {
+        Sound s = instance.sounds.Find(sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogError("Sound " + name + " not found!");
+        }
+        s.source.Stop();
+    }
 }

@@ -3,14 +3,19 @@ using UnityEngine;
 
 public class DamageDealer : MonoBehaviour
 {
+    [SerializeField]
+    internal int damage = 5;
+    [SerializeField]
+    internal string soundToPlay = "Hit2";
+
     internal virtual void OnTriggerEnter(Collider other)
     {
-        EventManager.TriggerEvent("takeDamage" + other.gameObject.GetInstanceID(), new Dictionary<string, object> { { "amount", 5 } });
+        EventManager.TriggerEvent("takeDamage" + other.gameObject.GetInstanceID(), new Dictionary<string, object> { { "amount", damage } });
         DoDealDamage(other);
     }
 
     internal virtual void DoDealDamage(Collider other)
     {
-        FindObjectOfType<AudioManager>().Play("Hit2");
+        FindObjectOfType<AudioManager>().Play(soundToPlay);
     }
 }

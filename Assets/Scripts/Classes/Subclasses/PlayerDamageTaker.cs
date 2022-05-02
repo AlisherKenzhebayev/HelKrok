@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 public class PlayerDamageTaker : DamageTaker
 {
@@ -10,7 +9,7 @@ public class PlayerDamageTaker : DamageTaker
 
     internal override void DoDeath()
     {
-        SceneManager.LoadScene("DeathScene");
+        FindObjectOfType<SceneLoaderManager>().LoadName("DeathScene");
         return;
     }
 }

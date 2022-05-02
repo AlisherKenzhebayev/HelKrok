@@ -148,6 +148,8 @@ public class DungeonGenerator : MonoBehaviour
         print(neighbourOfExitRoom);
         
         exitRoom.UpdateExitWalls(exitDirection);
+        //exitRoom.tag = "exitRoomTag";
+        exitRoom.exitDirection = exitDirection;
         exitRoom.UpdateExitRoomOutlet(exitDirection);
         Console.WriteLine("hereyes");
         //print("positive:" + exitDirection);

@@ -6,7 +6,9 @@ public class RoomBehaviour: MonoBehaviour
 {
     public GameObject[] walls; // 0 - Up 1 - Down 2 - Right 3 Left
     public GameObject[] doors;
-    public GameObject[] exits;
+    public GameObject[] closedExits;
+    public GameObject[] openedExits;
+    public int exitDirection;
 
     /*
     public bool[] testStatus;
@@ -24,7 +26,8 @@ public class RoomBehaviour: MonoBehaviour
         {
             doors[i].SetActive(status[i]);
             walls[i].SetActive(!status[i]);
-            exits[i].SetActive(false);
+            closedExits[i].SetActive(false);
+            openedExits[i].SetActive(false);
         }
     }
     public void UpdateExitWalls(int exitDirection)
@@ -35,7 +38,7 @@ public class RoomBehaviour: MonoBehaviour
 
     public void UpdateExitRoomOutlet(int exitDirection)
     {
-        exits[exitDirection].SetActive(true);
+        closedExits[exitDirection].SetActive(true);
     }
 
     // Update is called once per frame

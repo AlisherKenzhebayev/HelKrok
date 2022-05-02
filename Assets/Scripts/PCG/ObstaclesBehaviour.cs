@@ -67,7 +67,7 @@ public class ObstaclesBehaviour : MonoBehaviour
         Transform downWallPosition = transform.parent.Find("Entrances").Find("Down Wall");
         Transform rightWallPosition = transform.parent.Find("Entrances").Find("Right Wall");
         Transform leftWallPosition = transform.parent.Find("Entrances").Find("Left Wall");
-        print(upWallPosition);
+        //print(upWallPosition);
         Transform[] listOfTransforms = { upWallPosition, downWallPosition, rightWallPosition, leftWallPosition };
 
         for (int i = 0; i < listOfTransforms.Length; i++)

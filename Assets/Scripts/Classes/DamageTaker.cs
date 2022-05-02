@@ -6,11 +6,20 @@ public class DamageTaker : MonoBehaviour
     [SerializeField]
     [Tooltip("Same as maxHealth, works with that assumption")]
     internal int currentHealth = 100;
+    [SerializeField]
+    internal float iFrameTimer = 0.0f;
+
     internal int maxHealth;
+    internal float currentIFrameTime;
 
     private void Start()
     {
         maxHealth = currentHealth;
+    }
+
+    private void FixedUpdate()
+    {
+        currentIFrameTime = Mathf.Max(0.0f, currentIFrameTime - Time.fixedDeltaTime);
     }
 
     internal virtual void OnEnable()
@@ -25,6 +34,11 @@ public class DamageTaker : MonoBehaviour
 
     internal virtual void OnTakeDamage(Dictionary<string, object> obj)
     {
+        if (this.currentIFrameTime > 0)
+        {
+            return;
+        }
+
         FindObjectOfType<AudioManager>().Play("Hit");
 
         DoTakeDamage(obj);
@@ -38,6 +52,7 @@ public class DamageTaker : MonoBehaviour
         }
 
         Debug.Log("took damage");
+        this.currentIFrameTime = iFrameTimer;
         this.currentHealth -= (int)obj["amount"];
 
         if (this.currentHealth <= 0f)

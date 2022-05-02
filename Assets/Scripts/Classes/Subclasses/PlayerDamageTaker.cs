@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class PlayerDamageTaker : DamageTaker
 {
@@ -9,7 +10,7 @@ public class PlayerDamageTaker : DamageTaker
 
     internal override void DoDeath()
     {
-        // TODO: Switch scenes using SceneManager
+        SceneManager.LoadScene("DeathScene");
         return;
     }
 }

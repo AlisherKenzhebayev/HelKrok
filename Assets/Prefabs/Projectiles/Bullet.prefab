@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5c0cc336524824eaa6963c9eb7631b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 3
   impulseForce: 100
   placement: {fileID: 0}
   timeExist: 5

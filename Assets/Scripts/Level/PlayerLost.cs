@@ -59,11 +59,21 @@ public class PlayerLost : MonoBehaviour
         {
             ResetPlacement();
         }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            FindObjectOfType<SceneLoaderManager>().LoadBuildIndexed(0);
+        }
     }
 
     private void OnEnable()
     {
         EventManager.StartListening("playerCollideRestricted", OnColliderRestricted);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.StopListening("playerCollideRestricted", OnColliderRestricted);
     }
 
     private void OnColliderRestricted(Dictionary<string, object> obj)

@@ -12,12 +12,12 @@ public class DamageTaker : MonoBehaviour
     internal int maxHealth;
     internal float currentIFrameTime;
 
-    private void Start()
+    internal virtual void Start()
     {
         maxHealth = currentHealth;
     }
 
-    private void FixedUpdate()
+    internal virtual void FixedUpdate()
     {
         currentIFrameTime = Mathf.Max(0.0f, currentIFrameTime - Time.fixedDeltaTime);
     }

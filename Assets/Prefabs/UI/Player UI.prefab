@@ -107,10 +107,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 865879249042825546}
     m_Modifications:
-    - target: {fileID: 2041417886016243490, guid: 7d69849f29a1e1c449b8eb2e82ebf6e6, type: 3}
-      propertyPath: m_MatchWidthOrHeight
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2041417886016243492, guid: 7d69849f29a1e1c449b8eb2e82ebf6e6, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -199,11 +195,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2523069016907137211, guid: 7d69849f29a1e1c449b8eb2e82ebf6e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862833413713234020, guid: 7d69849f29a1e1c449b8eb2e82ebf6e6, type: 3}
+      propertyPath: winScreen
+      value: 
+      objectReference: {fileID: 3698325772003694287}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d69849f29a1e1c449b8eb2e82ebf6e6, type: 3}
 --- !u!224 &865879247428260176 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2041417886016243492, guid: 7d69849f29a1e1c449b8eb2e82ebf6e6, type: 3}
+  m_PrefabInstance: {fileID: 1175626792836830836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3698325772003694287 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2523069016907137211, guid: 7d69849f29a1e1c449b8eb2e82ebf6e6, type: 3}
   m_PrefabInstance: {fileID: 1175626792836830836}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4653590836150891543
@@ -213,30 +222,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 865879249042825546}
     m_Modifications:
-    - target: {fileID: 593754940, guid: d0aede7b5d4789846a76972a2fdf66c6, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 593754940, guid: d0aede7b5d4789846a76972a2fdf66c6, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1852922422, guid: d0aede7b5d4789846a76972a2fdf66c6, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1852922422, guid: d0aede7b5d4789846a76972a2fdf66c6, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1852922422, guid: d0aede7b5d4789846a76972a2fdf66c6, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 577325072835073360, guid: d0aede7b5d4789846a76972a2fdf66c6, type: 3}
-      propertyPath: m_MatchWidthOrHeight
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 577325072835073362, guid: d0aede7b5d4789846a76972a2fdf66c6, type: 3}
       propertyPath: m_Name
       value: LoseCanvas
@@ -339,6 +324,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 865879249042825546}
     m_Modifications:
+    - target: {fileID: 4265346065385436780, guid: bb1e4c66f3e7fde46a433aa07e564262, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4265346065385436780, guid: bb1e4c66f3e7fde46a433aa07e564262, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4265346066029915853, guid: bb1e4c66f3e7fde46a433aa07e564262, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4265346066029915853, guid: bb1e4c66f3e7fde46a433aa07e564262, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7826243165426567968, guid: bb1e4c66f3e7fde46a433aa07e564262, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -426,10 +427,6 @@ PrefabInstance:
     - target: {fileID: 7826243165426567969, guid: bb1e4c66f3e7fde46a433aa07e564262, type: 3}
       propertyPath: m_Name
       value: Player Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7826243165426567974, guid: bb1e4c66f3e7fde46a433aa07e564262, type: 3}
-      propertyPath: m_MatchWidthOrHeight
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb1e4c66f3e7fde46a433aa07e564262, type: 3}

@@ -1,21 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class QuitGame : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        
+        EventManager.StartListening("ExitGame", OnGameExit);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
+        EventManager.StopListening("ExitGame", OnGameExit);
+    }
+
+    private void OnGameExit(Dictionary<string, object> obj)
+    {
+        ExitGame();
+    }
+
+    public void ExitGame() {
+        Application.Quit();
     }
 }

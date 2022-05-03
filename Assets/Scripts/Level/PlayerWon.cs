@@ -1,33 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerWon : MonoBehaviour
 {
     [SerializeField]
     GameObject winScreen;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         winScreen.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        EventManager.StartListening("playerLevelExitDoor", OnPlayerExit);
     }
 
-
-
-    private void OnTriggerEnter(Collider other)
+    private void OnDisable()
     {
-        if (other.CompareTag("exitDoor"))
-        {
-            winScreen.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
+        EventManager.StopListening("playerLevelExitDoor", OnPlayerExit);
+    }
+
+    private void OnPlayerExit(Dictionary<string, object> obj)
+    {
+        winScreen.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

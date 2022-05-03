@@ -135,6 +135,67 @@ Transform:
   m_Father: {fileID: 707444928951168263}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5275910057693847265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2547289349252685140}
+  - component: {fileID: 968826144110737953}
+  - component: {fileID: 2066677902294161561}
+  m_Layer: 7
+  m_Name: Hurtbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2547289349252685140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5275910057693847265}
+  m_LocalRotation: {x: 0.10426811, y: 0, z: 0, w: 0.9945493}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 675778455313247481}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 11.97, y: 0, z: 0}
+--- !u!136 &968826144110737953
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5275910057693847265}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.5733266
+  m_Height: 8.013491
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.4643577, z: 0.85332704}
+--- !u!114 &2066677902294161561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5275910057693847265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1842a919abcc8f84ebd91b0904b61109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 10
+  iFrameTimer: 0.2
+  gameObjectToDisable: {fileID: 187613820988520381}
 --- !u!1 &5837535825398917032
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,6 +271,7 @@ Transform:
   - {fileID: 8101376565789735903}
   - {fileID: 8832234282369795135}
   - {fileID: 4397846870105715856}
+  - {fileID: 2547289349252685140}
   m_Father: {fileID: 707444928951168263}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

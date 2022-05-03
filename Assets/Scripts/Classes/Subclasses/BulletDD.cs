@@ -19,6 +19,11 @@ public class BulletDD : DamageDealer
     {
     }
 
+    public BulletDD(Transform placement)
+    {
+        this.placement = placement;
+    }
+
     public BulletDD(float impulse, Transform placement, float timeExist = 5f)
     {
         this.impulseForce = impulse;
@@ -51,8 +56,8 @@ public class BulletDD : DamageDealer
 
         if (placement == null)
         {
-            this.transform.position = gameObject.transform.parent.position;
-            this.transform.rotation = gameObject.transform.parent.rotation;
+            //this.transform.position = gameObject.transform.parent.position;
+            //this.transform.rotation = gameObject.transform.parent.rotation;
         }
         else
         {

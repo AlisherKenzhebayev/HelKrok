@@ -65,4 +65,13 @@ public class ProjectileSpawner : MonoBehaviour
         Gizmos.DrawSphere(this.transform.position, radius: 0.1f);
         Gizmos.DrawRay(this.transform.position, this.transform.forward);
     }
+
+    public GameObject ProjectileToSpawn {
+        get {
+            return projectileToSpawn;
+        }
+        set {
+            this.projectileToSpawn = value;
+        }
+    }
 }

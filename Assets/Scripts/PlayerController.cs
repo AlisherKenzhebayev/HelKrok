@@ -92,8 +92,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] 
     private AnimationCurve airForceEffectCurve = null;
 
+    [Header("Energy costs")]
     [SerializeField]
     private float grappleCost = 5f;
+    [SerializeField]
+    private float grappleCostCont = 0.0f;
+
+    [SerializeField]
+    private float actionCost = 3f;
+    [SerializeField]
+    private float actionCostCont = 0.5f;
 
     //**********
     //  PUBLIC
@@ -111,6 +119,7 @@ public class PlayerController : MonoBehaviour
     private List <GameObject>  links;
 
     private bool isTethered = false;
+    private bool isAction = false;
     private bool hasJumpInput = false;
 
     // Grapple information
@@ -175,7 +184,7 @@ public class PlayerController : MonoBehaviour
     {
         TestGrapple();
 
-        HandleGrappleInput();
+        HandleMouseInput();
         DebugGrappleWithMaterial();
 
         VisualizeGrapple();
@@ -192,7 +201,7 @@ public class PlayerController : MonoBehaviour
         physicsCommands.Clear();
 
         UpdateGrapplePosition();
-        UpdateGrappleEnergy();
+        UpdateContinuedEnergy();
 
         UpdateTimers();
 
@@ -241,8 +250,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleGrappleInput()
+    private void HandleMouseInput()
     {
+        // Action
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            if (!isAction)
+            {
+                BeginAction();
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            if (isAction)
+            {
+                EndAction();
+            }
+        }
+
+        // Grapple
         if (Input.GetKeyDown(KeyCode.Mouse0) 
             && energyDepleter.HasEnough(grappleCost))
         {
@@ -495,12 +522,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void UpdateGrappleEnergy()
+    private void UpdateContinuedEnergy()
     {
         if (isTethered)
         {
             // Simulate continuous grapple
-            energyDepleter.Use(0, 0);
+            energyDepleter.Use(grappleCostCont, 0);
+        }
+
+        if (isAction)
+        {
+            // Simulate continuous action
+            if (!energyDepleter.Use(actionCostCont, 0)) {
+                EndAction();
+            }
         }
     }
 
@@ -616,6 +651,20 @@ public class PlayerController : MonoBehaviour
         tetherObject = null;
         lr.positionCount = 0;
     }
+
+    void BeginAction()
+    {
+        energyDepleter.Use(actionCost, 0.0f);
+        isAction = true;
+        EventManager.TriggerEvent("PlayerActionButton", new Dictionary<string, object> { { "amount", true } });
+    }
+
+    void EndAction()
+    {
+        isAction = false;
+        EventManager.TriggerEvent("PlayerActionButton", new Dictionary<string, object> { { "amount", false } });
+    }
+
 
     void BeginJump()
     {

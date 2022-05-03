@@ -68,7 +68,7 @@ public class PlayerLost : MonoBehaviour
 
     private void OnColliderRestricted(Dictionary<string, object> obj)
     {
-        FindObjectOfType<AudioManager>().Play("RestrictedCollision");
+        AudioManager.Play("RestrictedCollision");
         debugText.SetActive(true);
     }
 }

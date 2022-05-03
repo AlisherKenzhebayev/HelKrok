@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Init()
+    void Init()
     {
         soundsGOs = new List<GameObject>();
 
@@ -60,12 +60,12 @@ public class AudioManager : MonoBehaviour
         foreach (var item in instance.sounds)
         {
             if (item.playOnStart) {
-                instance.Play(item.name);
+                AudioManager.Play(item.name);
             }
         }
     }
 
-    public void Play(string name)
+    public static void Play(string name)
     {
         Sound s = instance.sounds.Find(sound => sound.name == name);
         if (s == null)
@@ -75,7 +75,7 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
-    public void Stop(string name)
+    public static void Stop(string name)
     {
         Sound s = instance.sounds.Find(sound => sound.name == name);
         if (s == null)

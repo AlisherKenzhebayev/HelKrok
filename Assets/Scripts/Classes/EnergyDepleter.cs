@@ -92,20 +92,29 @@ public abstract class EnergyDepleter : MonoBehaviour, IEnergyDepleter
     /// </summary>
     public virtual bool Use(float energyAmount = 25f, float percentagePrice = 0.2f)
     {
-        if (!HasEnough(energyAmount)) {
+        if (!HasEnough(energyAmount)) 
+        {
+            Debug.LogError("Not enough energy");
             return false;
         }
 
         // Otherwise already has enough energy, uses it for something and has to payPrice
 
-        PayPrice(percentagePrice);
-        return true;
+        return PayPrice(energyAmount, percentagePrice);
     }
 
-    internal virtual void PayPrice(float percentagePrice)
+    internal virtual bool PayPrice(float flatPrice, float percentagePrice)
     {
-        currentEnergy = Mathf.Clamp(currentEnergy * (1 - percentagePrice), minEnergy, maxEnergy);
+        currentEnergy = Mathf.Clamp(currentEnergy - flatPrice, 0, maxEnergy);
+        currentEnergy = Mathf.Clamp(currentEnergy * (1 - percentagePrice), 0, maxEnergy);
         currentTimeRebound = timeRebound;
+
+        if (currentEnergy < minEnergy) {
+            currentEnergy = minEnergy;
+            return false;
+        }
+
+        return true;
     }
 
     public virtual float GetEnergy()

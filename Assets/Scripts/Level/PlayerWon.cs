@@ -10,7 +10,7 @@ public class PlayerWon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        winScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -26,6 +26,8 @@ public class PlayerWon : MonoBehaviour
         if (other.CompareTag("exitDoor"))
         {
             winScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }

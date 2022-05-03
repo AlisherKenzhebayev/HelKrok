@@ -36,8 +36,8 @@ Material:
     - Distance_: 0.5
     - NoiseScale_: 20
     m_Colors:
-    - ColorAccent_: {r: 0.058823526, g: 0.33392602, b: 1, a: 0}
-    - Color_: {r: 0.12549019, g: 0.732729, b: 0.8, a: 0}
-    - DistanceColor_: {r: 0, g: 0.14841256, b: 0.22745098, a: 0}
+    - ColorAccent_: {r: 0.6603774, g: 0.56159717, b: 0.41429335, a: 1}
+    - Color_: {r: 0.9433962, g: 0.46752378, b: 0, a: 1}
+    - DistanceColor_: {r: 0.16037738, g: 0.09622643, b: 0, a: 1}
     - NoiseSpeed_: {r: 0, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []

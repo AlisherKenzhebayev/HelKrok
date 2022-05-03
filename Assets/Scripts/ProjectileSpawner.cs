@@ -73,7 +73,7 @@ public class ProjectileSpawner : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
 
-        Gizmos.DrawSphere(this.transform.position, radius: 0.1f);
+        Gizmos.DrawSphere(this.transform.position, radius: 0.02f);
         Gizmos.DrawRay(this.transform.position, this.transform.forward);
     }
 

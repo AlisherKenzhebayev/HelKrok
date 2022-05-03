@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1842a919abcc8f84ebd91b0904b61109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 10
+  currentHealth: 20
   iFrameTimer: 0.2
   gameObjectToDisable: {fileID: 187613820988520381}
 --- !u!1 &5837535825398917032

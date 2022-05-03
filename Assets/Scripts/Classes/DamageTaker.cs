@@ -39,7 +39,7 @@ public class DamageTaker : MonoBehaviour
             return;
         }
 
-        FindObjectOfType<AudioManager>().Play("Hit");
+        AudioManager.Play("Hit");
 
         DoTakeDamage(obj);
     }

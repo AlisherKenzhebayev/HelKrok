@@ -74,7 +74,7 @@ public class BulletDD : DamageDealer
     {
         base.DoDealDamage(other);
 
-        FindObjectOfType<AudioManager>().Play("MagicHit");
+        AudioManager.Play("MagicHit");
         Destroy(this.gameObject);
     }
 }

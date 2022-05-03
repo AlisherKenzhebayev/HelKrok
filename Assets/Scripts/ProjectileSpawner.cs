@@ -77,6 +77,15 @@ public class ProjectileSpawner : MonoBehaviour
         Gizmos.DrawRay(this.transform.position, this.transform.forward);
     }
 
+    public GameObject ProjectileToSpawn {
+        get {
+            return projectileToSpawn;
+        }
+        set {
+            this.projectileToSpawn = value;
+        }
+    }
+
     public void SwitchSpawning(bool state)
     {
         isSpawning = state;

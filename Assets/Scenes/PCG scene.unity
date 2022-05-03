@@ -644,11 +644,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7459629291340601615, guid: f7eb47df89d6af045ae1d3b37f4843de, type: 3}
       propertyPath: size.x
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7459629291340601615, guid: f7eb47df89d6af045ae1d3b37f4843de, type: 3}
       propertyPath: size.y
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7eb47df89d6af045ae1d3b37f4843de, type: 3}

@@ -18,8 +18,6 @@ public class PlayerAction : MonoBehaviour
         currentAction = actions[current];
         projectileSpawner = this.GetComponent<ProjectileSpawner>();
         projectileSpawner.ProjectileToSpawn = currentAction;
-
-        projectileSpawner.enabled = false;
     }
 
     internal virtual void OnEnable()
@@ -34,6 +32,6 @@ public class PlayerAction : MonoBehaviour
 
     private void OnEnableAction(Dictionary<string, object> obj)
     {
-        projectileSpawner.enabled = (bool)obj["amount"] ? true : false;
+        projectileSpawner.SwitchSpawning((bool)obj["amount"] ? true : false);
     }
 }

@@ -65,7 +65,7 @@ public class BulletDD : DamageDealer
             this.transform.rotation = placement.transform.rotation;
         }
 
-        Debug.Log(rb.transform.forward);
+        //Debug.Log(rb.transform.forward);
 
         rb.AddForce(rb.transform.forward * impulseForce, ForceMode.Impulse);
     }

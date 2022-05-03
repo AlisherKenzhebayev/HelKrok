@@ -48,3 +48,4 @@ MonoBehaviour:
   numberToSpawn: 2
   loop: 1
   timerCooldown: 2
+  isSpawning: 0

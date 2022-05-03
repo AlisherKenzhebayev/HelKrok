@@ -19,6 +19,9 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField]
     private float timerCooldown = 2f;
 
+    [SerializeField]
+    private Transform parentTransform;
+
     private float currentCooldown;
 
     // Start is called before the first frame update
@@ -51,7 +54,7 @@ public class ProjectileSpawner : MonoBehaviour
         for (int i = 0; i < numberToSpawn; i++)
         {
             yield return new WaitForSeconds(timerToSpawn);
-            Instantiate(projectileToSpawn, this.transform);
+            Instantiate(projectileToSpawn, this.transform.position, this.transform.rotation, parentTransform);
         }
     }
 

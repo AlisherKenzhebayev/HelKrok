@@ -34,6 +34,7 @@ public class EnemyBehaviour : MonoBehaviour
     ProjectileSpawner projectileSpawner;
 
     Coroutine patrol = null;
+    bool isPatrolRunning;
 
     int currentTargetIndex;
     Transform currentTargetTransform;
@@ -84,7 +85,7 @@ public class EnemyBehaviour : MonoBehaviour
             if (enemyState == EnemyStates.patrol)
             {
                 projectileSpawner.SwitchSpawning(false);
-                if (patrol == null)
+                if (!isPatrolRunning)
                 {
                     patrol = StartCoroutine(Patrol());
                     yield return null;
@@ -126,7 +127,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     IEnumerator Patrol()
     {
-        Debug.Log("moving on patrol");
+        isPatrolRunning = true;
         float distance = 5000;
         while (distance > 1f && enemyState == EnemyStates.patrol)
         {
@@ -137,6 +138,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
         patrol = null;
         AssignNextTarget();
+        isPatrolRunning = false;
     }
 
     void MoveToTarget(Transform target, float speedMultiplayer = 1)
@@ -145,7 +147,6 @@ public class EnemyBehaviour : MonoBehaviour
         Vector3 D = target.position - enemyMesh.transform.position;
         enemyMesh.transform.rotation = Quaternion.Slerp(enemyMesh.transform.rotation, Quaternion.LookRotation(D), rotSpeed * Time.deltaTime);
         enemyMesh.transform.position = Vector3.Lerp(enemyMesh.transform.position, target.position, speedMultiplayer * speed * Time.deltaTime);
-        Debug.Log("Move To target");
     }
 
     void AssignNextTarget()

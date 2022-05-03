@@ -425,8 +425,8 @@ MonoBehaviour:
     - {fileID: 8385325970023536956}
   listOfObstacleSetsProbabilies:
   - list:
-    - 0.5
-    - 0.2
+    - 0.8
+    - 0.6
 --- !u!1 &3948524114843219215
 GameObject:
   m_ObjectHideFlags: 0
@@ -3381,6 +3381,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 187613820988520381, guid: fde690c9a6ac9c040be12911c5efbb7b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 370608505912150236, guid: fde690c9a6ac9c040be12911c5efbb7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.4
@@ -6068,6 +6072,10 @@ PrefabInstance:
     - target: {fileID: 187613820988520381, guid: fde690c9a6ac9c040be12911c5efbb7b, type: 3}
       propertyPath: m_Name
       value: enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 187613820988520381, guid: fde690c9a6ac9c040be12911c5efbb7b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 370608505912150236, guid: fde690c9a6ac9c040be12911c5efbb7b, type: 3}
       propertyPath: m_LocalPosition.x

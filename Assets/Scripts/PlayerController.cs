@@ -355,7 +355,7 @@ public class PlayerController : MonoBehaviour
         tetherLength = currentDistanceToGrapple;
 
         float curveMod = speedCurve.Evaluate(precisionFloat(timeGrappledSince / grappleMaxTime));
-        Debug.Log("Curve GrappleForce" + curveMod);
+        //Debug.Log("Curve GrappleForce" + curveMod);
         rb.AddForce(directionToGrapple * grappleForce * curveMod, ForceMode.Force);
     }
 

@@ -11,15 +11,9 @@ namespace KeySysem
         [SerializeField] private bool redKey = false;
 
         [SerializeField] private keyInventory _keyInventory = null;
-        private KeyDoorController doorObject;
 
         private void Start()
-        {
-            if (redDoor)
-            {
-                doorObject = GetComponent<KeyDoorController>();
-            }
-            
+        {   
         }
 
         public void ObjectInteraction()

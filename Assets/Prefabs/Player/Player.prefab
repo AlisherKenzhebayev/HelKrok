@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &981366326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 981366327}
+  - component: {fileID: 981366328}
+  m_Layer: 3
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &981366327
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981366326}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9208518964601638686}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &981366328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981366326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f0043075d6352a46bda57737db3496f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventorySO: {fileID: 11400000, guid: 269bacb8165a0224d98da21cab82a6f4, type: 2}
 --- !u!1 &989225637
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1837102839}
   - component: {fileID: 1837102840}
+  - component: {fileID: 1130506915785069484}
   m_Layer: 3
   m_Name: Energy
   m_TagString: Untagged
@@ -122,6 +167,19 @@ MonoBehaviour:
   minEnergy: 15
   timeRebound: 0.5
   defaultRestoreSpeed: 0.53
+--- !u!114 &1130506915785069484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837102838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90b05232e3ae7c4a879ab514ccb98bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyShaderMaterial: {fileID: 2100000, guid: af8d3bc6dd4d6c741aaba32e4d05df77, type: 2}
 --- !u!1 &2067350752
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +411,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9208518964508941598}
-  - component: {fileID: 533071611}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -379,19 +436,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &533071611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9208518964508941597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90b05232e3ae7c4a879ab514ccb98bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  energyShaderMaterial: {fileID: 2100000, guid: af8d3bc6dd4d6c741aaba32e4d05df77, type: 2}
 --- !u!1 &9208518964601638682
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +475,7 @@ Transform:
   - {fileID: 989225638}
   - {fileID: 2067350753}
   - {fileID: 1837102839}
+  - {fileID: 981366327}
   m_Father: {fileID: 9208518964508941598}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -572,6 +617,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   grappleMaxOverlapTime: 1.5
   shakeValue: 15
+  grappleLayers:
+    serializedVersion: 2
+    m_Bits: 4096
   airStrafeForce: 70
   maxAirSpeed: 30
   airForceEffectCurve:
@@ -1222,7 +1270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd5c6a993a44f7a4a8c94c68d328571c, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd5c6a993a44f7a4a8c94c68d328571c, type: 3}
       propertyPath: m_LocalPosition.x

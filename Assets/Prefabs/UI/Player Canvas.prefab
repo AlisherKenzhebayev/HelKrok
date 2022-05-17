@@ -567,10 +567,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hp Slider
       objectReference: {fileID: 0}
-    - target: {fileID: 7720385314886071680, guid: 8c725e4e7bfae7c44a7a2dc0f02409f5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7720385314886071687, guid: 8c725e4e7bfae7c44a7a2dc0f02409f5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -653,14 +649,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7720385314886071687, guid: 8c725e4e7bfae7c44a7a2dc0f02409f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720385316135200799, guid: 8c725e4e7bfae7c44a7a2dc0f02409f5, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720385316135200799, guid: 8c725e4e7bfae7c44a7a2dc0f02409f5, type: 3}
-      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -98,7 +98,7 @@ public class EnemyBehaviour : MonoBehaviour
             }
             if (enemyState == EnemyStates.attacking)
             {
-                if (!projectileSpawner.isSpawningMethod())
+                if (!projectileSpawner.isSpawning)
                 {
                     projectileSpawner.SwitchSpawning(true);
                 }
@@ -111,7 +111,7 @@ public class EnemyBehaviour : MonoBehaviour
             if (hp <=0)
             {
                 enemyState = EnemyStates.dead;
-                if (projectileSpawner.isSpawningMethod())
+                if (projectileSpawner.isSpawning)
                 {
                     projectileSpawner.SwitchSpawning(false);
                 }

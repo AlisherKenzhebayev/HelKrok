@@ -6,22 +6,20 @@ using UnityEngine;
 public class ProjectileSpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject projectileToSpawn;
+    public GameObject projectileToSpawn;
 
     [SerializeField]
-    private float timerToSpawn = 2f;
+    public float timerToSpawn = 2f;
     [SerializeField]
-    private float numberToSpawn = 2f;
+    public float numberToSpawn = 2f;
 
     [SerializeField]
-    private bool loop = false;
+    public bool loop = false;
 
     [SerializeField]
-    private float timerCooldown = 2f;
+    public float timerCooldown = 2f;
 
-    [SerializeField]
-    private Transform parentTransform;
-    bool isSpawning = false;
+    public bool isSpawning = false;
 
     private float currentCooldown;
 
@@ -41,9 +39,8 @@ public class ProjectileSpawner : MonoBehaviour
         currentCooldown = Mathf.Max(currentCooldown - Time.fixedDeltaTime, 0);
     }
 
-    private void StartSpawning()
+    public void StartSpawning()
     {
-        
         if (currentCooldown <= 0) {
             if (timerCooldown == float.PositiveInfinity) {
                 return;
@@ -62,9 +59,8 @@ public class ProjectileSpawner : MonoBehaviour
         for (int i = 0; i < numberToSpawn; i++)
         {
             yield return new WaitForSeconds(timerToSpawn);
-            Instantiate(projectileToSpawn, this.transform.position, this.transform.rotation, parentTransform);
-            Instantiate(projectileToSpawn, this.transform);
-            
+            GameObject obj = Instantiate(projectileToSpawn, this.transform, false);
+            obj.transform.SetParent(null);
         }
         Debug.Log("spawning");
     }
@@ -77,33 +73,12 @@ public class ProjectileSpawner : MonoBehaviour
         Gizmos.DrawRay(this.transform.position, this.transform.forward);
     }
 
-    public GameObject ProjectileToSpawn {
-        get {
-            return projectileToSpawn;
-        }
-        set {
-            this.projectileToSpawn = value;
-        }
-    }
-
     public void SwitchSpawning(bool state)
     {
         isSpawning = state;
         if (spawnCor != null && state == false)
         {
             StopCoroutine(spawnCor);
-        }
-    }
-
-    public bool isSpawningMethod()
-    {
-        if (isSpawning)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 }

@@ -3,21 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ProjectileSpawner))]
 public class PlayerAction : MonoBehaviour
 {
-    [SerializeField]
-    private List<GameObject> actions;
+    // TODO: test out with teleport
+    // Move the init of collection to Start, poll from playerInventory
 
-    private GameObject currentAction;
+    [SerializeField]
+    private List<BaseAbilityItemObject> actions;
+
+    private BaseAbilityItemObject currentAction;
     private int current = 0;
-    private ProjectileSpawner projectileSpawner;
 
     void Start()
     {
         currentAction = actions[current];
-        projectileSpawner = this.GetComponent<ProjectileSpawner>();
-        projectileSpawner.ProjectileToSpawn = currentAction;
+    }
+
+    private void Update()
+    {
+        currentAction = actions[current];
+    }
+
+    public void SwitchNextAction() {
+        current = (current + 1) % actions.Count;
+    }
+
+    public void SwitchPrevAction()
+    {
+        current = (current - 1) % actions.Count;
     }
 
     internal virtual void OnEnable()
@@ -32,6 +45,8 @@ public class PlayerAction : MonoBehaviour
 
     private void OnEnableAction(Dictionary<string, object> obj)
     {
-        projectileSpawner.SwitchSpawning((bool)obj["amount"] ? true : false);
+        // TODO: define some common pattern of interaction here
+
+        currentAction.Execute(this.gameObject, (bool)obj["amount"]);
     }
 }

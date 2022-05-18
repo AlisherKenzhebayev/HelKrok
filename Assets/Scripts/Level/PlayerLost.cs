@@ -18,6 +18,7 @@ public class PlayerLost : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // TODO: replace with refereneces to GameManager
         spawn = GameObject.FindGameObjectWithTag("Spawn");
         if (spawn == null)
         {

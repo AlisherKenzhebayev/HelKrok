@@ -9,7 +9,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public InventoryObject InventorySO = null;
-    private List<InventorySlot> Container;
+    public List<InventorySlot> Container;
 
     public bool FindItemName(string name) {
         return Container.Exists(o => o.item.name.ToLower().Equals(name.ToLower()));
@@ -24,6 +24,7 @@ public class Inventory : MonoBehaviour
         }
 
         Container.Add(new InventorySlot(_item, _amount));
+        Container.Sort();
     }
 
     public void RemoveItem(BaseItemObject _item, int _amount = 1)

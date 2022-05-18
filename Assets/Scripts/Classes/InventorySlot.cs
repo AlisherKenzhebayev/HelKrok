@@ -1,5 +1,7 @@
+using System;
+
 [System.Serializable]
-public class InventorySlot
+public class InventorySlot : IComparable
 {
     public BaseItemObject item;
     public int amount;
@@ -13,5 +15,17 @@ public class InventorySlot
     public void AddAmount(int value)
     {
         amount += value;
+    }
+
+    public int CompareTo(object obj)
+    {
+
+        if (obj == null) return 1;
+
+        InventorySlot otherItem = obj as InventorySlot;
+        if (otherItem != null)
+            return this.item.CompareTo(otherItem.item);
+        else
+            throw new ArgumentException("Object is not a InventorySlot");
     }
 }

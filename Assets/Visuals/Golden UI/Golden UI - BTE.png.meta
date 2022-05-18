@@ -11,6 +11,36 @@ TextureImporter:
   - first:
       213: 3118147066527079008
     second: Golden UI - BTE_1
+  - first:
+      213: 4223099912346179609
+    second: Golden UI - BTE_2
+  - first:
+      213: -8335080384597952833
+    second: Golden UI - BTE_3
+  - first:
+      213: -2784528541066275959
+    second: Golden UI - BTE_4
+  - first:
+      213: 5537684244844709286
+    second: Golden UI - BTE_5
+  - first:
+      213: -3817620257956812761
+    second: Golden UI - BTE_6
+  - first:
+      213: -3698190912746940119
+    second: Golden UI - BTE_7
+  - first:
+      213: -4035243245686223841
+    second: Golden UI - BTE_8
+  - first:
+      213: 5996724899002832731
+    second: Golden UI - BTE_10
+  - first:
+      213: 4380872626982708964
+    second: Golden UI - BTE_11
+  - first:
+      213: -7263102525113061494
+    second: Golden UI - BTE_12
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -132,8 +162,8 @@ TextureImporter:
         width: 36
         height: 36
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 13, y: 13, z: 13, w: 13}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -153,7 +183,7 @@ TextureImporter:
         width: 84
         height: 64
       alignment: 9
-      pivot: {x: 0.37730917, y: 0.5025554}
+      pivot: {x: 0.38, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -174,7 +204,7 @@ TextureImporter:
         width: 32
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -182,6 +212,344 @@ TextureImporter:
       bones: []
       spriteID: 06ad5c18c32e54b20800000000000000
       internalID: 3118147066527079008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golden UI - BTE_2
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 320
+        width: 69
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 7.5, y: -32}
+        - {x: 12.5, y: -30}
+        - {x: 17.5, y: -27}
+        - {x: 21.5, y: -27}
+        - {x: 24.5, y: -25}
+        - {x: 27.5, y: -22}
+        - {x: 29.5, y: -17}
+        - {x: 32.5, y: -11}
+        - {x: 34.5, y: -6}
+        - {x: 34.5, y: 5}
+        - {x: 32.5, y: 10}
+        - {x: 30.5, y: 15}
+        - {x: 28.5, y: 17}
+        - {x: 28.5, y: 21}
+        - {x: 27.5, y: 24}
+        - {x: 25.5, y: 26}
+        - {x: 23.5, y: 27}
+        - {x: 17.5, y: 27}
+        - {x: 14.5, y: 29}
+        - {x: 9.5, y: 32}
+        - {x: -2.5, y: 32}
+        - {x: -7.5, y: 30}
+        - {x: -12.5, y: 27}
+        - {x: -19.5, y: 28}
+        - {x: -23.5, y: 30}
+        - {x: -34.5, y: 32}
+        - {x: -34.5, y: -32}
+        - {x: -23.5, y: -30}
+        - {x: -18.5, y: -27}
+        - {x: -13.5, y: -27}
+        - {x: -7.5, y: -30}
+        - {x: -3.5, y: -32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 918906ecef67b9a30800000000000000
+      internalID: 4223099912346179609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golden UI - BTE_3
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 320
+        width: 69
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 7.5, y: -32}
+        - {x: 12.5, y: -30}
+        - {x: 17.5, y: -27}
+        - {x: 21.5, y: -27}
+        - {x: 24.5, y: -25}
+        - {x: 27.5, y: -22}
+        - {x: 29.5, y: -17}
+        - {x: 32.5, y: -11}
+        - {x: 34.5, y: -6}
+        - {x: 34.5, y: 5}
+        - {x: 32.5, y: 10}
+        - {x: 30.5, y: 15}
+        - {x: 28.5, y: 17}
+        - {x: 28.5, y: 21}
+        - {x: 27.5, y: 24}
+        - {x: 25.5, y: 26}
+        - {x: 23.5, y: 27}
+        - {x: 17.5, y: 27}
+        - {x: 14.5, y: 29}
+        - {x: 9.5, y: 32}
+        - {x: -2.5, y: 32}
+        - {x: -7.5, y: 30}
+        - {x: -12.5, y: 27}
+        - {x: -19.5, y: 28}
+        - {x: -23.5, y: 30}
+        - {x: -34.5, y: 32}
+        - {x: -34.5, y: -32}
+        - {x: -23.5, y: -30}
+        - {x: -18.5, y: -27}
+        - {x: -13.5, y: -27}
+        - {x: -7.5, y: -30}
+        - {x: -3.5, y: -32}
+      tessellationDetail: 1
+      bones: []
+      spriteID: fb676b52d88d35c80800000000000000
+      internalID: -8335080384597952833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golden UI - BTE_4
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 320
+        width: 69
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 7.5, y: -32}
+        - {x: 12.5, y: -30}
+        - {x: 17.5, y: -27}
+        - {x: 21.5, y: -27}
+        - {x: 24.5, y: -25}
+        - {x: 27.5, y: -22}
+        - {x: 29.5, y: -17}
+        - {x: 32.5, y: -11}
+        - {x: 34.5, y: -6}
+        - {x: 34.5, y: 5}
+        - {x: 32.5, y: 10}
+        - {x: 30.5, y: 15}
+        - {x: 28.5, y: 17}
+        - {x: 28.5, y: 21}
+        - {x: 27.5, y: 24}
+        - {x: 25.5, y: 26}
+        - {x: 23.5, y: 27}
+        - {x: 17.5, y: 27}
+        - {x: 14.5, y: 29}
+        - {x: 9.5, y: 32}
+        - {x: -2.5, y: 32}
+        - {x: -7.5, y: 30}
+        - {x: -12.5, y: 27}
+        - {x: -19.5, y: 28}
+        - {x: -23.5, y: 30}
+        - {x: -34.5, y: 32}
+        - {x: -34.5, y: -32}
+        - {x: -23.5, y: -30}
+        - {x: -18.5, y: -27}
+        - {x: -13.5, y: -27}
+        - {x: -7.5, y: -30}
+        - {x: -3.5, y: -32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 983dec28b0e5b59d0800000000000000
+      internalID: -2784528541066275959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golden UI - BTE_5
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 320
+        width: 69
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 7.5, y: -32}
+        - {x: 12.5, y: -30}
+        - {x: 17.5, y: -27}
+        - {x: 21.5, y: -27}
+        - {x: 24.5, y: -25}
+        - {x: 27.5, y: -22}
+        - {x: 29.5, y: -17}
+        - {x: 32.5, y: -11}
+        - {x: 34.5, y: -6}
+        - {x: 34.5, y: 5}
+        - {x: 32.5, y: 10}
+        - {x: 30.5, y: 15}
+        - {x: 28.5, y: 17}
+        - {x: 28.5, y: 21}
+        - {x: 27.5, y: 24}
+        - {x: 25.5, y: 26}
+        - {x: 23.5, y: 27}
+        - {x: 17.5, y: 27}
+        - {x: 14.5, y: 29}
+        - {x: 9.5, y: 32}
+        - {x: -2.5, y: 32}
+        - {x: -7.5, y: 30}
+        - {x: -12.5, y: 27}
+        - {x: -19.5, y: 28}
+        - {x: -23.5, y: 30}
+        - {x: -34.5, y: 32}
+        - {x: -34.5, y: -32}
+        - {x: -23.5, y: -30}
+        - {x: -18.5, y: -27}
+        - {x: -13.5, y: -27}
+        - {x: -7.5, y: -30}
+        - {x: -3.5, y: -32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a50f341b7ec9dc40800000000000000
+      internalID: 5537684244844709286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golden UI - BTE_6
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 368
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 728262d1a96150bc0800000000000000
+      internalID: -3817620257956812761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golden UI - BTE_7
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 368
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 929142e65f26dacc0800000000000000
+      internalID: -3698190912746940119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golden UI - BTE_8
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 370
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1c049ec5afeff7c0800000000000000
+      internalID: -4035243245686223841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golden UI - BTE_10
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 370
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b57ddcc0685a83350800000000000000
+      internalID: 5996724899002832731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golden UI - BTE_11
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 330
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e66981817cfbcc30800000000000000
+      internalID: 4380872626982708964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golden UI - BTE_12
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 330
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8fa4672cb6443b90800000000000000
+      internalID: -7263102525113061494
       vertices: []
       indices: 
       edges: []

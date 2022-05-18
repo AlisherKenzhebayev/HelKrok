@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a539b3ac96f484998c20d5e2c3b813, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  prefabUI: {fileID: 0}
+  prefabUI: {fileID: 1142638717841757054, guid: 4c47d932f02628c4e81ad517e59b0815, type: 3}
   type: 4
   priority: 0
   description: Some item, for now it's unclear what exactly does it do.

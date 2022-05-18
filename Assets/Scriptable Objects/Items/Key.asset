@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b73226d415f18f3479b0fe7d08e50257, type: 3}
   m_Name: Key
   m_EditorClassIdentifier: 
-  prefabUI: {fileID: 0}
+  prefabUI: {fileID: 3122161896154075952, guid: 88659cd9deae0e3448a85c9f623f75f0, type: 3}
   type: 2
   priority: 99
   description: A key for the door in the dungeon. Purposed to open a door, duh...

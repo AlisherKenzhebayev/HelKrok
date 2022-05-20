@@ -40,9 +40,6 @@ public class PlayerController : MonoBehaviour
     private float verticalRotationSpeed = 2.2f;
 
     [Header("Basic Movement")]
-    [Tooltip("Gravity acceleration")]
-    [SerializeField]
-    private float gravityAcceleration = 10f;
     [Tooltip("Ground speed")]
     [SerializeField]
     private float groundSpeed = 10f;
@@ -70,9 +67,6 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Speed curve")]
     [SerializeField] 
     private AnimationCurve speedCurve = null;
-    [Tooltip("Gravity curve")]
-    [SerializeField]
-    private AnimationCurve gravityCurve = null;
     [Tooltip("Grapple overlap geometry time")]
     [SerializeField]
     private float grappleMaxOverlapTime = 3f;
@@ -136,7 +130,6 @@ public class PlayerController : MonoBehaviour
 
     private List<ICommand> physicsCommands;
 
-    private LineRenderer lr;
     private Rigidbody rb;
     private float m_CameraVerticalAngle = 0f;
 
@@ -147,6 +140,8 @@ public class PlayerController : MonoBehaviour
     private MeshRenderer debugRenderer;
     private EnergyDepleter energyDepleter;
     private int grappleLayerMask;
+
+    private GravityCustom gravityCustom;
     
     // Start is called before the first frame update
     void Start()
@@ -165,10 +160,10 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("Error - no RigidBody component");
         }
 
-        lr = this.GetComponent<LineRenderer>();
-        if (lr == null)
+        gravityCustom = this.GetComponent<GravityCustom>();
+        if (gravityCustom == null)
         {
-            Debug.LogError("Error - no LineRenderer component");
+            Debug.LogError("Error - no GravityCustom component");
         }
 
         debugRenderer = debugObject.GetComponent<MeshRenderer>();
@@ -201,7 +196,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ApplyGravity();
+        ApplyPhysicsDrag();
 
         physicsCommands.Clear();
 
@@ -413,7 +408,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks and visualizes if the grapple point is available
+    /// Raycast checks and visualizes if the grapple point is available (not guaranteed)
     /// </summary>
     private void TestGrapple()
     {
@@ -506,17 +501,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void ApplyGravity()
+    /// <summary>
+    /// Applies both the gravity and air drag components
+    /// </summary>
+    private void ApplyPhysicsDrag()
     {
-        if (isTethered)
-        {
-            float curveMod = gravityCurve.Evaluate(precisionFloat(timeGrappledSince / grappleMaxTime));
-            rb.AddForce(-this.transform.up * rb.mass * gravityAcceleration * curveMod);
-        }
-        else
-        {
-            rb.AddForce(-this.transform.up * rb.mass * gravityAcceleration);
-        }
+        float frac = precisionFloat(timeGrappledSince / grappleMaxTime);
+        gravityCustom.UpdateFrac(frac);
     }
 
     private void UpdateGrapplePosition()
@@ -636,7 +627,8 @@ public class PlayerController : MonoBehaviour
             && hit.collider.gameObject.TryGetComponent<IInteractable>(out grappleInteractable))
         {
             energyDepleter.Use(grappleCost, 0.2f);
-            grappleInteractable.Execute();
+            grappleInteractable.InteractStart();
+
             isTethered = true;
             timeGrappledSince = 0f;
             timeGrappleOverlapGeometry = 0f;
@@ -645,16 +637,18 @@ public class PlayerController : MonoBehaviour
             tetherOffset = hit.point - tetherObject.transform.position;
             tetherPoint = tetherObject.transform.position + tetherOffset;
             tetherLength = Vector3.Distance(tetherPoint, playerCamera.position);
-            lr.positionCount = 2;
         }
     }
 
     void EndGrapple()
     {
-        grappleInteractable.Execute();
+        grappleInteractable.InteractStop();
+
         isTethered = false;
         tetherObject = null;
-        lr.positionCount = 0;
+
+        timeGrappledSince = 0f;
+        timeGrappleOverlapGeometry = 0f;
     }
 
     void BeginAction()

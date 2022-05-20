@@ -9,7 +9,7 @@ public class PlayerDamageTaker : DamageTaker
 
     internal override void DoDeath()
     {
-        FindObjectOfType<SceneLoaderManager>().LoadName("DeathScene");
+        SceneLoaderManager.LoadName("DeathScene");
         return;
     }
 }

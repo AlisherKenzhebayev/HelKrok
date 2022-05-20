@@ -41,7 +41,7 @@ public class SceneLoaderManager : MonoBehaviour
     {
     }
 
-    public void LoadBuildIndexed(int index)
+    public static void LoadBuildIndexed(int index)
     {
         if (SceneManager.sceneCountInBuildSettings < index)
         {
@@ -51,17 +51,17 @@ public class SceneLoaderManager : MonoBehaviour
         SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
 
-    public void ExitApp()
+    public static void ExitApp()
     {
         Application.Quit();
     }
 
-    public void LoadEnum(Scene enumScene, LoadSceneMode sceneMode = LoadSceneMode.Single)
+    public static void LoadEnum(Scene enumScene, LoadSceneMode sceneMode = LoadSceneMode.Single)
     {
         SceneManager.LoadScene(enumScene.ToString(), sceneMode);
     }
 
-    public void LoadName(string nameScene, LoadSceneMode sceneMode = LoadSceneMode.Single)
+    public static void LoadName(string nameScene, LoadSceneMode sceneMode = LoadSceneMode.Single)
     {
         SceneManager.LoadScene(nameScene, sceneMode);
     }

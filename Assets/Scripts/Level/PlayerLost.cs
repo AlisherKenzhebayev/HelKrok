@@ -63,7 +63,7 @@ public class PlayerLost : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            FindObjectOfType<SceneLoaderManager>().LoadBuildIndexed(0);
+            SceneLoaderManager.LoadBuildIndexed(0);
         }
     }
 

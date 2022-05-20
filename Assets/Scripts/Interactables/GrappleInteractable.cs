@@ -8,16 +8,16 @@ public class GrappleInteractable : MonoBehaviour, IInteractable
     [Tooltip("Replacement material (visual feedback)")]
     [SerializeField]
     private Material shaderMaterial;
-    private GameObject player;
-    private PlayerController playerController;
-    private Renderer[] rendererRef;
-    private Material[] originalMaterial;
+    internal GameObject player;
+    internal PlayerController playerController;
+    internal Renderer[] rendererRef;
+    internal Material[] originalMaterial;
 
-    private bool isGrappled = false;
-    private bool isFocused = false;
+    internal bool isGrappled = false;
+    internal bool isFocused = false;
 
     // Start is called before the first frame update
-    void Start()
+    internal virtual void Start()
     {
         this.player = GameObject.FindGameObjectWithTag("Player");
         this.playerController = player.GetComponentInChildren<PlayerController>();
@@ -30,7 +30,7 @@ public class GrappleInteractable : MonoBehaviour, IInteractable
     }
 
     // Update is called once per frame
-    void Update()
+    internal virtual void Update()
     {
         if (isFocused) {
             ShowMaterial();
@@ -39,10 +39,9 @@ public class GrappleInteractable : MonoBehaviour, IInteractable
             ResetMaterial();
         }
         isFocused = false;
-        isGrappled = false;
     }
 
-    private void ShowMaterial()
+    internal virtual void ShowMaterial()
     {
         if (true)
         {
@@ -53,7 +52,7 @@ public class GrappleInteractable : MonoBehaviour, IInteractable
         }
     }
 
-    public void Execute()
+    public virtual void InteractStart()
     {
         isGrappled = true;
     }
@@ -69,5 +68,10 @@ public class GrappleInteractable : MonoBehaviour, IInteractable
         {
             this.rendererRef[i].material = originalMaterial[i];
         }
+    }
+
+    public void InteractStop()
+    {
+        isGrappled = false;
     }
 }

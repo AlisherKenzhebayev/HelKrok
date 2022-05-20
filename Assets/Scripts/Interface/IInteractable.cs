@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 public interface IInteractable
 {
-    public void Execute();
+    public void InteractStart();
+    public void InteractStop();
 
     /// <summary>
     /// Visualize that this is interactable, one way or another

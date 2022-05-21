@@ -34,7 +34,7 @@ public class LevelExit : MonoBehaviour
 
     private void Update()
     {
-        if (playerInventory.FindItemName("key"))
+        if (playerInventory.FindItemByName("key") != null)
         {
             closedDoor.SetActive(false);
             openDoor.SetActive(true);

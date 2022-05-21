@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b6d10092360d847a576d9b5989d022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emptySlotPrefab: {fileID: 6948630073398289482, guid: 3cf5fdd636bf04e47ad5af22152952c9, type: 3}
   X_START: 50
   Y_START: -50
   X_SPACE_BETWEEN_ITEM: 95

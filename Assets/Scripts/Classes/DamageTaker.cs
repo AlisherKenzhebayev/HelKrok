@@ -17,6 +17,10 @@ public class DamageTaker : MonoBehaviour
         maxHealth = currentHealth;
     }
 
+    internal virtual void RestoreFlat(int health) {
+        currentHealth = Mathf.Max(currentHealth + health, maxHealth);
+    }
+
     internal virtual void FixedUpdate()
     {
         currentIFrameTime = Mathf.Max(0.0f, currentIFrameTime - Time.fixedDeltaTime);

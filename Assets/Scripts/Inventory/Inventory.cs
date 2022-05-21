@@ -10,9 +10,19 @@ public class Inventory : MonoBehaviour
 {
     public InventoryObject InventorySO = null;
     public List<InventorySlot> Container;
+    public int size = 24;
 
-    public bool FindItemName(string name) {
-        return Container.Exists(o => o.item.name.ToLower().Equals(name.ToLower()));
+    public InventorySlot FindItemByName(string name) {
+        var col = Container.FindAll(o => o.item != null);
+        if (col.Count == 0) {
+            return null;
+        }
+        return col.Find(o => o.item.name.ToLower().Equals(name.ToLower()));
+    }
+
+    public int FindIndex(BaseItemObject _item)
+    {
+        return Container.FindIndex(0, Container.Count, o => o.item == _item);
     }
 
     public void AddItem(BaseItemObject _item, int _amount = 1) {
@@ -23,8 +33,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        Container.Add(new InventorySlot(_item, _amount));
-        Container.Sort();
+        SetEmptySlot(_item, _amount);
     }
 
     public void RemoveItem(BaseItemObject _item, int _amount = 1)
@@ -37,8 +46,6 @@ public class Inventory : MonoBehaviour
                 return;
             }
         }
-
-        Container.Add(new InventorySlot(_item, _amount));
     }
 
     public int GetItemCount(BaseItemObject _item) {
@@ -52,9 +59,32 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        Container = new List<InventorySlot>();
-
+        CreateSlots();
         RepopulateInventory(InventorySO);
+    }
+
+    private InventorySlot SetEmptySlot(BaseItemObject _item, int _amount)
+    {
+        for (int i = 0; i < Container.Count; i++)
+        {
+            if (Container[i].item == null)
+            {
+                Container[i].UpdateSlot(_item, _amount);
+                return Container[i];
+            }
+        }
+
+        //TODO: increase inv.size
+        return null;
+    }
+
+    private void CreateSlots()
+    {
+        Container = new List<InventorySlot>();
+        for (int i = 0; i < size; i++)
+        {
+            Container.Add(new InventorySlot());
+        }
     }
 
     private void RepopulateInventory(InventoryObject _inventoryObject)
@@ -64,7 +94,6 @@ public class Inventory : MonoBehaviour
         }
         
         // TODO: load from memory/save
-
 
         // Adds the existing referenced SO data accordingly
         switch (_inventoryObject.LoadingType)

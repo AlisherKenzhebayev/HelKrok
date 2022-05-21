@@ -41,6 +41,9 @@ TextureImporter:
   - first:
       213: -7263102525113061494
     second: Golden UI - BTE_12
+  - first:
+      213: 4153132827022349655
+    second: Golden UI - BTE_13
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -550,6 +553,27 @@ TextureImporter:
       bones: []
       spriteID: a8fa4672cb6443b90800000000000000
       internalID: -7263102525113061494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golden UI - BTE_13
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 93
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7555eab4d44e2a930800000000000000
+      internalID: 4153132827022349655
       vertices: []
       indices: 
       edges: []

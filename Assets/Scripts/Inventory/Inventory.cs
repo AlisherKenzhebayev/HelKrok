@@ -12,6 +12,8 @@ public class Inventory : MonoBehaviour
     public List<InventorySlot> Container;
     public int size = 24;
 
+    private InventorySlot currentAbility = null;
+
     public InventorySlot FindItemByName(string name) {
         var col = Container.FindAll(o => o.item != null);
         if (col.Count == 0) {
@@ -61,6 +63,66 @@ public class Inventory : MonoBehaviour
     {
         CreateSlots();
         RepopulateInventory(InventorySO);
+    }
+
+    internal void OnPointerClick(InventorySlot _inventorySlot)
+    {
+        var item = _inventorySlot.item;
+
+        switch (item.type) {
+            case ItemType.Ability:
+                ChangeToAbility(_inventorySlot);
+                break;
+            default:
+                AddItem(_inventorySlot.item);
+                break;
+        }
+    }
+
+    public List<InventorySlot> GetAbilities() {
+        var col = Container.FindAll(o => o.item != null);
+        if (col.Count == 0)
+        {
+            return null;
+        }
+
+        var retVal = col.FindAll(o => o.item.type == ItemType.Ability);
+        retVal.Sort();
+        
+        return retVal;
+    }
+
+    public InventorySlot CurrentAbility() {
+        if (currentAbility == null) {
+            currentAbility = GetAbilities()[0];
+        }
+        
+        return currentAbility;
+    }
+
+    public void ChangeNextAbility() {
+        var abilities = GetAbilities();
+        var indexCur = abilities.IndexOf(currentAbility);
+
+        currentAbility = abilities[(indexCur + 1) % abilities.Count];
+    }
+
+    public bool ChangeToAbility(InventorySlot _inventorySlot)
+    {
+        if (!Container.Contains(_inventorySlot)) { 
+            return false;
+        }
+
+        currentAbility = _inventorySlot;
+        return true;
+    }
+
+    public void ChangePrevAbility()
+    {
+        var abilities = GetAbilities();
+        var indexCur = abilities.IndexOf(currentAbility);
+
+        currentAbility = abilities[(indexCur - 1) % abilities.Count];
     }
 
     private InventorySlot SetEmptySlot(BaseItemObject _item, int _amount)

@@ -99,6 +99,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float actionCostCont = 0.5f;
 
+    [Header ("Debug")]
+    [SerializeField]
+    private bool cursorHide = true;
+
     //**********
     //  PUBLIC
     //**********
@@ -152,8 +156,11 @@ public class PlayerController : MonoBehaviour
         links = new List<GameObject>();
         inputManager = new InputManager();
 
-        CursorMagick();
-        
+        if(cursorHide)
+        { 
+            CursorMagick();
+        }
+
         rb = this.GetComponent<Rigidbody>();
         if (rb == null)
         {

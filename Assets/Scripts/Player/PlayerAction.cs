@@ -1,36 +1,43 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 {
     // TODO: test out with teleport
-    // Move the init of collection to Start, poll from playerInventory
-
-    [SerializeField]
-    private List<BaseAbilityItemObject> actions;
 
     private BaseAbilityItemObject currentAction;
     private int current = 0;
 
+    private GameObject player;
+    private Inventory playerInventory;
+
     void Start()
     {
-        currentAction = actions[current];
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            Debug.LogError("Error - no Player tag exists");
+        }
+
+        playerInventory = player.GetComponentInChildren<Inventory>();
+        if (playerInventory == null)
+        {
+            Debug.LogError("Error - no playerInventory child component exists");
+        }
     }
 
     private void Update()
     {
-        currentAction = actions[current];
+        currentAction = (BaseAbilityItemObject)playerInventory.CurrentAbility().item;
     }
 
     public void SwitchNextAction() {
-        current = (current + 1) % actions.Count;
+        playerInventory.ChangeNextAbility();
     }
 
     public void SwitchPrevAction()
     {
-        current = (current - 1) % actions.Count;
+        playerInventory.ChangePrevAbility();
     }
 
     internal virtual void OnEnable()

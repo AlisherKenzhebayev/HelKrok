@@ -4,9 +4,9 @@ using UnityEngine;
 public class PlayerAction : MonoBehaviour
 {
     // TODO: test out with teleport
+    public Transform spawnTransform;
 
     private BaseAbilityItemObject currentAction;
-    private int current = 0;
 
     private GameObject player;
     private Inventory playerInventory;
@@ -54,6 +54,6 @@ public class PlayerAction : MonoBehaviour
     {
         // TODO: define some common pattern of interaction here
 
-        currentAction.Execute(this.gameObject, (bool)obj["amount"]);
+        currentAction.Execute(this.gameObject, (bool)obj["amount"], spawnTransform);
     }
 }

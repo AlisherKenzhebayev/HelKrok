@@ -7,6 +7,7 @@ TagManager:
   - Spawn
   - Ground
   - exitDoor
+  - inventoryUI
   layers:
   - Default
   - TransparentFX

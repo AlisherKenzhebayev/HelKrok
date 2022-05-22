@@ -11,19 +11,19 @@ public class DefaultProjectileAbilityObject : BaseAbilityItemObject
 
     private ProjectileSpawner projectileSpawner = null;
 
-    public override void Awake()
+    internal override void Awake()
     {
         base.Awake();
         tagName = "projectile";
     }
 
-    public override void Execute(GameObject go, bool enable) 
+    public override void Execute(GameObject _gameObject, bool _enable, Transform _transform) 
     {
         if (projectileSpawner == null)
         {
-            projectileSpawner = go.GetComponent<ProjectileSpawner>();
+            projectileSpawner = _gameObject.GetComponent<ProjectileSpawner>();
             if (projectileSpawner == null) {
-                projectileSpawner = go.AddComponent<ProjectileSpawner>();
+                projectileSpawner = _gameObject.AddComponent<ProjectileSpawner>();
             }
         }
 
@@ -32,6 +32,7 @@ public class DefaultProjectileAbilityObject : BaseAbilityItemObject
         projectileSpawner.numberToSpawn = numberToSpawn;
         projectileSpawner.loop = loop;
         projectileSpawner.timerCooldown = timerCooldown;
+        projectileSpawner.spawnTransform = _transform;
 
         projectileSpawner.StartSpawning();// (enable ? true : false);
     }

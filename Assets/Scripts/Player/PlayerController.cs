@@ -137,11 +137,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private float m_CameraVerticalAngle = 0f;
 
-    private DamageTaker health;
     private InputManager inputManager;
     private Vector3 worldspaceMoveInput;
 
-    private MeshRenderer debugRenderer;
+    private DamageTaker health;
     private EnergyDepleter energyDepleter;
     private int grappleLayerMask;
 
@@ -173,12 +172,6 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("Error - no GravityCustom component");
         }
 
-        debugRenderer = debugObject.GetComponent<MeshRenderer>();
-        if (debugRenderer == null)
-        {
-            Debug.LogError("Error - no MeshRenderer component");
-        }
-
         energyDepleter = this.GetComponentInChildren<EnergyDepleter>();
         if(energyDepleter == null)
         {
@@ -192,7 +185,6 @@ public class PlayerController : MonoBehaviour
         TestGrapple();
 
         HandleMouseInput();
-        DebugGrappleWithMaterial();
 
         VisualizeGrapple();
 
@@ -495,7 +487,6 @@ public class PlayerController : MonoBehaviour
                 }
 
                 distValue += distanceSpawnLinks;
-                
             }
         }
         else
@@ -589,23 +580,6 @@ public class PlayerController : MonoBehaviour
     private float precisionFloat(float fValue)
     {
         return Mathf.Round(fValue * 1000f) / 1000f;
-    }
-
-    private void DebugGrappleWithMaterial()
-    {
-        if (superJumpAvailable()) {
-            debugRenderer.material = debugQuoStateMaterial;
-            return;
-        }
-
-        if (this.isTethered)
-        {
-            debugRenderer.material = debugGoodStateMaterial;
-        }
-        else
-        {
-            debugRenderer.material = debugBadStateMaterial;
-        }
     }
 
     private bool isGrounded()

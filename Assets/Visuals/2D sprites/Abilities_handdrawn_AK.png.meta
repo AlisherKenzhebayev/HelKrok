@@ -20,6 +20,57 @@ TextureImporter:
   - first:
       213: -5590858884295583997
     second: Abilities_handdrawn_AK_5
+  - first:
+      213: 1720246844401472736
+    second: Abilities_handdrawn_AK_6
+  - first:
+      213: 6422584141241549666
+    second: Abilities_handdrawn_AK_7
+  - first:
+      213: -2495474212495768213
+    second: Abilities_handdrawn_AK_8
+  - first:
+      213: -7745271725406307420
+    second: Abilities_handdrawn_AK_9
+  - first:
+      213: -3500987822286398173
+    second: Abilities_handdrawn_AK_10
+  - first:
+      213: -2916002647373396932
+    second: Abilities_handdrawn_AK_11
+  - first:
+      213: 6476517189178871548
+    second: Abilities_handdrawn_AK_12
+  - first:
+      213: -6054966890578788685
+    second: Abilities_handdrawn_AK_13
+  - first:
+      213: -3832664127693143565
+    second: Abilities_handdrawn_AK_14
+  - first:
+      213: 5304887774960113990
+    second: Abilities_handdrawn_AK_15
+  - first:
+      213: 2417925727033884288
+    second: Abilities_handdrawn_AK_16
+  - first:
+      213: -911376150841749762
+    second: Abilities_handdrawn_AK_17
+  - first:
+      213: -1430048329954421739
+    second: Abilities_handdrawn_AK_18
+  - first:
+      213: -8958557004329977991
+    second: Abilities_handdrawn_AK_19
+  - first:
+      213: -2796317146876498403
+    second: Abilities_handdrawn_AK_20
+  - first:
+      213: 5394399391339279500
+    second: Abilities_handdrawn_AK_21
+  - first:
+      213: 4337402771610953607
+    second: Abilities_handdrawn_AK_22
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -241,7 +292,7 @@ TextureImporter:
       name: Abilities_handdrawn_AK_5
       rect:
         serializedVersion: 2
-        x: 192
+        x: 64
         y: 192
         width: 64
         height: 64
@@ -254,6 +305,90 @@ TextureImporter:
       bones: []
       spriteID: 307993467774962b0800000000000000
       internalID: -5590858884295583997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Abilities_handdrawn_AK_6
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e45986046b8fd710800000000000000
+      internalID: 1720246844401472736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Abilities_handdrawn_AK_7
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26382c68f3a912950800000000000000
+      internalID: 6422584141241549666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Abilities_handdrawn_AK_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b65ca02ec6b4e5dd0800000000000000
+      internalID: -2495474212495768213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Abilities_handdrawn_AK_9
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4abb746e664438490800000000000000
+      internalID: -7745271725406307420
       vertices: []
       indices: 
       edges: []

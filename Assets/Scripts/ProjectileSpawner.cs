@@ -9,6 +9,9 @@ public class ProjectileSpawner : MonoBehaviour
     public GameObject projectileToSpawn;
 
     [SerializeField]
+    public Transform spawnTransform;
+
+    [SerializeField]
     public float timerToSpawn = 2f;
     [SerializeField]
     public float numberToSpawn = 2f;
@@ -59,7 +62,13 @@ public class ProjectileSpawner : MonoBehaviour
         for (int i = 0; i < numberToSpawn; i++)
         {
             yield return new WaitForSeconds(timerToSpawn);
-            GameObject obj = Instantiate(projectileToSpawn, this.transform, false);
+            
+            Transform transformToSpawn = this.transform;
+            if(spawnTransform != null) {
+                transformToSpawn = spawnTransform;
+            }
+
+            GameObject obj = Instantiate(projectileToSpawn, transformToSpawn, false);
             obj.transform.SetParent(null);
         }
         Debug.Log("spawning");

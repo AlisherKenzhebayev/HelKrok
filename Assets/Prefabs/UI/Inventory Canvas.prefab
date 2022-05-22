@@ -58,11 +58,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptySlotPrefab: {fileID: 6948630073398289482, guid: 3cf5fdd636bf04e47ad5af22152952c9, type: 3}
-  X_START: 50
-  Y_START: -50
-  X_SPACE_BETWEEN_ITEM: 95
-  Y_SPACE_BETWEEN_ITEM: 95
-  NUMBER_COLUMN: 5
+  X_START: 45
+  Y_START: -45
+  X_SPACE_BETWEEN_ITEM: 105
+  Y_SPACE_BETWEEN_ITEM: 105
+  NUMBER_COLUMN: 7
 --- !u!1 &5441302634140128449
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +182,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5441302634140128452}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5441302634160947820}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5441302634160947817
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +209,7 @@ GameObject:
   - component: {fileID: 5441302634160947818}
   m_Layer: 5
   m_Name: Inventory Canvas
-  m_TagString: Untagged
+  m_TagString: inventoryUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

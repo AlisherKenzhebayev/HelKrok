@@ -18,7 +18,7 @@ public class DamageTaker : MonoBehaviour
     }
 
     internal virtual void RestoreFlat(int health) {
-        currentHealth = Mathf.Max(currentHealth + health, maxHealth);
+        currentHealth = Mathf.Min(currentHealth + health, maxHealth);
     }
 
     internal virtual void FixedUpdate()

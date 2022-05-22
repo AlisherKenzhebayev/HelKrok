@@ -2,11 +2,11 @@ using UnityEngine;
 
 public abstract class BaseAbilityItemObject : BaseItemObject
 {
-    public virtual void Awake()
+    internal virtual void Awake()
     {
         type = ItemType.Ability;
         tagName = "ability";
     }
 
-    public abstract void Execute(GameObject go, bool enable);
+    public abstract void Execute(GameObject _gameObject, bool _enable, Transform _transform);
 }

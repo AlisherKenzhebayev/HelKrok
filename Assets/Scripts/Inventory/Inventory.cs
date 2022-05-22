@@ -40,11 +40,17 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(BaseItemObject _item, int _amount = 1)
     {
-        foreach (InventorySlot inventorySlot in Container)
+        for (int i = 0; i < Container.Count; i++)
         {
+            InventorySlot inventorySlot = Container[i];
             if (inventorySlot.item == _item)
             {
-                inventorySlot.amount = Math.Max(0, inventorySlot.amount - _amount);
+                inventorySlot.amount = inventorySlot.amount - _amount;
+
+                if (inventorySlot.amount <= 0) {
+                    Container[i].UpdateSlot(null, 0);
+                }
+
                 return;
             }
         }
@@ -73,10 +79,33 @@ public class Inventory : MonoBehaviour
             case ItemType.Ability:
                 ChangeToAbility(_inventorySlot);
                 break;
-            default:
+            case ItemType.Consumable:
+                UseConsumable(_inventorySlot);
+                RemoveItem(_inventorySlot.item);
+                break;
+            case ItemType.Key:
                 AddItem(_inventorySlot.item);
                 break;
+            case ItemType.Default:
+            case ItemType.Pickup:
+            default:
+                // DO NOTHING
+                break;
         }
+    }
+
+    private bool UseConsumable(InventorySlot _inventorySlot)
+    {
+        if (!Container.Contains(_inventorySlot))
+        {
+            return false;
+        }
+
+        var consumable = (BaseConsumableItemObject) _inventorySlot.item;
+
+        consumable.Execute();
+
+        return true;
     }
 
     public List<InventorySlot> GetAbilities() {
@@ -155,7 +184,7 @@ public class Inventory : MonoBehaviour
             return;
         }
         
-        // TODO: load from memory/save
+        // TODO: load from memory/save -> Postponed, after presentation
 
         // Adds the existing referenced SO data accordingly
         switch (_inventoryObject.LoadingType)

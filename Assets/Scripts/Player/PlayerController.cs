@@ -85,8 +85,6 @@ public class PlayerController : MonoBehaviour
 
     [Header ("Debug")]
     [SerializeField]
-    private bool cursorHide = true;
-    [SerializeField]
     private GameObject grappleEndPrefab = null;
 
 
@@ -124,7 +122,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private float m_CameraVerticalAngle = 0f;
 
-    private InputManager playerInputManager;
     private Vector3 worldspaceMoveInput;
 
     private DamageTaker health;
@@ -143,12 +140,6 @@ public class PlayerController : MonoBehaviour
 
         physicsCommands = new List<ICommand>();
         links = new List<GameObject>();
-        playerInputManager = new InputManager();
-
-        if(cursorHide)
-        { 
-            CursorMagick();
-        }
 
         rb = this.GetComponent<Rigidbody>();
         if (rb == null)
@@ -233,10 +224,10 @@ public class PlayerController : MonoBehaviour
     private void HandleInput()
     {
         // Handle keyboard movement
-        worldspaceMoveInput = transform.TransformVector(playerInputManager.GetMoveInput());
+        worldspaceMoveInput = transform.TransformVector(InputManager.GetMoveInput());
 
         // Handle jump keys
-        if (playerInputManager.GetJumpButtonDown())
+        if (InputManager.GetJumpButtonDown())
         {
             if (!hasJumpInput)
             {
@@ -248,7 +239,7 @@ public class PlayerController : MonoBehaviour
     private void HandleMouseInput()
     {
         // Action
-        if (playerInputManager.GetActionButtonDown())
+        if (InputManager.GetActionButtonDown())
         {
             if (!isAction)
             {
@@ -256,7 +247,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (playerInputManager.GetActionButtonUp())
+        if (InputManager.GetActionButtonUp())
         {
             if (isAction)
             {
@@ -287,13 +278,13 @@ public class PlayerController : MonoBehaviour
     {
         // Horizontal mouse inputs
         {
-            float xMouseInput = playerInputManager.getMouseHorizontal();
+            float xMouseInput = InputManager.getMouseHorizontal();
             this.transform.Rotate(new Vector3(0f, xMouseInput * horizontalRotationSpeed, 0f), Space.Self);
         }
 
         // Vertical mouse inputs
         {
-            float yMouseInput = playerInputManager.getMouseVertical();
+            float yMouseInput = InputManager.getMouseVertical();
             m_CameraVerticalAngle -= yMouseInput * verticalRotationSpeed;
 
             m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
@@ -593,12 +584,6 @@ public class PlayerController : MonoBehaviour
     private bool superJumpAvailable()
     {
         return timeSuperJumpSince >= 0f && isGrounded();
-    }
-
-    private void CursorMagick()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     void BeginGrapple()

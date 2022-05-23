@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,29 +9,29 @@ public class SceneLoaderManager : MonoBehaviour
         DeathScene,
     }
 
-    private static SceneLoaderManager sceneLoaderInstance;
+    private static SceneLoaderManager sceneLoaderManager;
 
     public static SceneLoaderManager instance
     {
         get
         {
-            if (!sceneLoaderInstance)
+            if (!sceneLoaderManager)
             {
-                sceneLoaderInstance = FindObjectOfType(typeof(SceneLoaderManager)) as SceneLoaderManager;
+                sceneLoaderManager = FindObjectOfType(typeof(SceneLoaderManager)) as SceneLoaderManager;
 
-                if (!sceneLoaderInstance)
+                if (!sceneLoaderManager)
                 {
                     Debug.LogError("There needs to be one active SceneLoaderManager script on a GameObject in your scene.");
                 }
                 else
                 {
-                    sceneLoaderInstance.Init();
+                    sceneLoaderManager.Init();
 
                     //  Sets this to not be destroyed when reloading scene
-                    DontDestroyOnLoad(sceneLoaderInstance);
+                    DontDestroyOnLoad(sceneLoaderManager);
                 }
             }
-            return sceneLoaderInstance;
+            return sceneLoaderManager;
         }
     }
 

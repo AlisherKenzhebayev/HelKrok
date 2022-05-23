@@ -43,7 +43,7 @@ MeshCollider:
   m_GameObject: {fileID: 1993884368131793983}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -67,7 +67,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 82aa159cb48f9a5499e60b5a9a9c1156, type: 2}
+  - {fileID: 2100000, guid: beb6d02817b14e348966683fcbced65d, type: 2}
+  - {fileID: 2100000, guid: 6010cf7e6b690244f8d8a3699f319e5b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,16 +91,11 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: -7513297493162946847, guid: 60dd2d2fa9c1511458526e916eabdf60, type: 3}
   m_Bones: []
-  m_BlendShapeWeights:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
     m_Center: {x: -0.00014710426, y: 0.00036764145, z: -0.25161952}

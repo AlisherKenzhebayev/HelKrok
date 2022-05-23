@@ -22,47 +22,45 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField]
     public float timerCooldown = 2f;
 
-    public bool isSpawning = false;
-
     private float currentCooldown;
+    private bool isSpawning = false;
 
-    Coroutine spawnCor;
-
-    // Start is called before the first frame update
-    void Update()
-    {
-        if (isSpawning)
-        {
-            StartSpawning();
-        }
-    }
+    Coroutine spawnCor = null;
 
     private void FixedUpdate()
     {
         currentCooldown = Mathf.Max(currentCooldown - Time.fixedDeltaTime, 0);
     }
 
-    public void StartSpawning()
+    private void Update()
     {
-        if (currentCooldown <= 0) {
-            if (timerCooldown == float.PositiveInfinity) {
+        if(isSpawning)
+            RunSpawning();    
+    }
+
+    public void RunSpawning()
+    {
+        if (currentCooldown <= 0)
+        {
+            Debug.Log("ProjectileSpawner - CD ok!");
+
+            if (timerCooldown == float.PositiveInfinity)
+            {
                 return;
             }
             if (!loop)
             {
                 timerCooldown = float.PositiveInfinity;
             }
+
             currentCooldown = timerCooldown;
             spawnCor = StartCoroutine(spawnCoroutine());
-            
         }
     }
 
     IEnumerator spawnCoroutine() {
         for (int i = 0; i < numberToSpawn; i++)
         {
-            yield return new WaitForSeconds(timerToSpawn);
-            
             Transform transformToSpawn = this.transform;
             if(spawnTransform != null) {
                 transformToSpawn = spawnTransform;
@@ -70,8 +68,20 @@ public class ProjectileSpawner : MonoBehaviour
 
             GameObject obj = Instantiate(projectileToSpawn, transformToSpawn, false);
             obj.transform.SetParent(null);
+
+            yield return new WaitForSeconds(timerToSpawn);
         }
-        Debug.Log("spawning");
+        Debug.Log("ProjectileSpawner - spawning");
+    }
+
+    internal void StopFiring()
+    {
+        isSpawning = false;
+    }
+
+    internal void StartFiring()
+    {
+        isSpawning = true;
     }
 
     private void OnDrawGizmos()
@@ -80,14 +90,5 @@ public class ProjectileSpawner : MonoBehaviour
 
         Gizmos.DrawSphere(this.transform.position, radius: 0.02f);
         Gizmos.DrawRay(this.transform.position, this.transform.forward);
-    }
-
-    public void SwitchSpawning(bool state)
-    {
-        isSpawning = state;
-        if (spawnCor != null && state == false)
-        {
-            StopCoroutine(spawnCor);
-        }
     }
 }

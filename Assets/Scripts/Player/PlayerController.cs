@@ -94,11 +94,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float grappleCostCont = 0.0f;
 
-    [SerializeField]
-    private float actionCost = 3f;
-    [SerializeField]
-    private float actionCostCont = 0.5f;
-
     [Header ("Debug")]
     [SerializeField]
     private bool cursorHide = true;
@@ -137,7 +132,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private float m_CameraVerticalAngle = 0f;
 
-    private InputManager inputManager;
+    private InputManager playerInputManager;
     private Vector3 worldspaceMoveInput;
 
     private DamageTaker health;
@@ -153,7 +148,7 @@ public class PlayerController : MonoBehaviour
 
         physicsCommands = new List<ICommand>();
         links = new List<GameObject>();
-        inputManager = new InputManager();
+        playerInputManager = new InputManager();
 
         if(cursorHide)
         { 
@@ -237,10 +232,10 @@ public class PlayerController : MonoBehaviour
     private void HandleInput()
     {
         // Handle keyboard movement
-        worldspaceMoveInput = transform.TransformVector(inputManager.GetMoveInput());
+        worldspaceMoveInput = transform.TransformVector(playerInputManager.GetMoveInput());
 
         // Handle jump keys
-        if (inputManager.GetJumping())
+        if (playerInputManager.GetJumpButtonDown())
         {
             if (!hasJumpInput)
             {
@@ -252,7 +247,7 @@ public class PlayerController : MonoBehaviour
     private void HandleMouseInput()
     {
         // Action
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (playerInputManager.GetActionButtonDown())
         {
             if (!isAction)
             {
@@ -260,7 +255,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse1))
+        if (playerInputManager.GetActionButtonUp())
         {
             if (isAction)
             {
@@ -291,13 +286,13 @@ public class PlayerController : MonoBehaviour
     {
         // Horizontal mouse inputs
         {
-            float xMouseInput = inputManager.getMouseHorizontal();
+            float xMouseInput = playerInputManager.getMouseHorizontal();
             this.transform.Rotate(new Vector3(0f, xMouseInput * horizontalRotationSpeed, 0f), Space.Self);
         }
 
         // Vertical mouse inputs
         {
-            float yMouseInput = inputManager.getMouseVertical();
+            float yMouseInput = playerInputManager.getMouseVertical();
             m_CameraVerticalAngle -= yMouseInput * verticalRotationSpeed;
 
             m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
@@ -520,16 +515,8 @@ public class PlayerController : MonoBehaviour
     {
         if (isTethered)
         {
-            // Simulate continuous grapple
+            // TODO: Simulate continuous grapple if tethered and close
             energyDepleter.Use(grappleCostCont, 0);
-        }
-
-        if (isAction)
-        {
-            // Simulate continuous action
-            if (!energyDepleter.Use(actionCostCont, 0)) {
-                EndAction();
-            }
         }
     }
 
@@ -632,9 +619,7 @@ public class PlayerController : MonoBehaviour
         timeGrappleOverlapGeometry = 0f;
     }
 
-    void BeginAction()
-    {
-        energyDepleter.Use(actionCost, 0.0f);
+    void BeginAction() {
         isAction = true;
         EventManager.TriggerEvent("PlayerActionButton", new Dictionary<string, object> { { "amount", true } });
     }

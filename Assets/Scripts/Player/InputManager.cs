@@ -29,8 +29,18 @@ public class InputManager
         return Input.GetAxisRaw(GameConstants.k_AxisNameVertical);
     }
 
-    public bool GetJumping() {
+    public bool GetJumpButtonDown() {
         return Input.GetButtonDown(GameConstants.k_ButtonNameJump);
+    }
+
+    public bool GetActionButtonDown()
+    {
+        return Input.GetButtonDown(GameConstants.k_ButtonNameAction);
+    }
+
+    public bool GetActionButtonUp()
+    {
+        return Input.GetButtonUp(GameConstants.k_ButtonNameAction);
     }
 
     public Vector3 GetMoveInput()

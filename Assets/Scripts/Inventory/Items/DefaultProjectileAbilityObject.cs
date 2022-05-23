@@ -34,6 +34,12 @@ public class DefaultProjectileAbilityObject : BaseAbilityItemObject
         projectileSpawner.timerCooldown = timerCooldown;
         projectileSpawner.spawnTransform = _transform;
 
-        projectileSpawner.StartSpawning();// (enable ? true : false);
+        if (_enable)
+        {
+            projectileSpawner.StartFiring();
+        }
+        else {
+            projectileSpawner.StopFiring();
+        }
     }
 }

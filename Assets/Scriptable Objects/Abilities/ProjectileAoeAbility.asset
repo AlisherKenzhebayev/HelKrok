@@ -17,6 +17,8 @@ MonoBehaviour:
   priority: 201
   description: A concentrated surge of energy, seemeingly originating for the cuffs...
   tagName: projectile
+  energyCost: 30
+  continuousEnergyCost: 0.5
   prefabToShoot: {fileID: 5592506708158886972, guid: cc5370d3cd793384bb19fa08a4efdf31, type: 3}
   timerToSpawn: 0.1
   numberToSpawn: 1

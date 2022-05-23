@@ -109,9 +109,9 @@ public abstract class EnergyDepleter : MonoBehaviour, IEnergyDepleter
         currentEnergy = Mathf.Clamp(currentEnergy * (1 - percentagePrice), 0, maxEnergy);
         currentTimeRebound = timeRebound;
 
+        // Can't return false here, as otherwise the check before this is meaningless
         if (currentEnergy < minEnergy) {
             currentEnergy = minEnergy;
-            return false;
         }
 
         return true;

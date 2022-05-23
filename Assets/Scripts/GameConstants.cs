@@ -9,6 +9,8 @@ public class GameConstants
     public const string k_AxisNameJoystickLookHorizontal = "Look X";
     public const string k_ButtonNameJump = "Jump";
     public const string k_ButtonNameFire = "Fire";
+    public const string k_ButtonNameGrapple = "Fire1";
+    public const string k_ButtonNameAction = "Fire2";
     public const string k_ButtonNameGamepadFire = "Gamepad Fire";
     public const string k_ButtonNameSprint = "Sprint";
     public const string k_ButtonNameCrouch = "Crouch";

@@ -18,6 +18,8 @@ MonoBehaviour:
   description: Chain links that are on your cuffs. You throw them and use them as
     weapons
   tagName: projectile
+  energyCost: 7
+  continuousEnergyCost: 0.25
   prefabToShoot: {fileID: 5592506708158886972, guid: cc5370d3cd793384bb19fa08a4efdf31, type: 3}
   timerToSpawn: 0.1
   numberToSpawn: 3

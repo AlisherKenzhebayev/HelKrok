@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0043075d6352a46bda57737db3496f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventorySO: {fileID: 11400000, guid: 269bacb8165a0224d98da21cab82a6f4, type: 2}
+  InventorySO: {fileID: 11400000, guid: bc583acb0fc10b0479fcb472d49897ba, type: 2}
   Container: []
   size: 35
 --- !u!1 &989225637
@@ -670,7 +670,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   grappleCost: 12
   grappleCostCont: 0
-  cursorHide: 0
   grappleEndPrefab: {fileID: 4782248338475177714, guid: c7fcb38430c21db46856d662bf3cbc24, type: 3}
 --- !u!120 &382459780
 LineRenderer:

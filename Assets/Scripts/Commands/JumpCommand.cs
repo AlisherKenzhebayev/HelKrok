@@ -14,7 +14,7 @@ public class JumpCommand : BaseCommand
         this.worldspaceMoveInput = worldspaceMoveInput;
     }
 
-    public override void execute()
+    public override void Execute()
     {
         rbReference.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }

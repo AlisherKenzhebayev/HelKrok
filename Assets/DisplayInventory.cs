@@ -37,11 +37,14 @@ public class DisplayInventory : MonoBehaviour
         {
             Debug.LogError("Error - no playerInventory child component exists");
         }
-
-        CreateSlots();
     }
+
     void Update()
     {
+        if (itemDisplay.Count == 0 || itemDisplay == null) {
+            CreateSlots();
+        }
+
         UpdateDisplay();
     }
 

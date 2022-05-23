@@ -198,7 +198,7 @@ public class PlayerController : MonoBehaviour
         // Fire up the commands 
         foreach (ICommand command in physicsCommands)
         {
-            command.execute();
+            command.Execute();
         }
     }
     void OnDrawGizmos()
@@ -256,7 +256,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Grapple
-        if (Input.GetKeyDown(KeyCode.Mouse0) 
+        if (InputManager.GetGrappleButtonDown() 
             && energyDepleter.HasEnough(grappleCost))
         {
             if (!isTethered)
@@ -265,7 +265,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        if (InputManager.GetGrappleButtonUp())
         {
             if (isTethered)
             {

@@ -87,4 +87,14 @@ public class InputManager : MonoBehaviour
     {
         return Input.GetKeyDown(KeyCode.I);
     }
+
+    internal static bool GetGrappleButtonDown()
+    {
+        return Input.GetButtonDown(GameConstants.k_ButtonNameGrapple);
+    }
+
+    internal static bool GetGrappleButtonUp()
+    {
+        return Input.GetButtonUp(GameConstants.k_ButtonNameGrapple);
+    }
 }

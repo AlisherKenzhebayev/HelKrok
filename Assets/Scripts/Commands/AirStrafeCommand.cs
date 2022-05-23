@@ -19,7 +19,7 @@ public class AirStrafeCommand : BaseCommand
     /// <summary>
     /// Air strafing defined
     /// </summary>
-    public override void execute()
+    public override void Execute()
     {
         Vector3 velocityNoUp = rbReference.velocity;
         velocityNoUp.y = 0;

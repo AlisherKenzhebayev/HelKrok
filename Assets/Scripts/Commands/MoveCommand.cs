@@ -15,7 +15,7 @@ public class MoveCommand : BaseCommand
         this.worldspaceMoveInput = worldspaceMoveInput;
     }
 
-    public override void execute()
+    public override void Execute()
     {
         float dot = Vector3.Dot(rbReference.transform.forward, worldspaceMoveInput);
         float speedMod = 0f;

@@ -13,7 +13,7 @@ public class TimedJumpCommand : BaseCommand
         this.worldspaceMoveInput = worldspaceMoveInput;
     }
 
-    public override void execute()
+    public override void Execute()
     {
         rbReference.AddForce(rbReference.transform.up * jumpForce, ForceMode.Impulse);
     }

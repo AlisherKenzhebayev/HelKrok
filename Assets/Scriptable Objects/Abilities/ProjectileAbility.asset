@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabUI: {fileID: 8923601795117184846, guid: dc0363fc3f70f4c44b15555d4c0c2d71, type: 3}
   type: 3
-  priority: 200
+  priority: 300
   description: Chain links that are on your cuffs. You throw them and use them as
     weapons
   tagName: projectile

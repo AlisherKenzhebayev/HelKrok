@@ -47,6 +47,8 @@ public class DisplayInventory : MonoBehaviour
 
     private void CreateSlots()
     {
+        Debug.Log("DiplayInventory - CreateSlots");
+
         itemDisplay = new Dictionary<GameObject, InventorySlot>();
         for (int i = 0; i < playerInventory.Container.Count; i++)
         {

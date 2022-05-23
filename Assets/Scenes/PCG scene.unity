@@ -189,7 +189,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 66049940, guid: 5506e71babd327a4487cebf021810fc1, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 865879249042825546, guid: 5506e71babd327a4487cebf021810fc1, type: 3}
       propertyPath: m_RootOrder
@@ -695,10 +695,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
-      propertyPath: cursorHide
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f884e540adfa9214783b6affda616432, type: 3}
 --- !u!1 &1501285056 stripped
@@ -940,6 +936,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3948524115235503574, guid: 976e8131f47ecc24f8eca616ddc3cc03, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059141190179060137, guid: 976e8131f47ecc24f8eca616ddc3cc03, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

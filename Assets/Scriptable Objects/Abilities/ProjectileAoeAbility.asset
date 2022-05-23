@@ -19,7 +19,7 @@ MonoBehaviour:
   tagName: projectile
   energyCost: 30
   continuousEnergyCost: 0.5
-  prefabToShoot: {fileID: 5592506708158886972, guid: cc5370d3cd793384bb19fa08a4efdf31, type: 3}
+  prefabToShoot: {fileID: 5592506708158886972, guid: f534275b07092af4d872cca706e20fa0, type: 3}
   timerToSpawn: 0.1
   numberToSpawn: 1
   loop: 1

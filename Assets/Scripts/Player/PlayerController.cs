@@ -20,17 +20,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float distanceSpawnLinks = 0.5f;
 
-    [Header("Debug Materials")]
-    [SerializeField]
-    private Material debugGoodStateMaterial = null;
-    [SerializeField]
-    private Material debugQuoStateMaterial = null;
-    [SerializeField]
-    private Material debugBadStateMaterial = null;
-
-    [SerializeField]
-    private GameObject debugObject = null;
-
     [Header("Camera Rotation/Sensitivity")]
     [Tooltip("Rotation speed X for moving the camera")]
     [SerializeField] 
@@ -97,6 +86,9 @@ public class PlayerController : MonoBehaviour
     [Header ("Debug")]
     [SerializeField]
     private bool cursorHide = true;
+    [SerializeField]
+    private GameObject grappleEndPrefab = null;
+
 
     //**********
     //  PUBLIC
@@ -137,9 +129,12 @@ public class PlayerController : MonoBehaviour
 
     private DamageTaker health;
     private EnergyDepleter energyDepleter;
+    private TriggerGrappleClosenessCheck triggerClosenessCheck;
     private int grappleLayerMask;
 
     private GravityCustom gravityCustom;
+
+    private GameObject grappleEndpoint;
     
     // Start is called before the first frame update
     void Start()
@@ -172,6 +167,12 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("Error - no EnergyDepleter child component");
         }
+
+        triggerClosenessCheck = this.GetComponentInChildren<TriggerGrappleClosenessCheck>();
+        if (triggerClosenessCheck == null)
+        {
+            Debug.LogError("Error - no TriggerGrappleClosenessCheck child component");
+        }
     }
 
     // Update is called once per frame
@@ -190,9 +191,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ApplyPhysicsDrag();
-
         physicsCommands.Clear();
+        
+        ApplyPhysicsDrag();
 
         UpdateGrapplePosition();
         UpdateContinuedEnergy();
@@ -308,11 +309,20 @@ public class PlayerController : MonoBehaviour
     private void ApplyMovePhysics() {
         if (this.isTethered)
         {
-            ApplyGrapplePhysics();
+            if (!triggerClosenessCheck.HasGameObject(grappleEndpoint))
+            {
+                // Is grappled to something valid
+                ApplyGrapplePhysics();
+
+                // TODO: handle grapple movement
+            }
+            else {
+                ApplyGrapplePhysics(0.1f);
+            }
         }
         else
         {
-            // Not attached to a tether
+            // Not attached to anything
             if (isGrounded())
             {
                 // Handle Movement on ground
@@ -354,7 +364,7 @@ public class PlayerController : MonoBehaviour
         return;
     }
 
-    private void ApplyGrapplePhysics()
+    private void ApplyGrapplePhysics(float _movementMul = 1.0f)
     {
         Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - transform.position);
         float currentDistanceToGrapple = Vector3.Distance(tetherPoint, transform.position);
@@ -508,6 +518,8 @@ public class PlayerController : MonoBehaviour
         if (isTethered)
         {
             tetherPoint = tetherObject.transform.position + tetherOffset;
+            
+            grappleEndpoint.transform.position = tetherPoint;
         }
     }
 
@@ -605,6 +617,9 @@ public class PlayerController : MonoBehaviour
             tetherOffset = hit.point - tetherObject.transform.position;
             tetherPoint = tetherObject.transform.position + tetherOffset;
             tetherLength = Vector3.Distance(tetherPoint, playerCamera.position);
+
+            grappleEndpoint = Instantiate(grappleEndPrefab, tetherPoint, Quaternion.identity);
+            grappleEndpoint.transform.SetParent(null);
         }
     }
 
@@ -617,6 +632,9 @@ public class PlayerController : MonoBehaviour
 
         timeGrappledSince = 0f;
         timeGrappleOverlapGeometry = 0f;
+
+        Destroy(grappleEndpoint);
+        grappleEndpoint = null;
     }
 
     void BeginAction() {

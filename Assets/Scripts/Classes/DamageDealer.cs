@@ -14,6 +14,11 @@ public class DamageDealer : MonoBehaviour
         DoDealDamage(other);
     }
 
+    internal virtual void OnCollisionEnter(Collision collision)
+    {
+        AudioManager.Play(soundToPlay);
+    }
+
     internal virtual void DoDealDamage(Collider other)
     {
         AudioManager.Play(soundToPlay);

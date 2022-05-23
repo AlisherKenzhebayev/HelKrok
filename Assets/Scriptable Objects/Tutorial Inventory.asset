@@ -10,17 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9faf625de4dfbc84b801e85679190f5d, type: 3}
-  m_Name: Test Inventory
+  m_Name: Tutorial Inventory
   m_EditorClassIdentifier: 
   Container:
   - item: {fileID: 11400000, guid: aee0b47194d493642b9329d43c5b7cc3, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: 8952410b53918d4448d702b428edfd3b, type: 2}
-    amount: 1
   - item: {fileID: 11400000, guid: 403c0db742d77834b80efec721860ddf, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: 3b29b181b535f884b967600abdf676d5, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: 2d8b600092013ef43a3d75e970be89e2, type: 2}
-    amount: 999
   LoadingType: 2

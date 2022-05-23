@@ -7,7 +7,6 @@ public class DefaultProjectileAbilityObject : BaseAbilityItemObject
     public float timerToSpawn = 2f;
     public float numberToSpawn = 2f;
     public bool loop = false;
-    public float timerCooldown = 2f;
 
     private ProjectileSpawner projectileSpawner = null;
 
@@ -17,7 +16,7 @@ public class DefaultProjectileAbilityObject : BaseAbilityItemObject
         tagName = "projectile";
     }
 
-    public override void Execute(GameObject _gameObject, bool _enable, Transform _transform) 
+    public override bool Execute(GameObject _gameObject, bool _enable, Transform _transform) 
     {
         if (projectileSpawner == null)
         {
@@ -41,5 +40,7 @@ public class DefaultProjectileAbilityObject : BaseAbilityItemObject
         else {
             projectileSpawner.StopFiring();
         }
+
+        return true;
     }
 }

@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Energy Material
-  m_Shader: {fileID: -6465566751694194690, guid: 3f121119a92cf1b478e763a3abdb60dd, type: 3}
-  m_ShaderKeywords: _EMISSION
-  m_LightmapFlags: 2
+  m_Name: Link Projectile Material
+  m_Shader: {fileID: -6465566751694194690, guid: 9572bfb8f11ccc04bb5fd3f94281d521, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -32,9 +32,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Energy_: 0.2454001
-    - Vector1_5b398d80840c4219af96322b5289299f: -0.1
+    - Dissolve_: 0.1
+    - Distance_: 0.5
+    - NoiseScale_: 20
     m_Colors:
-    - Color_: {r: 0.2162256, g: 0.0090094, b: 0, a: 0}
-    - EColor_: {r: 0, g: 8, b: 6.7798386, a: 1}
+    - ColorAccent_: {r: 11.984314, g: 1.7568628, b: 0.8784314, a: 1}
+    - Color_: {r: 0.56765074, g: 0.28233936, b: 0, a: 1}
+    - DistanceColor_: {r: 164.64314, g: 84.329414, b: 148.5804, a: 0.7254902}
+    - NoiseSpeed_: {r: 0, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []

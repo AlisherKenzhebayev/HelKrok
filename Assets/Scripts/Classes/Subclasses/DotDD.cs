@@ -8,6 +8,11 @@ public class DotDD : DamageDealer
     internal float damageIntervals = 0.5f;
     internal float currentDamageIntervalTime;
 
+    internal override void OnCollisionEnter(Collision collision)
+    {
+        // DO NOTHING
+    }
+
     internal override void OnTriggerEnter(Collider other)
     {
         if (currentDamageIntervalTime > 0) {

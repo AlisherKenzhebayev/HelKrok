@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ public class PlayerAction : MonoBehaviour
     private Inventory playerInventory;
     private EnergyDepleter playerEnergyDepleter;
 
+    private float timerCooldown = float.PositiveInfinity;
+    private float currentCooldown;
     private bool isFiring = false;
 
     void Start()
@@ -38,20 +41,59 @@ public class PlayerAction : MonoBehaviour
     private void Update()
     {
         currentAction = (BaseAbilityItemObject)playerInventory.CurrentAbility().item;
+        timerCooldown = currentAction.timerCooldown;
     }
 
     private void FixedUpdate()
     {
         if (isFiring)
         {
-            // Simulate continuous action
-            if (!playerEnergyDepleter.Use(currentAction.GetContEnergyCost(), 0.0f))
+            if (currentCooldown <= 0)
             {
-                // Stop executing if the energy is insufficient
-                isFiring = false;
-                currentAction.Execute(this.gameObject, isFiring, spawnTransform);
+                FireAnother();
+            }
+            else
+            {
+                FireContinuous();
             }
         }
+
+        UpdateTimers();
+    }
+
+    private void FireAnother()
+    {
+        // Fire another one
+        if (!playerEnergyDepleter.Use(currentAction.GetEnergyCost(), 0.0f))
+        {
+            isFiring = false;
+            currentAction.Execute(this.gameObject, isFiring, spawnTransform);
+        }
+
+        currentCooldown = timerCooldown;
+    }
+
+    private void FireContinuous()
+    {
+        // Simulate continuous action
+        if (!playerEnergyDepleter.Use(currentAction.GetContEnergyCost(), 0.0f))
+        {
+            // Stop executing if the energy is insufficient
+            isFiring = false;
+            currentAction.Execute(this.gameObject, isFiring, spawnTransform);
+        }
+
+        if (!playerEnergyDepleter.HasEnough(currentAction.GetEnergyCost()))
+        {
+            // Stop executing if the energy is insufficient
+            isFiring = false;
+            currentAction.Execute(this.gameObject, isFiring, spawnTransform);
+        }
+    }
+
+    private void UpdateTimers()
+    {
+        currentCooldown = Mathf.Max(currentCooldown - Time.fixedDeltaTime, 0);
     }
 
     public void SwitchNextAction() {
@@ -79,8 +121,10 @@ public class PlayerAction : MonoBehaviour
 
         isFiring = (bool)obj["amount"];
 
-        if (!isFiring)
+        if (!isFiring || currentCooldown > 0)
         {
+            // Stop firing
+            isFiring = false;
             currentAction.Execute(this.gameObject, isFiring, spawnTransform);
             return;
         }
@@ -96,6 +140,7 @@ public class PlayerAction : MonoBehaviour
             }
 
             currentAction.Execute(this.gameObject, isFiring, spawnTransform);
+            currentCooldown = timerCooldown;
             return;
         }
     }

@@ -56,7 +56,8 @@ GameObject:
   m_Component:
   - component: {fileID: 989225638}
   - component: {fileID: 989225639}
-  m_Layer: 0
+  - component: {fileID: 292787988}
+  m_Layer: 6
   m_Name: TriggerForceCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,6 +92,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &292787988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989225637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff17ed58b8cde8142a9681584f49b3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1687492047
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,10 +586,6 @@ MonoBehaviour:
   grappleSpawn: {fileID: 9208518965371551863}
   chainLinkPrefab: {fileID: 4782248338475177714, guid: 7a89d6884085c4f41933c8673f6ba09d, type: 3}
   distanceSpawnLinks: 0.2
-  debugGoodStateMaterial: {fileID: 2100000, guid: dd594aa7b65105b4f830bddd556f66fa, type: 2}
-  debugQuoStateMaterial: {fileID: 2100000, guid: 4f47b69c96e3e06438c10c907f7d4f98, type: 2}
-  debugBadStateMaterial: {fileID: 2100000, guid: 797bf488c630d4c4da4076a24ec6a432, type: 2}
-  debugObject: {fileID: 3554602337878421718}
   horizontalRotationSpeed: 2.2
   verticalRotationSpeed: 2.2
   groundSpeed: 15
@@ -661,9 +670,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   grappleCost: 12
   grappleCostCont: 0
-  actionCost: 4
-  actionCostCont: 0.5
-  cursorHide: 1
+  cursorHide: 0
+  grappleEndPrefab: {fileID: 4782248338475177714, guid: c7fcb38430c21db46856d662bf3cbc24, type: 3}
 --- !u!120 &382459780
 LineRenderer:
   m_ObjectHideFlags: 0

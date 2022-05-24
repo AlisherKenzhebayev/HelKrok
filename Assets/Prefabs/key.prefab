@@ -122,6 +122,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: obs_stal_down
       objectReference: {fileID: 0}
+    - target: {fileID: 2526627185153950353, guid: 173e22cff7c1bf34cb57e005bad46ad4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2908114407483643947, guid: 173e22cff7c1bf34cb57e005bad46ad4, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 187613820988520381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.79, y: 2.5, z: 9.93}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 675778455313247481}
   - {fileID: 1227313291478742751}
@@ -52,8 +52,8 @@ MonoBehaviour:
   patrolPoints: []
   enemyState: 0
   enemyMesh: {fileID: 675778455313247481}
-  alertDistance: 100
-  followDistance: 40
+  alertDistance: 140
+  followDistance: 50
   hp: 100
   rb: {fileID: 4342944630951742806}
   projectileSpawner: {fileID: 4231340787765165310}

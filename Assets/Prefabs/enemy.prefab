@@ -46,14 +46,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.2
-  followSpeedMultiplayer: 0.4
+  followSpeedMultiplayer: 0.75
   rotSpeed: 7
   patrolPointsParent: {fileID: 2360663755004385227}
   patrolPoints: []
   enemyState: 0
   enemyMesh: {fileID: 675778455313247481}
-  alertDistance: 140
-  followDistance: 50
+  alertDistance: 150
+  followDistance: 100
   hp: 100
   rb: {fileID: 4342944630951742806}
   projectileSpawner: {fileID: 4231340787765165310}

@@ -86,7 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 15
   soundToPlay: Hit2
-  impulseForce: 200
+  impulseForce: 260
   placement: {fileID: 0}
   timeExist: 2
 --- !u!1 &7276947523093515171

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Link Projectile Material AOE
+  m_Name: Energy Ball AOE
   m_Shader: {fileID: -6465566751694194690, guid: 9572bfb8f11ccc04bb5fd3f94281d521, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -32,12 +32,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Dissolve_: 0.1
-    - Distance_: 0.5
-    - NoiseScale_: 20
+    - Dissolve_: 0.39
+    - Distance_: 0.3
+    - NoiseScale_: 41.2
     m_Colors:
-    - ColorAccent_: {r: 2.9960785, g: 0.4392157, b: 0.21960784, a: 1}
-    - Color_: {r: 0.56765074, g: 0.28233936, b: 0, a: 1}
-    - DistanceColor_: {r: 1.216786, g: 0.6243195, b: 1.102115, a: 0.7254902}
+    - ColorAccent_: {r: 0, g: 0.7490196, b: 0.45490196, a: 1}
+    - Color_: {r: 31.234709, g: 0, b: 33.89676, a: 1}
+    - DistanceColor_: {r: 0.2839495, g: 1, b: 0, a: 1}
     - NoiseSpeed_: {r: 0, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []

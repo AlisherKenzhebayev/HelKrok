@@ -8,9 +8,9 @@ public class DotDD : DamageDealer
     internal float damageIntervals = 0.5f;
     internal float currentDamageIntervalTime;
 
-    internal override void OnCollisionEnter(Collision collision)
+    internal override bool OnCollisionEnter(Collision collision)
     {
-        // DO NOTHING
+        return base.OnCollisionEnter(collision);
     }
 
     internal override void OnTriggerEnter(Collider other)

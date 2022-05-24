@@ -22,6 +22,8 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField]
     public float timerCooldown = 2f;
 
+    public GameObject originHitbox;
+
     private float currentCooldown;
     private bool isSpawning = false;
 
@@ -68,6 +70,9 @@ public class ProjectileSpawner : MonoBehaviour
 
             GameObject obj = Instantiate(projectileToSpawn, transformToSpawn, false);
             obj.transform.SetParent(null);
+            
+            var dd = obj.gameObject.GetComponentInChildren<DamageDealer>();
+            dd.originHitbox = originHitbox;
 
             yield return new WaitForSeconds(timerToSpawn);
         }

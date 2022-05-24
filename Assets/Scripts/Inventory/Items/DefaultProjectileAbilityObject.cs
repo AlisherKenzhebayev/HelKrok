@@ -32,6 +32,9 @@ public class DefaultProjectileAbilityObject : BaseAbilityItemObject
         projectileSpawner.loop = loop;
         projectileSpawner.timerCooldown = timerCooldown;
         projectileSpawner.spawnTransform = _transform;
+        
+        // TODO: horrible mess
+        projectileSpawner.originHitbox = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<DamageTaker>().gameObject;
 
         if (_enable)
         {

@@ -13,6 +13,8 @@ public class BulletDD : DamageDealer
 
     [SerializeField]
     private float timeExist = 5f;
+    [SerializeField]
+    private float timeStartActive = 0.1f;
     private float timeStart;
 
     public BulletDD()
@@ -42,11 +44,17 @@ public class BulletDD : DamageDealer
         {
             Destroy(this.gameObject);
         }
+
+        if (Time.time - timeStart > timeStartActive)
+        {
+            this.gameObject.GetComponent<Collider>().enabled = true;
+        }
     }
 
     void Start() {
 
         this.gameObject.SetActive(true);
+        this.gameObject.GetComponent<Collider>().enabled = false;
 
         this.rb = this.GetComponent<Rigidbody>();
         if (this.rb == null)
@@ -70,18 +78,28 @@ public class BulletDD : DamageDealer
         rb.AddForce(rb.transform.forward * impulseForce, ForceMode.Impulse);
     }
 
-    internal override void OnCollisionEnter(Collision collision)
+    internal override bool OnCollisionEnter(Collision collision)
     {
-        base.OnCollisionEnter(collision);
+        bool retVal = base.OnCollisionEnter(collision);
 
-        Destroy(this.gameObject);
+        if (retVal)
+        {
+            Destroy(this.gameObject);
+        }
+
+        return retVal;
     }
 
-    internal override void DoDealDamage(Collider other)
+    internal override bool DoDealDamage(Collider other)
     {
-        base.DoDealDamage(other);
+        bool retVal = base.DoDealDamage(other);
 
-        AudioManager.Play("MagicHit");
-        Destroy(this.gameObject);
+        if (retVal)
+        {
+            AudioManager.Play("MagicHit");
+            Destroy(this.gameObject);
+        }
+
+        return retVal;
     }
 }

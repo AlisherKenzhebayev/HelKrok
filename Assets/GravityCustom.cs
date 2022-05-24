@@ -36,5 +36,7 @@ public class GravityCustom : MonoBehaviour
     {
         float curveMod = gravityCurve.Evaluate(frac);
         rbReference.AddForce(-Vector3.up * rbReference.mass * gravityAcceleration * curveMod);
+
+        Debug.Log("GravityCustom - " + curveMod);
     }
 }

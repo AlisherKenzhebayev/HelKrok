@@ -88,6 +88,16 @@ public class InputManager : MonoBehaviour
         return Input.GetKeyDown(KeyCode.I);
     }
 
+    internal static bool GetInventoryKeyNext()
+    {
+        return Input.GetKeyDown(KeyCode.E);
+    }
+
+    internal static bool GetInventoryKeyPrev()
+    {
+        return Input.GetKeyDown(KeyCode.Q);
+    }
+
     internal static bool GetGrappleButtonDown()
     {
         return Input.GetButtonDown(GameConstants.k_ButtonNameGrapple);

@@ -235,6 +235,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player UI
       objectReference: {fileID: 0}
+    - target: {fileID: 2683542656284949913, guid: 5506e71babd327a4487cebf021810fc1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683542656284949913, guid: 5506e71babd327a4487cebf021810fc1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3953527440400030059, guid: 5506e71babd327a4487cebf021810fc1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3953527440400030059, guid: 5506e71babd327a4487cebf021810fc1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5506e71babd327a4487cebf021810fc1, type: 3}
 --- !u!1001 &339219899
@@ -597,6 +613,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: gravityAcceleration
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 9208518964508941597, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: m_Name
       value: PlayerPrefab

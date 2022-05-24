@@ -85,12 +85,31 @@ public class GameplayManager : MonoBehaviour
             SceneLoaderManager.LoadBuildIndexed(0);
         }
 
+        UpdateInventoryCanvas();
+
         UpdateInventory();
 
         CursorLogic();
     }
 
     private void UpdateInventory()
+    {
+        if (playerInventory == null) {
+            return;
+        }
+
+        if (InputManager.GetInventoryKeyNext())
+        {
+            playerInventory.ChangeNextAbility();
+        }
+
+        if (InputManager.GetInventoryKeyPrev())
+        {
+            playerInventory.ChangePrevAbility();
+        }
+    }
+
+    private void UpdateInventoryCanvas()
     {
         if (inventoryCanvas == null) {
             Debug.LogWarning("There's no inventory canvas present in the scene");

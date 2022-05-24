@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
     public List<InventorySlot> Container;
     public int size = 24;
 
-    private InventorySlot currentAbility = null;
+    private int currentAbilityIndex = -1;
 
     public InventorySlot FindItemByName(string name) {
         var col = Container.FindAll(o => o.item != null);
@@ -121,19 +121,20 @@ public class Inventory : MonoBehaviour
         return retVal;
     }
 
-    public InventorySlot CurrentAbility() {
-        if (currentAbility == null) {
-            currentAbility = GetAbilities()[0];
+    public InventorySlot CurrentAbility(int offset = 0) {
+        if (currentAbilityIndex < 0) {
+            currentAbilityIndex = 0;
         }
-        
-        return currentAbility;
+
+        var abilities = GetAbilities();
+
+        return abilities[(currentAbilityIndex + offset + abilities.Count) % abilities.Count];
     }
 
     public void ChangeNextAbility() {
         var abilities = GetAbilities();
-        var indexCur = abilities.IndexOf(currentAbility);
 
-        currentAbility = abilities[(indexCur + 1) % abilities.Count];
+        currentAbilityIndex = (currentAbilityIndex + 1) % abilities.Count;
     }
 
     public bool ChangeToAbility(InventorySlot _inventorySlot)
@@ -142,16 +143,15 @@ public class Inventory : MonoBehaviour
             return false;
         }
 
-        currentAbility = _inventorySlot;
+        currentAbilityIndex = GetAbilities().IndexOf(_inventorySlot);
         return true;
     }
 
     public void ChangePrevAbility()
     {
         var abilities = GetAbilities();
-        var indexCur = abilities.IndexOf(currentAbility);
-
-        currentAbility = abilities[(indexCur - 1) % abilities.Count];
+        
+        currentAbilityIndex = (currentAbilityIndex + abilities.Count - 1) % abilities.Count;
     }
 
     private InventorySlot SetEmptySlot(BaseItemObject _item, int _amount)

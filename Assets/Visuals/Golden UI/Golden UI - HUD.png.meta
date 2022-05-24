@@ -7,10 +7,10 @@ TextureImporter:
     second: Golden UI - HUD_0
   - first:
       213: -1366326258503975473
-    second: Golden UI - HUD_1
+    second: Golden UI - Dial_separate
   - first:
       213: 8572345597319746367
-    second: Golden UI - HUD_2
+    second: Golden UI - Dial_mask
   - first:
       213: -5647867035365262344
     second: Golden UI - HUD_3
@@ -293,6 +293,48 @@ TextureImporter:
       bones: []
       spriteID: a47877d44cb7c2eb0800000000000000
       internalID: -4743280224484489398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golden UI - Dial_separate
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 63
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcdf49ac185d90de0800000000000000
+      internalID: -1366326258503975473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Golden UI - Dial_mask
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 63
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f33902c07e617f670800000000000000
+      internalID: 8572345597319746367
       vertices: []
       indices: 
       edges: []

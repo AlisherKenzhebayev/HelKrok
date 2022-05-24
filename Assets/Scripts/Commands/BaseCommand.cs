@@ -10,5 +10,5 @@ public abstract class BaseCommand : ICommand
         rbReference = rb;
     }
 
-    public abstract void execute();
+    public abstract void Execute();
 }

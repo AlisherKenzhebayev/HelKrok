@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b73226d415f18f3479b0fe7d08e50257, type: 3}
+  m_Name: Key
+  m_EditorClassIdentifier: 
+  prefabUI: {fileID: 3122161896154075952, guid: 88659cd9deae0e3448a85c9f623f75f0, type: 3}
+  type: 2
+  priority: 99
+  description: A key for the door in the dungeon. Purposed to open a door, duh...
+  tagName: key

@@ -55,7 +55,7 @@ public class EnemyBehaviour : MonoBehaviour
             patrolPoints.Add(point.gameObject);
         }
         currentTargetTransform = patrolPoints[0].transform;
-        StartCoroutine(EnemyBehaviourCor());
+        patrol = StartCoroutine(EnemyBehaviourCor());
     }
 
     // Update is called once per frame
@@ -84,7 +84,7 @@ public class EnemyBehaviour : MonoBehaviour
             
             if (enemyState == EnemyStates.patrol)
             {
-                projectileSpawner.SwitchSpawning(false);
+                projectileSpawner.StopFiring();
                 if (!isPatrolRunning)
                 {
                     patrol = StartCoroutine(Patrol());
@@ -98,9 +98,9 @@ public class EnemyBehaviour : MonoBehaviour
             }
             if (enemyState == EnemyStates.attacking)
             {
-                if (!projectileSpawner.isSpawningMethod())
+                //if (!projectileSpawner.isSpawning)
                 {
-                    projectileSpawner.SwitchSpawning(true);
+                    projectileSpawner.StartFiring();
                 }
                 
                 Vector3 D = player.transform.position - enemyMesh.transform.position;
@@ -111,9 +111,9 @@ public class EnemyBehaviour : MonoBehaviour
             if (hp <=0)
             {
                 enemyState = EnemyStates.dead;
-                if (projectileSpawner.isSpawningMethod())
+                //if (projectileSpawner.isSpawning)
                 {
-                    projectileSpawner.SwitchSpawning(false);
+                    projectileSpawner.StopFiring();
                 }
                 Destroy(projectileSpawner);
                 StartCoroutine(EnemyDeath());

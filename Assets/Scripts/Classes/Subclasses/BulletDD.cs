@@ -70,6 +70,13 @@ public class BulletDD : DamageDealer
         rb.AddForce(rb.transform.forward * impulseForce, ForceMode.Impulse);
     }
 
+    internal override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+
+        Destroy(this.gameObject);
+    }
+
     internal override void DoDealDamage(Collider other)
     {
         base.DoDealDamage(other);

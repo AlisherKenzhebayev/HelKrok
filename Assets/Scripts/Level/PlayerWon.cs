@@ -24,7 +24,6 @@ public class PlayerWon : MonoBehaviour
     private void OnPlayerExit(Dictionary<string, object> obj)
     {
         winScreen.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        GameplayManager.ShowWinScreen();
     }
 }

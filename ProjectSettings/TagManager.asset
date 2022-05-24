@@ -6,7 +6,8 @@ TagManager:
   tags:
   - Spawn
   - Ground
-  - www
+  - exitDoor
+  - inventoryUI
   layers:
   - Default
   - TransparentFX
@@ -23,9 +24,9 @@ TagManager:
   - Obstacles
   - Walls
   - 
+  - Pickups
   - 
-  - 
-  - 
+  - Checkpoints
   - 
   - 
   - 

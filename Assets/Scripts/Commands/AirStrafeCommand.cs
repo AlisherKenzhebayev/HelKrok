@@ -19,7 +19,7 @@ public class AirStrafeCommand : BaseCommand
     /// <summary>
     /// Air strafing defined
     /// </summary>
-    public override void execute()
+    public override void Execute()
     {
         Vector3 velocityNoUp = rbReference.velocity;
         velocityNoUp.y = 0;
@@ -31,7 +31,7 @@ public class AirStrafeCommand : BaseCommand
         float dot = Vector3.Dot(worldspaceMoveInput.normalized, rbReference.velocity.normalized);
         bool isAway = Vector3.Dot(worldspaceMoveInput, projVel) <= 0f;
 
-        //Debug.Log(projVel.magnitude + " " + isAway);
+        Debug.Log("Air strafe values " + projVel.magnitude + " " + isAway);
 
         // only apply force if moving away from velocity or velocity is below MaxAirSpeed
         if (projVel.magnitude < maxAirSpeed || isAway)

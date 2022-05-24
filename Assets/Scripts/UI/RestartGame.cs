@@ -4,6 +4,6 @@ public class RestartGame : MonoBehaviour
 {
     public void RestartLevel()
     {
-        FindObjectOfType<SceneLoaderManager>().LoadBuildIndexed(0);
+        SceneLoaderManager.LoadBuildIndexed(0);
     }
 }

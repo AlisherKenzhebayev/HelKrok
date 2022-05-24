@@ -66,6 +66,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     public LayerMask grappleLayers;
 
+
+    [Header("Movement while grappled")]
+    [Tooltip("Grapple move force")]
+    [SerializeField]
+    private float grappleMoveForce = 100f;
+    [Tooltip("Grapple move force curve")]
+    [SerializeField]
+    private AnimationCurve grappleMoveForceEffectCurve = null;
+
+
     [Header("Air Movement")]
     [Tooltip("Air strafe force")]
     [SerializeField]
@@ -73,7 +83,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Max air speed")]
     [SerializeField] 
     private float maxAirSpeed = 5f;
-    [Tooltip("Air force curve (dependency of time)")]
+    [Tooltip("Air force curve (maxSpeed)")]
     [SerializeField] 
     private AnimationCurve airForceEffectCurve = null;
 
@@ -123,6 +133,7 @@ public class PlayerController : MonoBehaviour
     private float m_CameraVerticalAngle = 0f;
 
     private Vector3 worldspaceMoveInput;
+    private Vector3 localMoveInput;
 
     private DamageTaker health;
     private EnergyDepleter energyDepleter;
@@ -224,8 +235,9 @@ public class PlayerController : MonoBehaviour
     private void HandleInput()
     {
         // Handle keyboard movement
-        worldspaceMoveInput = transform.TransformVector(InputManager.GetMoveInput());
-
+        localMoveInput = InputManager.GetMoveInput();
+        worldspaceMoveInput = transform.TransformVector(localMoveInput);
+        
         // Handle jump keys
         if (InputManager.GetJumpButtonDown())
         {
@@ -306,6 +318,10 @@ public class PlayerController : MonoBehaviour
                 ApplyGrapplePhysics();
 
                 // TODO: handle grapple movement
+                physicsCommands.Add(new GrappleMoveCommand(rb, transform.TransformVector(GrappleMoveCommand.FilterYZ(localMoveInput)))
+                    .SetForceEffectCurve(grappleMoveForceEffectCurve)
+                    .SetMoveForce(grappleMoveForce)
+                    .SetLookVector(this.transform.forward));
             }
             else {
                 ApplyGrapplePhysics(0.1f);

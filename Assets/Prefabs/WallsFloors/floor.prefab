@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1993884368131793983}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -7.33}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children: []
   m_Father: {fileID: 3004637698241667270}
@@ -98,8 +98,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -0.00014710426, y: 0.00036764145, z: -0.25161952}
-    m_Extent: {x: 3.000767, y: 3.0005155, z: 0.5339146}
+    m_Center: {x: 0, y: 0, z: -0.02256912}
+    m_Extent: {x: 6.0007668, y: 6.0005155, z: 0.5339146}
   m_DirtyAABB: 0
 --- !u!111 &4907977445471032639
 Animation:
@@ -187,7 +187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6462056523119128474}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -7.33}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children: []
   m_Father: {fileID: 3004637698241667270}
@@ -219,6 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62809d3082f1c2f49982d21173d9eb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 40
   soundToPlay: LavaHit
   damageIntervals: 1

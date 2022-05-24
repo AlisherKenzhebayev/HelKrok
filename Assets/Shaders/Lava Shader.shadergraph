@@ -1516,7 +1516,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Scale",
     "m_StageCapability": 3,
-    "m_Value": 3.0,
+    "m_Value": 2.0899999141693117,
     "m_DefaultValue": 10.0,
     "m_Labels": []
 }
@@ -1761,7 +1761,7 @@
     "m_ShaderOutputName": "Tiling",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 1.0,
+        "x": 2.7100000381469728,
         "y": 1.0
     },
     "m_DefaultValue": {
@@ -1926,7 +1926,7 @@
     "m_ShaderOutputName": "Offset",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": -1.2100000381469727,
+        "x": 0.18000000715255738,
         "y": 0.0
     },
     "m_DefaultValue": {

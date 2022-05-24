@@ -108,8 +108,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad3b380d051a28443b74107ed0a9d022, type: 3}
+--- !u!1 &4432264204608195291 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ad3b380d051a28443b74107ed0a9d022, type: 3}
+  m_PrefabInstance: {fileID: 3549954840661915530}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3947757342328197217 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ad3b380d051a28443b74107ed0a9d022, type: 3}
   m_PrefabInstance: {fileID: 3549954840661915530}
   m_PrefabAsset: {fileID: 0}
+--- !u!64 &6773188827848670124
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432264204608195291}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6568738734471030825, guid: ad3b380d051a28443b74107ed0a9d022, type: 3}
+--- !u!114 &6286726037855635835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432264204608195291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62809d3082f1c2f49982d21173d9eb78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
+  soundToPlay: Hit2
+  damageIntervals: 0.5

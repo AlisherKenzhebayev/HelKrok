@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7645953355892306047}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Flower_spiky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,9 +28,55 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3947757342328197217}
+  - {fileID: 5719687030431384570}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6575569427952281393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5719687030431384570}
+  - component: {fileID: 1557553988088802468}
+  m_Layer: 13
+  m_Name: hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5719687030431384570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6575569427952281393}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: 0.000000029802322, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_Children: []
+  m_Father: {fileID: 7645953355892306047}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1557553988088802468
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6575569427952281393}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6568738734471030825, guid: ad3b380d051a28443b74107ed0a9d022, type: 3}
 --- !u!1001 &3549954840661915530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,6 +152,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: flower_spiky
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ad3b380d051a28443b74107ed0a9d022, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad3b380d051a28443b74107ed0a9d022, type: 3}
 --- !u!1 &4432264204608195291 stripped
@@ -118,7 +168,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ad3b380d051a28443b74107ed0a9d022, type: 3}
   m_PrefabInstance: {fileID: 3549954840661915530}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &6773188827848670124
+--- !u!64 &8706364351581950225
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,7 +182,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6568738734471030825, guid: ad3b380d051a28443b74107ed0a9d022, type: 3}
---- !u!114 &6286726037855635835
+--- !u!114 &2095630470830866266
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,6 +194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62809d3082f1c2f49982d21173d9eb78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 35
   soundToPlay: Hit2
-  damageIntervals: 0.5
+  damageIntervals: 1

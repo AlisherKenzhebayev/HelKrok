@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96aad0a970392e468272cf115907ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movable: 0
+  movable: 1
   startPos: {fileID: 8526584871705483023}
   endPos: {fileID: 8526584872182279219}
   timeToDestination: 3

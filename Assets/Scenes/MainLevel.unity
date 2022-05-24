@@ -18339,6 +18339,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 981366328, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: InventorySO
+      value: 
+      objectReference: {fileID: 11400000, guid: 269bacb8165a0224d98da21cab82a6f4, type: 2}
+    - target: {fileID: 1837102840, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: defaultRestoreSpeed
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 9208518964508941597, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: m_Name
       value: PlayerPrefab
@@ -18386,6 +18394,10 @@ PrefabInstance:
     - target: {fileID: 9208518964508941598, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: grappleMoveForce
+      value: 3000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f884e540adfa9214783b6affda616432, type: 3}

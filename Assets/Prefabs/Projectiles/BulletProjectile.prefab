@@ -51,7 +51,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5592506708158886972}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -86,9 +86,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 15
   soundToPlay: Hit2
-  impulseForce: 260
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  originHitbox: {fileID: 0}
+  impulseForce: 100
   placement: {fileID: 0}
   timeExist: 2
+  timeStartActive: 0.1
 --- !u!1 &7276947523093515171
 GameObject:
   m_ObjectHideFlags: 0

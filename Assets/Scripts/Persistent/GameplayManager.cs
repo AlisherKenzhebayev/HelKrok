@@ -85,20 +85,55 @@ public class GameplayManager : MonoBehaviour
             SceneLoaderManager.LoadBuildIndexed(0);
         }
 
+        UpdateInventoryCanvas();
+
+        UpdateInventory();
+
+        CursorLogic();
+    }
+
+    private void UpdateInventory()
+    {
+        if (playerInventory == null) {
+            return;
+        }
+
+        if (InputManager.GetInventoryKeyNext())
+        {
+            playerInventory.ChangeNextAbility();
+        }
+
+        if (InputManager.GetInventoryKeyPrev())
+        {
+            playerInventory.ChangePrevAbility();
+        }
+    }
+
+    private void UpdateInventoryCanvas()
+    {
+        if (inventoryCanvas == null) {
+            Debug.LogWarning("There's no inventory canvas present in the scene");
+            return;
+        }
+
         if (InputManager.GetInventoryKeyDown())
         {
             var invCanvas = inventoryCanvas.GetComponent<Canvas>();
             invCanvas.enabled ^= true;
         }
-
-        CursorLogic();
     }
 
     private void CursorLogic()
     {
-        var invCanvas = inventoryCanvas.GetComponent<Canvas>();
-        if (invCanvas.enabled || 
-            isShowingWinScreen)
+        bool checkCursorShow = isShowingWinScreen;
+
+        // Process the checks for inventory canvas
+        if (inventoryCanvas != null) {
+            var invCanvas = inventoryCanvas.GetComponent<Canvas>();
+            checkCursorShow |= invCanvas.enabled;
+        }
+
+        if (checkCursorShow)
         {
             CursorShow();
         }

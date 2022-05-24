@@ -86,9 +86,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   soundToPlay: Hit2
+  originHitbox: {fileID: 0}
   impulseForce: 70
   placement: {fileID: 0}
   timeExist: 2
+  timeStartActive: 0.1
 --- !u!1 &8876133504151296690
 GameObject:
   m_ObjectHideFlags: 0

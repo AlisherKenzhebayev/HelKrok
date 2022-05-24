@@ -8,19 +8,36 @@ public class DamageDealer : MonoBehaviour
     [SerializeField]
     internal string soundToPlay = "Hit2";
 
+    [SerializeField]
+    internal LayerMask ignoreLayers;
+
+    public GameObject originHitbox = null;
+
     internal virtual void OnTriggerEnter(Collider other)
     {
-        EventManager.TriggerEvent("takeDamage" + other.gameObject.GetInstanceID(), new Dictionary<string, object> { { "amount", damage } });
+        if (originHitbox != null && other.gameObject == originHitbox)
+        {
+            return;
+        }
+
         DoDealDamage(other);
     }
 
-    internal virtual void OnCollisionEnter(Collision collision)
+    internal virtual bool OnCollisionEnter(Collision collision)
     {
         AudioManager.Play(soundToPlay);
+        return true;
     }
 
-    internal virtual void DoDealDamage(Collider other)
+    internal virtual bool DoDealDamage(Collider other)
     {
+        if ((ignoreLayers | (1 << other.gameObject.layer)) == ignoreLayers)
+        {
+            return false;
+        }
+
+        EventManager.TriggerEvent("takeDamage" + other.gameObject.GetInstanceID(), new Dictionary<string, object> { { "amount", damage } });
         AudioManager.Play(soundToPlay);
+        return true;
     }
 }

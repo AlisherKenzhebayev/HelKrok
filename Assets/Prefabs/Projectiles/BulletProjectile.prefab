@@ -84,9 +84,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5c0cc336524824eaa6963c9eb7631b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 15
   soundToPlay: Hit2
-  impulseForce: 100
+  impulseForce: 200
   placement: {fileID: 0}
   timeExist: 2
 --- !u!1 &7276947523093515171

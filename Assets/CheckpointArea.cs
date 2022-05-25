@@ -5,6 +5,7 @@ public class CheckpointArea : MonoBehaviour
 {
     [SerializeField]
     private Transform checkpointTransform;
+
     [SerializeField]
     private Vector3 boxSize;
 
@@ -28,9 +29,13 @@ public class CheckpointArea : MonoBehaviour
     private void OnDrawGizmos()
     {    
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(this.transform.position, Vector3.Scale(boxSize, this.transform.localScale));
+        Transform t = transform;
+        //t.position = t.localPosition;
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.DrawWireCube(this.transform.localPosition, boxSize);
      
         Gizmos.color = Color.green;
+        Gizmos.matrix = Matrix4x4.identity;
         Gizmos.DrawSphere(checkpointTransform.position, 0.5f);
     }
 }

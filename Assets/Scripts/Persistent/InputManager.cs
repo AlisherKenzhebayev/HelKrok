@@ -4,6 +4,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     private static InputManager inputManager;
+    private static bool cameraLock = false;
 
     public static InputManager instance
     {
@@ -31,11 +32,18 @@ public class InputManager : MonoBehaviour
 
     public static float getMouseHorizontal()
     {
+        if (cameraLock)
+        {
+            return 0;
+        }
         return Input.GetAxis(GameConstants.k_MouseAxisNameHorizontal);
     }
 
     public static float getMouseVertical()
     {
+        if (cameraLock) {
+            return 0;
+        }
         return Input.GetAxis(GameConstants.k_MouseAxisNameVertical);
     }
 
@@ -106,5 +114,14 @@ public class InputManager : MonoBehaviour
     internal static bool GetGrappleButtonUp()
     {
         return Input.GetButtonUp(GameConstants.k_ButtonNameGrapple);
+    }
+
+    internal static void CameraLockOn() {
+        cameraLock = true;
+    }
+
+    internal static void CameraLockOff()
+    {
+        cameraLock = false;
     }
 }

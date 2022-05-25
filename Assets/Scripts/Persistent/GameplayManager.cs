@@ -121,6 +121,15 @@ public class GameplayManager : MonoBehaviour
             var invCanvas = inventoryCanvas.GetComponent<Canvas>();
             invCanvas.enabled ^= true;
         }
+
+        if (inventoryCanvas.GetComponent<Canvas>().enabled)
+        {
+            InputManager.CameraLockOn();
+        }
+        else
+        {
+            InputManager.CameraLockOff();
+        }
     }
 
     private void CursorLogic()

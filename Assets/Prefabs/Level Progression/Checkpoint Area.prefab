@@ -59,8 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointTransform: {fileID: 6309849037894570072}
-  boxSize: {x: 12, y: 12, z: 12}
-  enableDebug: 0
+  boxSize: {x: 20, y: 20, z: 1}
 --- !u!1 &6309849037894570075
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6309849037894570075}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -6, z: 0}
+  m_LocalPosition: {x: 0, y: -8.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6309849037865597323}

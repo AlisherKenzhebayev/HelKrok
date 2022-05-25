@@ -122,11 +122,14 @@ public class Inventory : MonoBehaviour
     }
 
     public InventorySlot CurrentAbility(int offset = 0) {
+        var abilities = GetAbilities();
+        if (abilities == null) {
+            return null;
+        }
+        
         if (currentAbilityIndex < 0) {
             currentAbilityIndex = 0;
         }
-
-        var abilities = GetAbilities();
 
         return abilities[(currentAbilityIndex + offset + abilities.Count) % abilities.Count];
     }

@@ -37,6 +37,9 @@ public class UIAbilityImageReplacement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        abilityImage.sprite = playerInventory.CurrentAbility().item.prefabUI.transform.GetChild(0).GetComponentInChildren<Image>().sprite;
+        var curAbility = playerInventory.CurrentAbility();
+        if (curAbility != null) { 
+            abilityImage.sprite = curAbility.item.prefabUI.transform.GetChild(0).GetComponentInChildren<Image>().sprite;
+        }
     }
 }

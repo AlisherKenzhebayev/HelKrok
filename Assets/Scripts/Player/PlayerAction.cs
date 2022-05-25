@@ -40,7 +40,12 @@ public class PlayerAction : MonoBehaviour
 
     private void Update()
     {
-        currentAction = (BaseAbilityItemObject)playerInventory.CurrentAbility().item;
+        var curAbility = playerInventory.CurrentAbility();
+        if (curAbility == null) {
+            return;
+        }
+
+        currentAction = (BaseAbilityItemObject)curAbility.item;
         timerCooldown = currentAction.timerCooldown;
     }
 

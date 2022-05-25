@@ -18751,7 +18751,55 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: gravityAcceleration
-      value: 30
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: gravityCurve.m_Curve.Array.data[1].time
+      value: 0.7969843
+      objectReference: {fileID: 0}
+    - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: gravityCurve.m_Curve.Array.data[1].value
+      value: 0.5697608
+      objectReference: {fileID: 0}
+    - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: gravityCurve.m_Curve.Array.data[0].inSlope
+      value: -0.13662988
+      objectReference: {fileID: 0}
+    - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: gravityCurve.m_Curve.Array.data[1].inSlope
+      value: -1.1308025
+      objectReference: {fileID: 0}
+    - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: gravityCurve.m_Curve.Array.data[2].inSlope
+      value: -2.8064866
+      objectReference: {fileID: 0}
+    - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: gravityCurve.m_Curve.Array.data[0].outSlope
+      value: -0.13662988
+      objectReference: {fileID: 0}
+    - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: gravityCurve.m_Curve.Array.data[1].inWeight
+      value: 0.30467054
+      objectReference: {fileID: 0}
+    - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: gravityCurve.m_Curve.Array.data[1].outSlope
+      value: -1.1308025
+      objectReference: {fileID: 0}
+    - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: gravityCurve.m_Curve.Array.data[2].outSlope
+      value: -2.8064866
+      objectReference: {fileID: 0}
+    - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: gravityCurve.m_Curve.Array.data[0].outWeight
+      value: 0.30322638
+      objectReference: {fileID: 0}
+    - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: gravityCurve.m_Curve.Array.data[1].outWeight
+      value: 0.67161816
+      objectReference: {fileID: 0}
+    - target: {fileID: 95150079, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: gravityCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 981366328, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: InventorySO
@@ -18819,7 +18867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleForce
-      value: 4000
+      value: 4500
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: airStrafeForce
@@ -18835,15 +18883,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[1].time
-      value: 0.07145575
+      value: 0.21664234
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[2].time
-      value: 0.23747566
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[3].time
@@ -18855,11 +18903,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[1].value
-      value: 0.39165318
+      value: 0.66257924
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[2].value
-      value: 0.6578623
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[3].value
@@ -18867,47 +18915,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[0].inSlope
-      value: 0
+      value: 7.3584924
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[1].inSlope
-      value: 0.99008614
+      value: 1.1545491
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[2].inSlope
-      value: 0.5429131
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[0].outSlope
-      value: 0
+      value: 7.3584924
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[1].inWeight
-      value: 0.49019346
+      value: 0.9423012
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[1].outSlope
-      value: 0.99008614
+      value: 1.1545491
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[2].inWeight
-      value: 0.23088819
-      objectReference: {fileID: 0}
-    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
-      propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[2].outSlope
-      value: 0.5429131
-      objectReference: {fileID: 0}
-    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
-      propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[0].outWeight
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[2].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[0].outWeight
+      value: 0.09616465
+      objectReference: {fileID: 0}
+    - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[1].outWeight
-      value: 0.1828689
+      value: 0.15849678
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[2].outWeight
-      value: 0.19264142
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9208518964601638752, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: grappleMoveForceEffectCurve.m_Curve.Array.data[0].tangentMode
@@ -18940,7 +18988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc94dc0b19e112c4480df1c106bec68a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  radius: 0.5
   airCurve:
     serializedVersion: 2
     m_Curve:
@@ -18954,22 +19002,13 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.06997469
-      value: 0.24
-      inSlope: 0.05023272
-      outSlope: 0.05023272
+      time: 0.33895516
+      value: 0.18393677
+      inSlope: -0.46951047
+      outSlope: -0.46951047
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.49019346
-      outWeight: 0.6687509
-    - serializedVersion: 3
-      time: 0.23895669
-      value: 0.18
-      inSlope: -0.15959224
-      outSlope: -0.15959224
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.23088819
+      inWeight: 0.58204895
       outWeight: 0.19171162
     - serializedVersion: 3
       time: 1

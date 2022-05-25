@@ -38,7 +38,7 @@ public class GrappleMoveCommand : BaseCommand
             Debug.Log(this.GetType() + " - " + lookVector.normalized + " " + rbReference.velocity.normalized);
 
             Vector3 vc = worldspaceMoveInput.normalized * moveForce 
-                * precisionFloat(projVel.magnitude / rbReference.velocity.magnitude) 
+                //* precisionFloat(projVel.magnitude / rbReference.velocity.magnitude) 
                 * curveMod;
 
             Debug.Log(this.GetType() + " - CurveMod: " + curveMod + " - Magnitude: " + vc.magnitude + " - Input: " + worldspaceMoveInput);

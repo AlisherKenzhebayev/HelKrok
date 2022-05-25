@@ -70,10 +70,6 @@ public class EnemyBehaviour : MonoBehaviour
             ChangeEnemyState(EnemyStates.patrol);
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            DecreaseHP();
-        }
     }
 
 

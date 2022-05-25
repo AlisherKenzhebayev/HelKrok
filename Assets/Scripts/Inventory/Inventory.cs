@@ -110,14 +110,15 @@ public class Inventory : MonoBehaviour
 
     public List<InventorySlot> GetAbilities() {
         var col = Container.FindAll(o => o.item != null);
-        if (col.Count == 0)
+
+        var retVal = col.FindAll(o => o.item.type == ItemType.Ability);
+        retVal.Sort();
+
+        if (retVal.Count == 0)
         {
             return null;
         }
 
-        var retVal = col.FindAll(o => o.item.type == ItemType.Ability);
-        retVal.Sort();
-        
         return retVal;
     }
 

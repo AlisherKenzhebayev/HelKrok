@@ -456,11 +456,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4438602404605021862, guid: 450248d8f6b1b3449b203a5b8e950517, type: 3}
       propertyPath: timerToSpawn
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4438602404605021862, guid: 450248d8f6b1b3449b203a5b8e950517, type: 3}
       propertyPath: numberToSpawn
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9057808749382448740, guid: 450248d8f6b1b3449b203a5b8e950517, type: 3}
       propertyPath: m_Name

@@ -141,6 +141,7 @@ public class PlayerController : MonoBehaviour
     private int grappleLayerMask;
 
     private GravityCustom gravityCustom;
+    private AirFrictionCustom airFrictionCustom;
 
     private GameObject grappleEndpoint;
     
@@ -162,6 +163,12 @@ public class PlayerController : MonoBehaviour
         if (gravityCustom == null)
         {
             Debug.LogError("Error - no GravityCustom component");
+        }
+
+        airFrictionCustom = this.GetComponent<AirFrictionCustom>();
+        if (airFrictionCustom == null)
+        {
+            Debug.LogError("Error - no AirFrictionCustom component");
         }
 
         energyDepleter = this.GetComponentInChildren<EnergyDepleter>();
@@ -321,7 +328,7 @@ public class PlayerController : MonoBehaviour
                 physicsCommands.Add(new GrappleMoveCommand(rb, transform.TransformVector(GrappleMoveCommand.FilterYZ(localMoveInput)))
                     .SetForceEffectCurve(grappleMoveForceEffectCurve)
                     .SetMoveForce(grappleMoveForce)
-                    .SetLookVector(this.transform.forward));
+                    .SetLookVector(this.playerCamera.forward));
             }
             else {
                 ApplyGrapplePhysics(0.1f);
@@ -517,7 +524,9 @@ public class PlayerController : MonoBehaviour
     private void ApplyPhysicsDrag()
     {
         float frac = precisionFloat(timeGrappledSince / grappleMaxTime);
+
         gravityCustom.UpdateFrac(frac);
+        airFrictionCustom.UpdateFrac(frac);
     }
 
     private void UpdateGrapplePosition()

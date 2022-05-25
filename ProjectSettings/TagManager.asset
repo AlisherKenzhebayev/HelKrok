@@ -20,7 +20,7 @@ TagManager:
   - HitboxLayer
   - 
   - Level
-  - 
+  - ObstacleTrigger
   - Obstacles
   - Walls
   - 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4850377158971304474}
   - component: {fileID: 4475134068473101247}
   - component: {fileID: 9072154299128356017}
-  - component: {fileID: 5261469858163275124}
+  - component: {fileID: 7447986102761691556}
   m_Layer: 15
   m_Name: Pickup Body
   m_TagString: Untagged
@@ -97,8 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountRestore: 20
   soundEffect: pickup
---- !u!64 &5261469858163275124
-MeshCollider:
+--- !u!65 &7447986102761691556
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -107,10 +107,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8025730304140266426, guid: d258db5bd0873cf48b2bb23f452d112e, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.5710225, y: 1.49, z: 2.9693525}
+  m_Center: {x: -0.091055095, y: 0.083308645, z: 0.13349053}
 --- !u!1 &8846771666786101281
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +136,7 @@ Transform:
   m_GameObject: {fileID: 8846771666786101281}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 7955169828982090060}
   m_Father: {fileID: 0}

@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 261555164382262348}
   - component: {fileID: 3853807661727331023}
   - component: {fileID: 4224328527506488443}
+  - component: {fileID: 3676916881959485472}
   m_Layer: 13
   m_Name: stal.108
   m_TagString: Untagged
@@ -122,8 +123,21 @@ MeshCollider:
   m_GameObject: {fileID: 8074362235494886543}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8523807115589991867, guid: 869d2ee7cbfb666429950238cfe94c13, type: 3}
+--- !u!65 &3676916881959485472
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8074362235494886543}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.634239, y: 2.0222013, z: 4.0993347}
+  m_Center: {x: 2.5188498, y: 0.3838408, z: 2.0210366}

@@ -41,6 +41,7 @@ public class PlayerAction : MonoBehaviour
     private void Update()
     {
         var curAbility = playerInventory.CurrentAbility();
+
         if (curAbility == null) {
             return;
         }
@@ -124,6 +125,10 @@ public class PlayerAction : MonoBehaviour
     {
         // TODO: define some common pattern of interaction here
 
+        if (currentAction == null) {
+            return;
+        }
+
         isFiring = (bool)obj["amount"];
 
         if (!isFiring || currentCooldown > 0)
@@ -131,7 +136,6 @@ public class PlayerAction : MonoBehaviour
             // Stop firing
             isFiring = false;
             currentAction.Execute(this.gameObject, isFiring, spawnTransform);
-            return;
         }
         else
         {
@@ -146,7 +150,6 @@ public class PlayerAction : MonoBehaviour
 
             currentAction.Execute(this.gameObject, isFiring, spawnTransform);
             currentCooldown = timerCooldown;
-            return;
         }
     }
 }

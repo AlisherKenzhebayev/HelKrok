@@ -13,9 +13,15 @@ public class GrappleVisualizer : MonoBehaviour
     [Tooltip("Grapple shake amount")]
     [SerializeField]
     private float shakeValue = 15f;
-    [Tooltip("Animation timer")]
+    [Tooltip("Animation speed")]
+    [SerializeField]
+    private float animationLaunchSpeed = 3f;
+    [Tooltip("Animation time")]
     [SerializeField]
     private float animationPlaybackTime = 3f;
+    [Tooltip("Animation distance")]
+    [SerializeField]
+    private float fixedAnimDist = 50f;
 
     [Header("Animation")]
     [Tooltip("Keypoints")]
@@ -39,6 +45,7 @@ public class GrappleVisualizer : MonoBehaviour
     private float grappleMaxOverlapTime;
     private float timeGrappledSince;
     private float timeGrappleOverlapGeometry;
+    private Vector3 directionToGrapple;
 
     private void Start()
     {
@@ -56,15 +63,19 @@ public class GrappleVisualizer : MonoBehaviour
     {
         if (isTethered)
         {
-            if(displacements.Count != keypoints) {
+            if(displacements.Count == 0) {
                 // Generate keypoints
                 displacements = GenerateKeypoints();
             }
 
             // Spawn in chain links
-            float timeProportion = Mathf.Min(timeGrappledSince, animationPlaybackTime) / animationPlaybackTime;
-            float totalDist = Vector3.Distance(grappleSpawn.position, tetherPoint) * timeProportion;
-            Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - grappleSpawn.position);
+            float maxDist = Vector3.Distance(grappleSpawn.position, tetherPoint);
+            float maxTime = maxDist / animationLaunchSpeed;
+            float animTime = fixedAnimDist / animationLaunchSpeed;
+            float timeProportion = Mathf.Min(timeGrappledSince, maxTime) / maxTime;
+
+            float totalDist = maxDist * timeProportion;
+            directionToGrapple = Vector3.Normalize(tetherPoint - grappleSpawn.position);
             float numberOfSpawn = Mathf.RoundToInt(totalDist / distanceSpawnLinks);
             totalDist -= totalDist % distanceSpawnLinks;
             float distValue = 0;
@@ -80,6 +91,7 @@ public class GrappleVisualizer : MonoBehaviour
                     continue;
                 }
 
+                // TODO: Weird thing with zeroes... Yeah, they exist.
                 if (totalDist == 0.0f)
                 {
                     totalDist += 0.01f;
@@ -87,11 +99,11 @@ public class GrappleVisualizer : MonoBehaviour
 
                 //We get our lerpValue
                 float lerpValue = precisionFloat(distValue / totalDist);
-                //We get our lerpValue
+
                 float timeLerpValue = precisionFloat(timeGrappledSince / animationPlaybackTime);
 
                 //Get the position
-                Vector3 placePosition = EstimateDisplacedPosition(grappleSpawn.position, grappleSpawn.position + directionToGrapple * totalDist, lerpValue, timeLerpValue);
+                Vector3 placePosition = EstimateDisplacedPosition(grappleSpawn.position, grappleSpawn.position + directionToGrapple * totalDist, distValue, totalDist, timeLerpValue);
                 if (links.Count > i && links[i] != null)
                 {
                     links[i].transform.position = placePosition;
@@ -177,20 +189,32 @@ public class GrappleVisualizer : MonoBehaviour
     }
 
     private Vector3 GetDisplacement(List<Vector3> list, float posFrac) {
-        var floorV = Mathf.FloorToInt(Mathf.Clamp(posFrac, 0.001f, 0.999f) * (keypoints-1));
+        var fValue = Mathf.Clamp(posFrac, 0.001f, 0.999f) * (keypoints - 1);
+        var floorV = Mathf.FloorToInt(fValue);
 
         float evalCurve = displacementCurve.Evaluate(posFrac);
 
-        return list[floorV] * evalCurve;
+        return Vector3.Lerp(list[floorV], list[floorV], 1) * evalCurve;
     }
 
-    private Vector3 EstimateDisplacedPosition(Vector3 startPosition, Vector3 endPosition, float lerpValue, float timeLerpValue)
+    private Vector3 EstimateDisplacedPosition(Vector3 startPosition, Vector3 endPosition, float distValue, float totalDist, float lerpTime)
     {
-        var linePos = Vector3.Lerp(startPosition, endPosition, lerpValue);
+        float lerpTotalDist = precisionFloat(distValue / totalDist);
+        var linePos = Vector3.Lerp(startPosition, endPosition, lerpTotalDist);
 
-        var keyPointsTime = KeypointsAtTime(timeLerpValue);
-
-        linePos += GetDisplacement(keyPointsTime, lerpValue);
+        //if (totalDist > fixedAnimDist)
+        {
+            if (distValue <= fixedAnimDist)
+            {
+                var keyPointsTime = KeypointsAtTime(lerpTime);
+                float lerpAnimDist = precisionFloat(distValue / fixedAnimDist);
+                linePos += GetDisplacement(keyPointsTime, lerpAnimDist);
+            }
+        //}
+        //else {
+        //    var keyPointsTime = KeypointsAtTime(lerpTime);
+        //    linePos += GetDisplacement(keyPointsTime, lerpTotalDist);
+        }
 
         return linePos;
     }
@@ -208,6 +232,18 @@ public class GrappleVisualizer : MonoBehaviour
         grappleMaxOverlapTime = _grappleMaxOverlapTime;
         timeGrappleOverlapGeometry = _timeGrappleOverlapGeometry;
         timeGrappledSince = _timeGrappledSince;
+    }
+
+    public Vector3 DirectionToGrapple{
+        get {
+            if (isTethered)
+            {
+                return directionToGrapple;
+            }
+            else {
+                return Vector3.zero;
+            }
+        }
     }
 
     private float precisionFloat(float fValue)

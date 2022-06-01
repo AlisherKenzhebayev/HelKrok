@@ -3,22 +3,22 @@ using UnityEngine;
 
 public class GameplayManager : MonoBehaviour
 {
-    private static Transform spawnTransform;
+    private static Vector3 spawnPosition;
+    private static Quaternion spawnRotation;
 
     private static GameplayManager gameManager;
 
     private static GameObject player;
     private static PlayerController playerController;
     private static Inventory playerInventory;
-    private static Rigidbody playerRigidbody;
-
+    
     private static GameObject inventoryCanvas;
 
-    private static bool isShowingWinScreen;
+    private static bool isShowingUiScreen;
 
     public static GameplayManager instance {
         get {
-            gameManager = FindObjectOfType<GameplayManager>();
+            gameManager = FindObjectOfType(typeof(GameplayManager)) as GameplayManager;
             if (!gameManager)
             {
                 Debug.LogError("There needs to be one active GameManager script on a GameObject in your scene.");
@@ -33,9 +33,8 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    void Init()
+    void Init() 
     {
-        return;
     }
 
     void Start()
@@ -46,22 +45,22 @@ public class GameplayManager : MonoBehaviour
             Debug.LogError("Error - no Player tag exists");
         }
 
-        playerController = player.GetComponent<PlayerController>();
+        if (player != null)
+        {
+            playerController = player.GetComponent<PlayerController>();
+        }
         if (playerController == null)
         {
             Debug.LogError("Error - no PlayerController component exists");
         }
 
-        playerInventory = player.GetComponentInChildren<Inventory>();
+        if (player != null)
+        {
+            playerInventory = player.GetComponentInChildren<Inventory>();
+        }
         if (playerInventory == null)
         {
             Debug.LogError("Error - no Inventory child component exists");
-        }
-
-        playerRigidbody = player.GetComponent<Rigidbody>();
-        if (playerController == null)
-        {
-            Debug.LogError("Error - no RigidBody component exists");
         }
 
         inventoryCanvas = GameObject.FindGameObjectWithTag("inventoryUI");
@@ -69,8 +68,6 @@ public class GameplayManager : MonoBehaviour
         {
             Debug.LogError("Error - no inventoryUI tag exists");
         }
-
-        ResetCheckpoint();
     }
 
     private void Update()
@@ -82,7 +79,7 @@ public class GameplayManager : MonoBehaviour
 
         if (InputManager.GetRestartKeyDown())
         {
-            SceneLoaderManager.LoadBuildIndexed(0);
+            RestartGame();
         }
 
         UpdateInventoryCanvas();
@@ -92,9 +89,16 @@ public class GameplayManager : MonoBehaviour
         CursorLogic();
     }
 
+    public void RestartGame()
+    {
+        SceneLoaderManager.LoadBuildIndexed(0);
+    }
+
     private void UpdateInventory()
     {
-        if (playerInventory == null) {
+        if (playerInventory == null)
+        {
+            Debug.LogWarning("There's no inventory present in the scene");
             return;
         }
 
@@ -134,7 +138,7 @@ public class GameplayManager : MonoBehaviour
 
     private void CursorLogic()
     {
-        bool checkCursorShow = isShowingWinScreen;
+        bool checkCursorShow = isShowingUiScreen;
 
         // Process the checks for inventory canvas
         if (inventoryCanvas != null) {
@@ -152,9 +156,9 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    public static void ShowWinScreen()
+    public static void ShowUiScreen(bool value = true)
     {
-        isShowingWinScreen = true;
+        isShowingUiScreen = value;
     }
 
     private static void CursorHide()
@@ -171,19 +175,86 @@ public class GameplayManager : MonoBehaviour
 
     public static void ResetCheckpoint()
     {
-        isShowingWinScreen = false;
-
-        if (spawnTransform == null) {
-            return;
+        LoadGame();
+        if (playerController != null) { 
+            isShowingUiScreen = false;
+            playerController.ResetToCheckpoint(spawnPosition, spawnRotation);
         }
-
-        playerRigidbody.velocity = Vector3.zero;
-        player.transform.position = spawnTransform.position;
-        player.transform.rotation = spawnTransform.rotation;
     }
 
-    public static void ChangeSpawnPoint(Transform _transform)
+    public static void ChangeSpawnPoint(Vector3 _position, Quaternion _rotation)
     {
-        spawnTransform = _transform;
+        spawnPosition = _position;
+        spawnRotation = _rotation;
+        
+        SaveGame();
+    }
+
+    //************
+    //  SAVING / LOADING
+    //************
+
+    public static void SaveGame() {
+        SaveJsonData();
+    }
+
+    public static void LoadGame()
+    {
+        LoadJsonData();
+    }
+
+    private static void SaveJsonData() {
+        SaveData sd = new SaveData();
+        GameplayManager.PopulateSaveData(sd);
+
+        if (FileManager.WriteToFile("SaveFile.dat", sd.ToJson())){
+            Debug.Log("Save successful");
+        }
+    }
+
+    private static void LoadJsonData() {
+        if (FileManager.LoadFromFile("SaveFile.dat", out var json)) {
+            SaveData sd = new SaveData();
+            sd.LoadFromJson(json);
+
+            GameplayManager.LoadFromSaveData(sd);
+            Debug.Log("Load successful");
+        }
+    }
+
+    public static void PopulateSaveData(SaveData a_saveData)
+    {
+        a_saveData.m_CheckpointPosition = new float[3];
+        a_saveData.m_CheckpointPosition[0] = spawnPosition.x;
+        a_saveData.m_CheckpointPosition[1] = spawnPosition.y;
+        a_saveData.m_CheckpointPosition[2] = spawnPosition.z;
+
+        a_saveData.m_CheckpointRotation = new float[4];
+        a_saveData.m_CheckpointRotation[0] = spawnRotation.x;
+        a_saveData.m_CheckpointRotation[1] = spawnRotation.y;
+        a_saveData.m_CheckpointRotation[2] = spawnRotation.z;
+        a_saveData.m_CheckpointRotation[3] = spawnRotation.w;
+
+        if (playerController != null) {
+            playerController.PopulateSaveData(a_saveData);
+        }
+    }
+
+    public static void LoadFromSaveData(SaveData a_saveData)
+    {
+        spawnPosition = new Vector3(
+            a_saveData.m_CheckpointPosition[0],
+            a_saveData.m_CheckpointPosition[1],
+            a_saveData.m_CheckpointPosition[2]);
+
+        spawnRotation = new Quaternion(
+            a_saveData.m_CheckpointRotation[0],
+            a_saveData.m_CheckpointRotation[1],
+            a_saveData.m_CheckpointRotation[2],
+            a_saveData.m_CheckpointRotation[3]);
+
+        if (playerController != null) {
+            playerController.LoadFromSaveData(a_saveData);
+        }
     }
 }

@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
     public static InputManager instance
     {
         get {
-            inputManager = FindObjectOfType<InputManager>();
+            inputManager = FindObjectOfType(typeof(InputManager)) as InputManager;
             if (!inputManager)
             {
                 Debug.LogError("There needs to be one active InputManager script on a GameObject in your scene.");

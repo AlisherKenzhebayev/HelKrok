@@ -29,19 +29,19 @@ public class GrappleMoveCommand : BaseCommand
         // project the velocity onto the movevector
         Vector3 projVel = Vector3.Project(velocityNoUp, worldspaceMoveInput);
 
-        Debug.Log(this.GetType() + " - " + projVel.magnitude + " - Velocity: " + rbReference.velocity);
+        //Debug.Log(this.GetType() + " - " + projVel.magnitude + " - Velocity: " + rbReference.velocity);
         
         {
             // When max disaligned -> bigger result
             float curveMod = forceEffectCurve.Evaluate(1 - Vector3.Dot(lookVector.normalized, rbReference.velocity.normalized));
 
-            Debug.Log(this.GetType() + " - " + lookVector.normalized + " " + rbReference.velocity.normalized);
+            //Debug.Log(this.GetType() + " - " + lookVector.normalized + " " + rbReference.velocity.normalized);
 
             Vector3 vc = worldspaceMoveInput.normalized * moveForce 
                 //* precisionFloat(projVel.magnitude / rbReference.velocity.magnitude) 
                 * curveMod;
 
-            Debug.Log(this.GetType() + " - CurveMod: " + curveMod + " - Magnitude: " + vc.magnitude + " - Input: " + worldspaceMoveInput);
+            //Debug.Log(this.GetType() + " - CurveMod: " + curveMod + " - Magnitude: " + vc.magnitude + " - Input: " + worldspaceMoveInput);
             
             rbReference.AddForce(vc, ForceMode.Force);
         }

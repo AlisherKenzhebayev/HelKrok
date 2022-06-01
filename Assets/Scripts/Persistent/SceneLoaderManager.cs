@@ -3,10 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoaderManager : MonoBehaviour
 {
-    public enum Scene
+    [System.Serializable]
+    public enum ScenesEnum
     {
-        SampleScene,
-        DeathScene,
+        MainLevel = 0,
+        DeathScene = 1,
+        WinScene = 2,
     }
 
     private static SceneLoaderManager sceneLoaderManager;
@@ -39,6 +41,11 @@ public class SceneLoaderManager : MonoBehaviour
     {
     }
 
+    public static Scene GetCurrentScene()
+    {
+        return SceneManager.GetActiveScene();
+    }
+
     public static void LoadBuildIndexed(int index)
     {
         if (SceneManager.sceneCountInBuildSettings < index)
@@ -49,18 +56,24 @@ public class SceneLoaderManager : MonoBehaviour
         SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
 
+    public static void LoadBuildName(string name) {
+        LoadName(name);
+    }
+
     public static void ExitApp()
     {
         Application.Quit();
     }
 
-    public static void LoadEnum(Scene enumScene, LoadSceneMode sceneMode = LoadSceneMode.Single)
+    public static void LoadEnum(ScenesEnum enumScene, LoadSceneMode sceneMode = LoadSceneMode.Single)
     {
-        SceneManager.LoadScene(enumScene.ToString(), sceneMode);
+        if (SceneLoaderManager.GetCurrentScene() != SceneManager.GetSceneByName(enumScene.ToString()))
+            SceneManager.LoadScene(enumScene.ToString(), sceneMode);
     }
 
     public static void LoadName(string nameScene, LoadSceneMode sceneMode = LoadSceneMode.Single)
     {
-        SceneManager.LoadScene(nameScene, sceneMode);
+        if(SceneLoaderManager.GetCurrentScene() != SceneManager.GetSceneByName(nameScene))
+            SceneManager.LoadScene(nameScene, sceneMode);
     }
 }

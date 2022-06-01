@@ -9,7 +9,9 @@ public class PlayerDamageTaker : DamageTaker
 
     internal override void DoDeath()
     {
-        SceneLoaderManager.LoadName("DeathScene");
-        return;
+        //GameplayManager.ShowUiScreen();
+        GameplayManager.ResetCheckpoint();
+        //GameplayManager.SaveGame();
+        //SceneLoaderManager.LoadEnum(SceneLoaderManager.ScenesEnum.DeathScene);
     }
 }

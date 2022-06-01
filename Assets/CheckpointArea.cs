@@ -23,7 +23,7 @@ public class CheckpointArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GameplayManager.ChangeSpawnPoint(checkpointTransform);
+        GameplayManager.ChangeSpawnPoint(checkpointTransform.position, checkpointTransform.rotation);
     }
 
     private void OnDrawGizmos()

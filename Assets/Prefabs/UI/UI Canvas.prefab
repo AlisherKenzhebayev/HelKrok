@@ -465,7 +465,6 @@ GameObject:
   - component: {fileID: 48692940644187159}
   - component: {fileID: 7442640099798629798}
   - component: {fileID: 880275683192361284}
-  - component: {fileID: 4789571238084969039}
   m_Layer: 5
   m_Name: Restart
   m_TagString: Untagged
@@ -575,9 +574,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4789571238084969039}
-        m_TargetAssemblyTypeName: RestartGame, Assembly-CSharp
-        m_MethodName: RestartLevel
+      - m_Target: {fileID: 5351783915916467820, guid: e9d0dd43e7b9c9b42850a3d128db3799, type: 3}
+        m_TargetAssemblyTypeName: GameplayManager, Assembly-CSharp
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -587,18 +586,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4789571238084969039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1797020491760728539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 376f2819899fc0e4284e7091aa9e7913, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2041417884978814921
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,6 +813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winScreen: {fileID: 2523069016907137211}
+  showByDefault: 0
 --- !u!1 &2523069016907137211
 GameObject:
   m_ObjectHideFlags: 0

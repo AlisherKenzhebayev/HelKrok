@@ -591,6 +591,12 @@ public class PlayerController : MonoBehaviour, ISaveable
         EventManager.TriggerEvent("PlayerActionButton", new Dictionary<string, object> { { "amount", false } });
     }
 
+    public bool IsTethered
+    {
+        get {
+            return isTethered;
+        }
+    }
 
     void BeginJump()
     {

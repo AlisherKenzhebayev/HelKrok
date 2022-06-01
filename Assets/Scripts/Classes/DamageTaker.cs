@@ -77,5 +77,8 @@ public class DamageTaker : MonoBehaviour
         {
             return currentHealth * 1.0f / maxHealth;
         }
+        set {
+            this.currentHealth = Mathf.Clamp(Mathf.CeilToInt(value * maxHealth), 0, maxHealth);
+        }
     }
 }

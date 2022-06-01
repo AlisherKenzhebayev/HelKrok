@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, ISaveable
 {
     //**********
     //  PUBLIC
@@ -70,7 +70,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private AnimationCurve grappleMoveForceEffectCurve = null;
 
-
     [Header("Air Movement")]
     [Tooltip("Air strafe force")]
     [SerializeField]
@@ -128,7 +127,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 worldspaceMoveInput;
     private Vector3 localMoveInput;
 
-    private DamageTaker health;
+    private DamageTaker damageTaker;
     private EnergyDepleter energyDepleter;
     private TriggerGrappleClosenessCheck triggerClosenessCheck;
     private int grappleLayerMask;
@@ -171,9 +170,15 @@ public class PlayerController : MonoBehaviour
         }
 
         energyDepleter = this.GetComponentInChildren<EnergyDepleter>();
-        if(energyDepleter == null)
+        if (energyDepleter == null)
         {
             Debug.LogError("Error - no EnergyDepleter child component");
+        }
+
+        damageTaker = this.GetComponentInChildren<DamageTaker>();
+        if (damageTaker == null)
+        {
+            Debug.LogError("Error - no DamageTaker child component");
         }
 
         triggerClosenessCheck = this.GetComponentInChildren<TriggerGrappleClosenessCheck>();
@@ -409,7 +414,7 @@ public class PlayerController : MonoBehaviour
         tetherLength = currentDistanceToGrapple;
 
         float curveMod = speedCurve.Evaluate(precisionFloat(timeGrappledSince / grappleMaxTime));
-        Debug.Log("Curve GrappleForce " + curveMod);
+        //Debug.Log("Curve GrappleForce " + curveMod);
         rb.AddForce(directionToGrapple * grappleForce * curveMod, ForceMode.Force);
     }
 
@@ -595,5 +600,51 @@ public class PlayerController : MonoBehaviour
     void EndJump()
     {
         hasJumpInput = false;
+    }
+
+    public void ResetToCheckpoint(Vector3 _position, Quaternion _rotation) {
+        rb.velocity = Vector3.zero;
+        this.transform.position = _position;
+        this.transform.rotation = _rotation;
+    }
+
+    //************
+    //  SAVE / LOAD
+    //************
+
+    public void PopulateSaveData(SaveData a_saveData)
+    {
+        SaveData.PlayerData _playerData = new SaveData.PlayerData();
+
+        _playerData.m_Position = new float[3];
+        _playerData.m_Position[0] = transform.position.x;
+        _playerData.m_Position[1] = transform.position.y;
+        _playerData.m_Position[2] = transform.position.z;
+
+        _playerData.m_Rotation = new float[4];
+        _playerData.m_Rotation[0] = transform.rotation.x;
+        _playerData.m_Rotation[1] = transform.rotation.y;
+        _playerData.m_Rotation[2] = transform.rotation.z;
+        _playerData.m_Rotation[3] = transform.rotation.w;
+        
+        _playerData.m_FracHealth = damageTaker.FracHealth;
+        
+        a_saveData.playerData = _playerData;
+    }
+
+    public void LoadFromSaveData(SaveData a_saveData)
+    {
+        this.transform.position = new Vector3(
+            a_saveData.playerData.m_Position[0],
+            a_saveData.playerData.m_Position[1],
+            a_saveData.playerData.m_Position[2]);
+
+        this.transform.rotation = new Quaternion(
+         a_saveData.playerData.m_Rotation[0],
+         a_saveData.playerData.m_Rotation[1],
+         a_saveData.playerData.m_Rotation[2],
+         a_saveData.playerData.m_Rotation[3]);
+
+        this.damageTaker.FracHealth = a_saveData.playerData.m_FracHealth;
     }
 }

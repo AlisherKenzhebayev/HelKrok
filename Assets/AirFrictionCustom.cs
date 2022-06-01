@@ -45,6 +45,6 @@ public class AirFrictionCustom : MonoBehaviour
         float curveMod = airCurve.Evaluate(frac);
         rbReference.AddForce(direction * forceAmount * curveMod);
 
-        Debug.Log(this.GetType() + " - " + curveMod);
+        //Debug.Log(this.GetType() + " - " + curveMod);
     }
 }

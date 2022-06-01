@@ -41,8 +41,8 @@ public class RotateHand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.LogWarning("ASD - " + visualizer.DirectionToGrapple.normalized);
+        //Debug.LogWarning("ASD - " + visualizer.DirectionToGrapple.normalized);
         Quaternion rotation = Quaternion.LookRotation(Vector3.Normalize(playerCamera.forward.normalized + visualizer.DirectionToGrapple.normalized) );
-        this.transform.rotation = Quaternion.Lerp(this.transform.rotation, rotation, 0.03f);
+        this.transform.rotation = Quaternion.Lerp(this.transform.rotation, rotation, 0.1f);
     }
 }

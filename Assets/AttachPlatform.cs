@@ -7,7 +7,6 @@ public class AttachPlatform : MonoBehaviour
         if (other.tag == "Player")
         {
             other.transform.parent = this.transform;
-            Debug.Log("Player");
         }
     }
 

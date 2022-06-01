@@ -45,8 +45,7 @@ public class GrappleVisualizer : MonoBehaviour
     private float grappleMaxOverlapTime;
     private float timeGrappledSince;
     private float timeGrappleOverlapGeometry;
-    private Vector3 directionToGrapple;
-
+    
     private void Start()
     {
         links = new List<GameObject>();
@@ -75,7 +74,7 @@ public class GrappleVisualizer : MonoBehaviour
             float timeProportion = Mathf.Min(timeGrappledSince, maxTime) / maxTime;
 
             float totalDist = maxDist * timeProportion;
-            directionToGrapple = Vector3.Normalize(tetherPoint - grappleSpawn.position);
+            Vector3 directionToGrapple = Vector3.Normalize(tetherPoint - grappleSpawn.position);
             float numberOfSpawn = Mathf.RoundToInt(totalDist / distanceSpawnLinks);
             totalDist -= totalDist % distanceSpawnLinks;
             float distValue = 0;
@@ -238,7 +237,7 @@ public class GrappleVisualizer : MonoBehaviour
         get {
             if (isTethered)
             {
-                return directionToGrapple;
+                return Vector3.Normalize(tetherPoint - this.transform.position);
             }
             else {
                 return Vector3.zero;

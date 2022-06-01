@@ -1,14 +1,22 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerWon : MonoBehaviour
 {
     [SerializeField]
-    GameObject winScreen;
+    private GameObject winScreen;
+
+    [SerializeField]
+    private bool showByDefault;
 
     private void Start()
     {
-        winScreen.SetActive(false);
+        if(winScreen != null) { 
+            winScreen.SetActive(showByDefault);
+        }
+
+        GameplayManager.ShowUiScreen(showByDefault);
     }
 
     private void OnEnable()
@@ -24,6 +32,6 @@ public class PlayerWon : MonoBehaviour
     private void OnPlayerExit(Dictionary<string, object> obj)
     {
         winScreen.SetActive(true);
-        GameplayManager.ShowWinScreen();
+        GameplayManager.ShowUiScreen();
     }
 }

@@ -85,6 +85,8 @@ public class PlayerController : MonoBehaviour, ISaveable
     [SerializeField]
     private float grappleCost = 5f;
     [SerializeField]
+    private float grappleEnergyCost = .2f;
+    [SerializeField]
     private float grappleCostCont = 0.0f;
 
     [Header ("Debug")]
@@ -549,7 +551,7 @@ public class PlayerController : MonoBehaviour, ISaveable
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hit, energyDepleter.GetEnergy(), grappleLayerMask) 
             && hit.collider.gameObject.TryGetComponent<IInteractable>(out grappleInteractable))
         {
-            energyDepleter.Use(grappleCost, 0.2f);
+            energyDepleter.Use(grappleCost, grappleEnergyCost);
             grappleInteractable.InteractStart();
 
             isTethered = true;

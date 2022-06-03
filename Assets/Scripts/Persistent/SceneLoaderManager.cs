@@ -6,9 +6,10 @@ public class SceneLoaderManager : MonoBehaviour
     [System.Serializable]
     public enum ScenesEnum
     {
-        MainLevel = 0,
-        DeathScene = 1,
-        WinScene = 2,
+        Menu = 0,
+        MainLevel = 1,
+        DeathScene = 2,
+        WinScene = 3,
     }
 
     private static SceneLoaderManager sceneLoaderManager;

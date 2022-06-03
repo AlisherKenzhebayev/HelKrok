@@ -84,8 +84,6 @@ public class Inventory : MonoBehaviour
                 RemoveItem(_inventorySlot.item);
                 break;
             case ItemType.Key:
-                AddItem(_inventorySlot.item);
-                break;
             case ItemType.Default:
             case ItemType.Pickup:
             default:

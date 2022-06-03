@@ -32,12 +32,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Dissolve_: 0.225
+    - Dissolve_: 0
     - Distance_: 0.5
     - NoiseScale_: 20
     m_Colors:
     - ColorAccent_: {r: 0.6603774, g: 0.56159717, b: 0.41429335, a: 1}
     - Color_: {r: 0.9433962, g: 0.46752378, b: 0, a: 1}
+    - Color_56c92a777f3846298c57122874a84889: {r: 0.31328458, g: 1, b: 0, a: 0}
     - DistanceColor_: {r: 0.16037738, g: 0.09622643, b: 0, a: 1}
     - NoiseSpeed_: {r: 0, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []

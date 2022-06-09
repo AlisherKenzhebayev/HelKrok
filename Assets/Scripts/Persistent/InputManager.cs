@@ -91,6 +91,11 @@ public class InputManager : MonoBehaviour
         return move;
     }
 
+    internal static bool GetPauseMenuKeyDown()
+    {
+        return Input.GetKeyDown(KeyCode.Escape);
+    }
+
     internal static bool GetInventoryKeyDown()
     {
         return Input.GetKeyDown(KeyCode.I);

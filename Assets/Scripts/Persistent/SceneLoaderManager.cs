@@ -61,9 +61,9 @@ public class SceneLoaderManager : MonoBehaviour
         LoadName(name);
     }
 
-    public static void ExitApp()
+    public static void ForceLoadEnum(ScenesEnum enumScene, LoadSceneMode sceneMode = LoadSceneMode.Single)
     {
-        Application.Quit();
+        SceneManager.LoadScene(enumScene.ToString(), sceneMode);
     }
 
     public static void LoadEnum(ScenesEnum enumScene, LoadSceneMode sceneMode = LoadSceneMode.Single)

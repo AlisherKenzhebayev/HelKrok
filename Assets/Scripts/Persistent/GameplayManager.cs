@@ -11,10 +11,13 @@ public class GameplayManager : MonoBehaviour
     private static GameObject player;
     private static PlayerController playerController;
     private static Inventory playerInventory;
-    
+
     private static GameObject inventoryCanvas;
+    private static GameObject pauseCanvas;
 
     private static bool isShowingUiScreen;
+
+    public static bool isGamePaused;
 
     public static GameplayManager instance {
         get {
@@ -35,6 +38,7 @@ public class GameplayManager : MonoBehaviour
 
     void Init() 
     {
+        ContinueGameTime();
     }
 
     void Start()
@@ -68,6 +72,12 @@ public class GameplayManager : MonoBehaviour
         {
             Debug.LogError("Error - no inventoryUI tag exists");
         }
+
+        pauseCanvas = GameObject.FindGameObjectWithTag("pauseUI");
+        if (pauseCanvas == null)
+        {
+            Debug.LogError("Error - no pauseUI tag exists");
+        }
     }
 
     private void Update()
@@ -89,9 +99,26 @@ public class GameplayManager : MonoBehaviour
         CursorLogic();
     }
 
-    public void RestartGame()
+    public static void PauseGameTime()
     {
-        SceneLoaderManager.LoadBuildIndexed(0);
+        Time.timeScale = 0f;
+        isGamePaused = true;
+    }
+
+    public static void ContinueGameTime()
+    {
+        Time.timeScale = 1f;
+        isGamePaused = false;
+    }
+
+    public static void RestartGame()
+    {
+        SceneLoaderManager.ForceLoadEnum(SceneLoaderManager.ScenesEnum.MainLevel);
+    }
+
+    public static void MainMenu()
+    {
+        SceneLoaderManager.LoadEnum(SceneLoaderManager.ScenesEnum.Menu);
     }
 
     private void UpdateInventory()
@@ -122,11 +149,17 @@ public class GameplayManager : MonoBehaviour
 
         if (InputManager.GetInventoryKeyDown())
         {
+            if (isGamePaused)
+            {
+                Debug.LogWarning("Game is paused, inventory open state tried changing");
+                return;
+            }
+
             var invCanvas = inventoryCanvas.GetComponent<Canvas>();
             invCanvas.enabled ^= true;
         }
 
-        if (inventoryCanvas.GetComponent<Canvas>().enabled)
+        if (inventoryCanvas.GetComponent<Canvas>().enabled || pauseCanvas.GetComponent<Canvas>().enabled)
         {
             InputManager.CameraLockOn();
         }
@@ -142,8 +175,15 @@ public class GameplayManager : MonoBehaviour
 
         // Process the checks for inventory canvas
         if (inventoryCanvas != null) {
-            var invCanvas = inventoryCanvas.GetComponent<Canvas>();
-            checkCursorShow |= invCanvas.enabled;
+            var canvas = inventoryCanvas.GetComponent<Canvas>();
+            checkCursorShow |= canvas.enabled;
+        }
+
+        // Process the checks for pause canvas
+        if (pauseCanvas != null)
+        {
+            var canvas = pauseCanvas.GetComponent<Canvas>();
+            checkCursorShow |= canvas.enabled;
         }
 
         if (checkCursorShow)
@@ -154,6 +194,11 @@ public class GameplayManager : MonoBehaviour
         {
             CursorHide();
         }
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     public static void ShowUiScreen(bool value = true)

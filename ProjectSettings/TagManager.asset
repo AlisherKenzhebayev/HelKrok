@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - exitDoor
   - inventoryUI
+  - pauseUI
   layers:
   - Default
   - TransparentFX

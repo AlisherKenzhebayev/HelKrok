@@ -19406,6 +19406,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 809516925, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: fovMultiplier
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406333028, guid: f884e540adfa9214783b6affda616432, type: 3}
+      propertyPath: radius
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 1837102840, guid: f884e540adfa9214783b6affda616432, type: 3}
       propertyPath: currentEnergy
       value: 180
@@ -23283,15 +23291,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3351502313425957741, guid: d89de43bb3f5b514cafb4bac0a805642, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.82
+      value: 7.38
       objectReference: {fileID: 0}
     - target: {fileID: 3351502313425957741, guid: d89de43bb3f5b514cafb4bac0a805642, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.86
+      value: -4.06
       objectReference: {fileID: 0}
     - target: {fileID: 3351502313425957741, guid: d89de43bb3f5b514cafb4bac0a805642, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.09
+      value: 46.56
       objectReference: {fileID: 0}
     - target: {fileID: 3351502313937773703, guid: d89de43bb3f5b514cafb4bac0a805642, type: 3}
       propertyPath: m_LocalPosition.x
